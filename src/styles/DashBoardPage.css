@@ -1,0 +1,114 @@
+#dashboardpage{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    color: #666;
+}
+
+#dashboardpage_main{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 256px auto;
+}
+
+#dashboardpage_main_left{
+    margin-top: 2px;
+    width: 215px;
+    background-color: #FAFAFA;
+    padding: 20px;
+    padding-top: 30px;
+    box-shadow: 2px 1px 1px 1px rgba(6,6,6,0.05);
+    height: calc(100vh - 95px);
+    display: grid;
+    grid-template-rows: 35px 30px 35px;
+    row-gap: 10px;
+    justify-content: center;
+}
+
+#dashboardpage_main_left >input
+{   
+    /* width: calc(236px - 4rem); */
+    background-color: #FFFFFF;
+    border: rgba(219, 217, 217, 0.7) 1px solid;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: .75rem 1rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#dashboardpage_main_left >div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dashboardpage_main_left >button{
+    width: 100%;
+    background-color: rgba(219, 217, 217, 0.7);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #666;
+    padding: 3px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    
+}
+
+#dashboardpage_main_right{
+    padding: 20px;
+    padding-top: 30px;
+    display: grid;
+    grid-template-rows: 35px 30px 200px auto;
+    row-gap: 15px;
+}
+
+#dashboard_title{
+    font-size: 26px;
+}
+
+#dashboard_arrangement >select{
+    font-size: 16px;
+    cursor: pointer;
+    padding: .3rem .4rem;
+    margin-right: 10px;
+    outline: none;
+    color: #888;
+    border-color: rgb(193, 193, 193);
+    border-radius: 3px;
+}
+
+
+#dashboard_addnew{
+    padding: 16px;
+    width: 232px;
+    height: 144px;
+
+    background-color: #f5f5ed56;
+    border: .5px solid rgb(248, 247, 218);
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: baseline;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+#dashboard_addnew >div{
+    cursor: pointer;
+    display: grid;
+    text-align: center;
+    color: #444;
+    /* align-items: center; */
+}
+
+#dashboard_addnew >div >p >a{
+    text-decoration: none;
+    color: #111827;
+}

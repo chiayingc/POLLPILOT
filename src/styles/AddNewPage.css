@@ -1,0 +1,92 @@
+input{
+    outline: none;
+}
+
+#addnewpage{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    color: #666;
+}
+
+#addnewpage_main{
+    margin-top: 30px;
+    width: 90%;
+    display: grid;
+    justify-items: center;
+}
+
+#addnewpage_addtitle{
+    width: 55%;
+    padding: 30px;
+    display: grid;
+    grid-template-rows: 30px 35px 37px;
+    row-gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+#addnewpage_addtitle >input{
+    font-size: 16px;
+    padding: .2rem .6rem;
+    border: solid #888;
+    border-width: 0px 0px 1px 0px ;
+}
+
+#addnewpage_addtitle >div{
+    display: grid;
+    justify-content: right;
+    padding-top: 5px;
+    padding-left: 65%;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+#addnewpage_addtitle >div >button{
+    /* 要改成取消沒有底色 */
+    background-color: rgba(249, 240, 245, 0.731);
+    border: #f5f7e77f 1px solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #111827;
+    min-width: 60px;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: baseline;
+    cursor: pointer;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+#add_questions{
+    width: 55%;
+    padding: 30px;
+    display: grid;
+    grid-template-rows: 30px 35px auto;
+    row-gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+#add_questions >button{
+    width: 50px;
+    background-color:#fff;
+    border: #f5f7e77f 1px solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #111827;
+    min-width: 60px;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: 0 1px 3px 0 rgba(242, 127, 194, 0.3), 0 1px 2px 0 rgba(217, 200, 205, 0.9);
+    cursor: pointer;
+    touch-action: manipulation;
+    cursor: pointer;
+
+    margin-left: calc(100% - 60px);
+}
+
+#all_questions{
+    width: 100%;
+}

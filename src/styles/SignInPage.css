@@ -91,6 +91,12 @@ input{
     touch-action: manipulation;
 }
 
+.hint{
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 #signinpage_main_left >div >div >button,
 #signinpage_main_left >div >form >button{
     width: 300px;

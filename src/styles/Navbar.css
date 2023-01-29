@@ -26,12 +26,14 @@ body>div{
 }
 #nav_btns{
     justify-self: right;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1rem;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr; */
+    /* column-gap: 1rem; */
 }
 
-#nav_btn_signin, #nav_btn_signup{
+#nav_btn_signin,
+#nav_btn_signup,
+#nav_btn_signout{
     background-color: #FFFFFF;
     border: 0;
     border-radius: 5px;
@@ -45,6 +47,8 @@ body>div{
     box-shadow: 0 1px 3px 0 rgba(242, 167, 202, 0.26), 0 1px 2px 0 rgba(217, 200, 209, 0.9);
     cursor: pointer;
     touch-action: manipulation;
+
+    margin-left: 10px;
 }
 
 #nav_btn_signin >a,
@@ -54,16 +58,22 @@ body>div{
     font-size: 16px;
     font-weight: 500;
 }
-#nav_btn_signin:hover, #nav_btn_signup:hover {
+#nav_btn_signin:hover, 
+#nav_btn_signup:hover,
+#nav_btn_signout:hover {
     background-color: #F7D6DB;
 }
 
-#nav_btn_signin:focus, #nav_btn_signup:focus {
+#nav_btn_signin:focus,
+#nav_btn_signup:focus,
+#nav_btn_signout:focus{
     outline: 2px solid transparent;
     outline-offset: 2px;
 }
 
-#nav_btn_signin:focus-visible, #nav_btn_signup:focus-visible {
+#nav_btn_signin:focus-visible,
+#nav_btn_signup:focus-visible,
+#nav_btn_signout:focus-visible{
     box-shadow: none;
 }
 

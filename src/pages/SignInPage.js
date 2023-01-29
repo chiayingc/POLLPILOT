@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../styles/SignInPage.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import home from '../assets/home.png'
 import pplogo from '../assets/pp-logo-tmp_05.png'
 import { auth } from '../../firebase-config.js'
@@ -12,33 +12,29 @@ import { signInWithEmailAndPassword,
 function SignInPage() {
     const [signinEmail, setSigninEmail] = useState("");
     const [signinPassword, setSigninPassword] = useState("");
-
+    const [signinHint, setSigninHint]=useState("");
     const [user,setUser]=useState({});
+    const navigate=useNavigate();
 
     useEffect(()=>{
         onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            console.log(user);
-            console.log(currentUser);
         });
     },[]);
 
-
     const signin= async(e)=>{
         e.preventDefault();
-        // console.log(user.email);
-        // console.log(1);
         try{
-            // console.log(2);
             const user=await signInWithEmailAndPassword(
                 auth,
                 signinEmail,
                 signinPassword);
-            console.log(user);
-            // console.log(user.operationType);
+            if(user){
+                navigate("/dashboard");
+            }
         }catch(error){
-            // console.log(3);
             console.log(error.message);
+            setSigninHint("登入失敗:"+error.message);
         }
         
     };
@@ -69,9 +65,12 @@ function SignInPage() {
                             <img/>
                             <p>忘記密碼了嗎</p>
                         </div>
-                        <p>hint // {user?user.email:"Not logged In"}</p>
+                        <p className='hint' id='signin_hint'>{signinHint}</p>
+                        {/* <p className='hint'>hint // {user?user.email:"未登入或登入失敗"}</p> */}
                     </div>
-                    <button onClick={signin}>登入</button>
+                    <button onClick={signin}>
+                        登入
+                    </button>
                 </form>
                 <div>
                     <p>其他登入</p>

@@ -20,7 +20,6 @@ function App() {
                 {/* 要改成個別uid的路徑 */}
                 <Route path="/dashboard" element={ <DashBoardPage/> } />  
                 <Route path="/addnew" element={ <AddNewPage/> } />
-
                 <Route path="/" element={ <HomePage/> } />
                 <Route path="/signup" element={ <SignUpPage/> } />
                 <Route path="/signin" element={ <SignInPage/> } />

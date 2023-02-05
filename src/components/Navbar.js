@@ -1,15 +1,17 @@
-import React, {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState, useEffect, useContext} from 'react'
+import { Link,useNavigate } from 'react-router-dom'
 import pplogo from '../assets/pp-logo-tmp_05.png'
 import '../styles/Navbar.css'
 
 import { auth } from '../../firebase-config.js'
 import {onAuthStateChanged,
         signOut } from 'firebase/auth'
+import { UserContext  } from '../helper/Context'
 
 
 function Navbar() {
-  const [user,setUser]=useState({});
+  const {user, setUser}=useContext(UserContext);
+  // console.log(user);
 
   useEffect(()=>{
       onAuthStateChanged(auth, (currentUser) => {

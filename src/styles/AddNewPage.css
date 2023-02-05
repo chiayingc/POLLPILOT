@@ -1,49 +1,73 @@
-input{
+input {
     outline: none;
 }
 
-#addnewpage{
+#addnewpage {
     width: 100%;
     display: grid;
     justify-items: center;
     color: #666;
 }
 
-#addnewpage_main{
+#addnewpage_main {
     margin-top: 30px;
     width: 90%;
     display: grid;
     justify-items: center;
+    margin-bottom: 50px;
 }
 
-#addnewpage_addtitle{
+#survey_setting,
+#general_setting {
     width: 55%;
-    padding: 30px;
     display: grid;
-    grid-template-rows: 30px 35px 37px;
-    row-gap: 10px;
-
+    justify-items: center;
     margin-bottom: 30px;
+    border: 1px solid rgb(236, 236, 236);
+    padding: 30px;
 }
 
-#addnewpage_addtitle >input{
+#next_btn {
+    width: calc(55% + 60px);
+    display: grid;
+    justify-items: center;
+    margin-bottom: 35px;
+}
+
+#survey_setting>h3,
+#general_setting>h3 {
+    justify-self: left;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+#addnewpage_addtitle {
+    width: 90%;
+    padding: 20px;
+    display: grid;
+    /* grid-template-rows: 30px 35px 37px; */
+    grid-template-rows: 30px 35px;
+    row-gap: 10px;
+}
+
+#addnewpage_addtitle>input {
     font-size: 16px;
     padding: .2rem .6rem;
     border: solid #888;
-    border-width: 0px 0px 1px 0px ;
+    border-width: 0px 0px 1px 0px;
 }
 
-#addnewpage_addtitle >div{
+/* #addnewpage_addtitle >div{
     display: grid;
     justify-content: right;
     padding-top: 5px;
     padding-left: 65%;
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
-}
+} */
 
-#addnewpage_addtitle >div >button{
-    /* 要改成取消沒有底色 */
+/* #addnewpage_addtitle >div >button{
+     要改成取消沒有底色 
     background-color: rgba(249, 240, 245, 0.731);
     border: #f5f7e77f 1px solid;
     border-radius: 5px;
@@ -56,37 +80,96 @@ input{
     cursor: pointer;
     touch-action: manipulation;
     cursor: pointer;
+} */
+
+#title_style,
+#welcome_text,
+#thanks_text,
+#survey_status,
+#num_desplay {
+    width: 90%;
+    padding: 20px;
 }
 
-#add_questions{
-    width: 55%;
-    padding: 30px;
-    display: grid;
-    grid-template-rows: 30px 35px auto;
-    row-gap: 10px;
-
-    margin-bottom: 30px;
+#title_align {
+    display: flex;
+    height: fit-content;
+    padding: 10px;
 }
 
-#add_questions >button{
-    width: 50px;
-    background-color:#fff;
-    border: #f5f7e77f 1px solid;
+#title_align>button {
+    margin-right: 15px;
+    padding: 15px;
+    width: 144px;
+    border-radius: 5px;
+    background-color: #f5f1ed56;
+    border: .5px solid rgb(248, 239, 218);
     border-radius: 5px;
     box-sizing: border-box;
-    color: #111827;
-    min-width: 60px;
-    font-size: 16px;
+    font-weight: 600;
     text-align: center;
-    vertical-align: middle;
-    box-shadow: 0 1px 3px 0 rgba(242, 127, 194, 0.3), 0 1px 2px 0 rgba(217, 200, 205, 0.9);
+    vertical-align: baseline;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     cursor: pointer;
     touch-action: manipulation;
-    cursor: pointer;
-
-    margin-left: calc(100% - 60px);
 }
 
-#all_questions{
-    width: 100%;
+#num_button {
+    margin-top: 10px;
+}
+
+#num_button>button {
+    margin-right: 10px;
+    padding: 15px;
+    width: 90px;
+    border-radius: 5px;
+    background-color: #f5f1ed56;
+    border: .5px solid rgb(248, 239, 218);
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: baseline;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+#welcome_text>textarea,
+#thanks_text>textarea {
+    width: 70%;
+    height: 70px;
+    resize: none;
+
+    margin-top: 10px;
+    outline: none;
+}
+
+#survey_status>select {
+    font-size: 14px;
+    cursor: pointer;
+    padding: .3rem .4rem;
+    margin-right: 8px;
+    outline: none;
+    color: #888;
+    border-color: rgb(193, 193, 193);
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+#next_btn>button {
+    justify-self: end;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(248, 239, 218);
+    border: .5px solid #f5f1ed56;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: baseline;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    touch-action: manipulation;
+
 }

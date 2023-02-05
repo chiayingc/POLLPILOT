@@ -1,86 +1,116 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import '../styles/SignUpPage.css'
 import { Link } from 'react-router-dom'
 import home from '../assets/home.png'
 import pplogo from '../assets/pp-logo-tmp_05.png'
-import { auth } from '../../firebase-config.js'
-import { createUserWithEmailAndPassword,
-        onAuthStateChanged } from 'firebase/auth'
+import { auth, db } from '../../firebase-config.js'
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged
+} from 'firebase/auth'
+import { UserContext  } from '../helper/Context'
+import { doc, collection, addDoc , setDoc, getDocs } from 'firebase/firestore'
+
 
 function SignUpPage() {
+    const {user, setUser}=useContext(UserContext);
+    const [uid, setUid]=useState("");
+    const [userName, setUserName]=useState("");
     const [signupEmail, setSignupEmail] = useState("");
     const [signupPassword, setSignupPassword] = useState("");
 
-    const [user,setUser]=useState({});
+    // const [user, setUser] = useState({});
 
-    useEffect(()=>{
+    useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
         });
-    },[]);
+    }, []);
 
-    const signup= async(e)=>{
+    const signup = async (e) => {
         e.preventDefault();
         // console.log(user.email);
         // console.log(1);
-        try{
+        try {
             // console.log(2);
-            const user=await createUserWithEmailAndPassword(
+            //註冊成功, 前往登入(先設hint註冊成功 setTimeout兩秒後跳轉登入頁)
+
+            await createUserWithEmailAndPassword(
                 auth,
                 signupEmail,
-                signupPassword);
-            console.log(user);
-        }catch(error){
+                signupPassword)
+            .then(()=>{
+                //把使用者註冊資料放進資料庫
+                onAuthStateChanged(auth, async(currentUser) => {
+                    console.log(currentUser);
+                    const userData=doc(db,"allUsers","user_"+currentUser.uid);
+                    await setDoc(userData,
+                        {
+                            name:userName,
+                            email:signupEmail,
+                            registTime:Date.now(),
+                            surveyCount:0
+                        },
+                        { merge:true })
+                        .then(()=>{console.log("create successed!")})
+                        .catch(()=>{console.log("create fail")});
+                    });
+            })
+            .catch((error)=>{console.log("error:"+error.message)});
+
+        } catch (error) {
+            //註冊失敗
             // console.log(3);
             console.log(error.message);
         }
-        
+
     };
 
-  return (
-    <div id='signuppage'>
-        {/* <Navbar/> */}
-      <div id='signuppage_main'>
-        <div id='signuppage_main_left'>
-            <div>
-                <img src={pplogo} id="logo"/>
-            </div>
-            <div>
-                <h2>註冊</h2>
-                <form>
+    return (
+        <div id='signuppage'>
+            {/* <Navbar/> */}
+            <div id='signuppage_main'>
+                <div id='signuppage_main_left'>
                     <div>
-                        <p>您的姓名</p>
-                        <input type="text" placeholder='請輸入您的姓名'/>
+                        <img src={pplogo} id="logo" />
                     </div>
                     <div>
-                        <p>您的電子郵件地址</p>
-                        <input type="text" placeholder='請輸入您的電子郵件地址' 
-                               onChange={(e)=>{setSignupEmail(e.target.value)}}/>
-                    </div>
-                    <div id='aaa'>
-                        <p>您的密碼</p>
+                        <h2>註冊</h2>
+                        <form>
+                            <div>
+                                <p>您的姓名</p>
+                                <input type="text" placeholder='請輸入您的姓名' 
+                                    onChange={(e) => { setUserName(e.target.value) }}/>
+                            </div>
+                            <div>
+                                <p>您的電子郵件地址</p>
+                                <input type="text" placeholder='請輸入您的電子郵件地址'
+                                    onChange={(e) => { setSignupEmail(e.target.value) }} />
+                            </div>
+                            <div id='aaa'>
+                                <p>您的密碼</p>
+                                <div>
+                                    <input type="text" placeholder='請輸入您的密碼'
+                                        onChange={(e) => { setSignupPassword(e.target.value) }} />
+                                    <img />
+                                </div>
+                                <p>hint // {user ? user.email : "Not logged In"}</p>
+                            </div>
+                            <button onClick={signup}>註冊</button>
+                        </form>
                         <div>
-                            <input type="text" placeholder='請輸入您的密碼'
-                                   onChange={(e)=>{setSignupPassword(e.target.value)}}/>
-                            <img/>
+                            <p>其他註冊</p>
+                            <button>使用 Facebook 註冊</button>
+                            <div><p>已經有帳號嗎？</p> <p><Link to={"/signin"}>前往登入</Link></p></div>
                         </div>
-                        <p>hint // {user?user.email:"Not logged In"}</p>
                     </div>
-                    <button onClick={signup}>註冊</button>
-                </form>
-                <div>
-                    <p>其他註冊</p>
-                    <button>使用 Facebook 註冊</button>
-                    <div><p>已經有帳號嗎？</p> <p><Link to={"/signin"}>前往登入</Link></p></div>
+                </div>
+                <div id='signuppage_main_right'>
+                    <img src={home} />
                 </div>
             </div>
         </div>
-        <div id='signuppage_main_right'>
-            <img src={home}/>
-        </div>
-      </div>
-    </div>
-  )
+    )
 }
 
 export default SignUpPage

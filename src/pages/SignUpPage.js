@@ -14,7 +14,7 @@ import { doc, collection, addDoc , setDoc, getDocs } from 'firebase/firestore'
 
 function SignUpPage() {
     const {user, setUser}=useContext(UserContext);
-    const [uid, setUid]=useState("");
+    // const [uid, setUid]=useState("");
     const [userName, setUserName]=useState("");
     const [signupEmail, setSignupEmail] = useState("");
     const [signupPassword, setSignupPassword] = useState("");

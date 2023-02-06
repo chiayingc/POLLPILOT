@@ -27,6 +27,19 @@ body > div{
     padding-top: 30px;
 }
 
+#addquespage_main_left{
+    padding: 50px;
+    padding-left: 150px;
+}
+
+#questions{
+    width: 80%;
+}
+
+.qus{
+    margin-bottom: 30px;
+}
+
 #ques_type{
     padding: 12px;
     display: grid;
@@ -76,3 +89,8 @@ body > div{
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     cursor: pointer; 
 }
+
+
+
+
+

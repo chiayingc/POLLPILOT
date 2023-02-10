@@ -10,7 +10,7 @@ import DashBoardPage from "./pages/DashBoardPage";
 import AddNewPage from "./pages/AddNewPage";
 import AddQuesPage from "./pages/AddQuesPage";
 import ReleasePage from "./pages/ReleasePage";
-
+import FillInPage from "./pages/FillInPage";
 import { UserContext } from "./helper/Context";
 
 
@@ -30,6 +30,10 @@ function App() {
                     <Route path="/addnew" element={<AddNewPage />} />
                     <Route path="/addques" element={<AddQuesPage />} />
                     <Route path="/release" element={<ReleasePage />} />
+                    <Route path="/release/:survey" element={<ReleasePage />} />
+                    
+                    <Route path="/fillin" element={<FillInPage />} />
+                    <Route path="/fillin/:fillin" element={<FillInPage />} />
 
                     <Route path="/" element={<HomePage />} />
                     <Route path="/signup" element={<SignUpPage />} />

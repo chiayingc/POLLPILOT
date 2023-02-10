@@ -2,7 +2,7 @@ import React  from 'react'
 
 
 // 帶入count(第幾題) 設定div id
-function Question({ allQ, recordQue }) {
+function Question({ allQ, recordQue, done }) {
 
   // const recordQue=(e)=>{
   //   console.log(e.target.id);
@@ -17,9 +17,10 @@ function Question({ allQ, recordQue }) {
     let id = i + 1;
     if (allQ[i] == "A") {
       let oneQue = <div id={"qus" + id} className={"qus"}>
-                      <p id={"title"+id} className="qus_title"> 題目標題</p>
+                      <p id={"title"+id}> 題目標題</p>
                       {/* <input id={"title"+id} className="qus_title" type="text" placeholder="題目標題" readOnly/> */}
-                      <input id={"queContent"+id} type="text" onChange={recordQue} />
+                      <input id={"AqueContent"+id} className="qus_titleA" type="text" onChange={recordQue} />
+                      <button id={"done"+id} onClick={done}>完成</button>
                     </div>
       allQuestions.push(oneQue);
     }

@@ -25,7 +25,8 @@ function AddNewPage() {
             setUser(currentUser);
             const userData=doc(db,"allUsers","user_"+currentUser.uid);
             const data=await getDoc(userData);
-            console.log(data.data());
+            console.log(currentUser);
+            // console.log(data.data());
             setSurvey(data.data().surveyCount+1);
         });
     },[]);
@@ -33,7 +34,13 @@ function AddNewPage() {
 
     const saveSurveySettings=async()=>{
 
-        const userSurveys=doc(db,"allUsers","user_"+user.uid,"userSurveys","survey"+survey);
+          //let date=new Date()
+          //生成不重複代碼的方法 1.用時間產生,永不重複 Date.now().toString(36)  2.隨機 Math.random().toString(36).slice(2,8)
+          // let date=new Date();
+          let serial=Date.now().toString(36).slice(2,8);
+          //把代碼放進問卷資料裡面
+
+        const userSurveys=doc(db,"allUsers","user_"+user.uid,"userSurveys",serial+"survey"+survey);
         await setDoc(userSurveys, { Settings:{
             id:survey,
             name:surveyTitle,
@@ -42,7 +49,8 @@ function AddNewPage() {
             thanksText:surveyThanksText,
             status:surveyStatus,
             key:surveyKey,
-            showNum:surveyShowNum
+            showNum:surveyShowNum,
+            serial:serial
         } }, { merge: true })
         .then(async()=>{
             console.log("success"); 
@@ -56,7 +64,9 @@ function AddNewPage() {
                 .then(()=>{
                     console.log("update successed!")
                     // 跳轉頁面
-                    navigate("/addques");
+                    navigate("/addques",{
+                        state:[serial,survey]
+                    });
                 })
                 .catch(()=>{console.log("update fail")});
         })

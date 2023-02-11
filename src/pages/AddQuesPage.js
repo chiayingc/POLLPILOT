@@ -21,47 +21,43 @@ function AddQuesPage() {
   // const [allMutiQue, setAllMutiQue]=useState([4,5]); //紀錄所有多選
   const [allQues, setAllQues] = useState([]); //紀錄所有題目題型
   const [allQuestions, setAllQuestions] = useState([]);  //記錄所有題目內容
-  
-  const [theQue, setTheQue]=useState([]);
 
-  const [id,setId]=useState("");
-  const [type, setType]=useState("");
+  const [theQue, setTheQue] = useState([]);
+
+  const [id, setId] = useState("");
+  const [type, setType] = useState("");
 
 
-  const done=async (e)=> {
+  const done = async (e) => {
     e.preventDefault();
 
-    if(theQue[0]=="" || theQue[1]=="" || theQue[2]==""){
+    if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "") {
       return;
     }
-    let newAllQues =allQuestions;
-    newAllQues[e.target.id.replace("done", "")]=theQue;
+    let newAllQues = allQuestions;
+    newAllQues[e.target.id.replace("done", "")] = theQue;
     setAllQuestions(newAllQues);
-    
+
     setTheQue('');
     setId("");
 
-};
+  };
 
   const recordQue = (e) => {   //記錄題目內容(單行文字問答題)
     // console.log(e.target.id);
-    setId( e.target.id.replace("AqueContent", ""));
-    setType (e.target.id.substr(0, 1));
-    setTheQue([id,type, e.target.value]);
+    setId(e.target.id.replace("AqueContent", ""));
+    setType(e.target.id.substr(0, 1));
+    setTheQue([id, type, e.target.value]);
   }
-  
+
 
   const saveQues = async () => {
 
-    /*這是回答時用的 不要管*/
-    // const userSurveys=doc(db,"allUsers","user_"+user.uid,"userSurveys","survey"+"7","Answers","answer"+"1");  /////////要改!!! 第幾張問卷?的第幾份回答??
-    /*這是答案卷時用的 不要管 */
+    let size = Object.keys(allQuestions).length;
 
-    let size=Object.keys(allQuestions).length;
-    
     for (let i = 1; i <= size; i++) {
       console.log(allQuestions[i]);
-      const userSurveys = doc(db, "allUsers", "user_" + user.uid, "userSurveys", serial + "survey" + survey, "Questions", "Que" + allQuestions[i][0] );
+      const userSurveys = doc(db, "allUsers", "user_" + user.uid, "userSurveys", serial + "survey" + survey, "Questions", "Que" + allQuestions[i][0]);
       await setDoc(userSurveys, {
         id: allQuestions[i][0],
         type: allQuestions[i][1],
@@ -69,80 +65,60 @@ function AddQuesPage() {
       }, { merge: true })
         .then(async () => {
           console.log("success");
+          // navigate("/fillin/"+ serial + "survey" + survey);
+          navigate("/release/"+ serial + "survey" + survey);
           //跳轉到發布頁面
-          }).catch(()=>{console.log("fail")});
-
-
-          // console.log(allQuestions);
-          // console.log(user.uid);
-
-          // await setDoc(userSurveys, {
-          //   Questions:  //arrayUnion是用來直接把整個array放進去的
-          //     tmpQues
-          // }, { merge: true })
-          //   .then(async () => {
-          //     console.log("success");
-          //     //跳轉到發布頁面
-          //     navigate("/release", {
-          //       state: state
-          //     });
-
-
-            // })
-            // .catch(() => {
-            //   console.log("fail");
-            // });
-
-          ////
-        }
-    }
-
-    const addQue = (e) => {   //新增題目區塊
-      let queAry = allQues;
-      // console.log(e.target.value);
-      if (e.target.value == "A") {  //設定題型 
-        queAry[queCount] = "A";
-      }
-      else if (e.target.value == "B") {
-        queAry[queCount] = "B";
-      }
-      setAllQues(queAry);
-      setQueCount(queCount + 1);
+        }).catch(() => { console.log("fail") });
 
     }
-
-    return (
-      <div id='addquespage'>
-        {/* 要改成會員版nav */}
-        <Navbar />
-        <div id='addquespage_main'>
-          <div id='addquespage_main_left'>
-            <Question allQ={allQues} recordQue={recordQue} done={done} />
-          </div>
-          <div id='addquespage_main_right'>
-            <h5>選擇題型</h5>
-            <div id='ques_type'>
-              <button onClick={addQue} value={"A"}>單行文字</button>
-              <button onClick={addQue} value={"B"}>多行文字</button>
-              <button>單選題</button>
-              <button>多選題</button>
-              <button>矩陣題</button>
-              <button>數字題</button>
-              <button>數字滑桿</button>
-              <button>引言</button>
-              <button>分類標題</button>
-              <button>日期</button>
-              <button>分隔線</button>
-            </div>
-            <div id='step_btn'>
-              <button>＜問卷設定</button>
-              <button onClick={saveQues}>外觀設定＞</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    )
   }
 
-  export default AddQuesPage
+  const addQue = (e) => {   //新增題目區塊
+    let queAry = allQues;
+    // console.log(e.target.value);
+    if (e.target.value == "A") {  //設定題型 
+      queAry[queCount] = "A";
+    }
+    else if (e.target.value == "B") {
+      queAry[queCount] = "B";
+    }
+    setAllQues(queAry);
+    setQueCount(queCount + 1);
+
+  }
+
+  return (
+    <div id='addquespage'>
+      {/* 要改成會員版nav */}
+      <Navbar />
+      <div id='addquespage_main'>
+        <div id='addquespage_main_left'>
+          <Question allQ={allQues} recordQue={recordQue} done={done} />
+        </div>
+        <div id='addquespage_main_right'>
+          <h5>選擇題型</h5>
+          <div id='ques_type'>
+            <button onClick={addQue} value={"A"}>單行文字</button>
+            <button onClick={addQue} value={"B"}>多行文字</button>
+            <button>單選題</button>
+            <button>多選題</button>
+            <button>矩陣題</button>
+            <button>數字題</button>
+            <button>數字滑桿</button>
+            <button>引言</button>
+            <button>分類標題</button>
+            <button>日期</button>
+            <button>分隔線</button>
+          </div>
+          <div id='step_btn'>
+            <button>＜問卷設定</button>
+            <button onClick={saveQues}>外觀設定＞</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  )
+}
+
+export default AddQuesPage

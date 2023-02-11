@@ -4,9 +4,12 @@ import '../styles/ReleasePage.css'
 import { useLocation } from 'react-router-dom'
 
 function ReleasePage() {
-  const {state} =useLocation();
-  const serial=state[0];  //這份問卷的編號
-  const idSurvey=state[1]; //問卷的id
+
+  const location = useLocation();
+  let tmpAry = location.pathname.split("/");
+  let theSurvey = tmpAry[tmpAry.length - 1];
+  console.log(tmpAry);
+
 
   const copyUrl=()=>{
     let copyDOM=document.querySelector("#url");
@@ -33,7 +36,7 @@ function ReleasePage() {
         <div id='releasepage_content'>
           <div>img + 分享你的問卷</div>
           <div>
-            <span id="url">{"https://pollpilot-1c440.web.app/fillin/"+state[0]+"SURVEY"+state[1]}</span>
+            <span id="url">{"https://pollpilot-1c440.web.app/fillin/"+theSurvey}</span>
             <button onClick={copyUrl}>複製</button>
           </div>
           <div>QR code</div>

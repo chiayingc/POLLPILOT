@@ -5,23 +5,17 @@ import { auth, db } from '../../firebase-config.js'
 import { doc, collection, setDoc,getDocs, query, where, onSnapshot } from 'firebase/firestore'
 import { UserContext } from '../helper/Context'
 import { onAuthStateChanged } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
-
-
-
-
-
-
-
+//////路徑要改 不能依賴user
 
 function FillInPage() {
   const { user, setUser } = useContext(UserContext);
   const [surveyData, setSurveyData] = useState([]);
 
-  const [ansID, setAnsID] = useState(1);
-  const [theAns, setTheAns] = useState([]);
   const [allAns, setAllAns] = useState([]);
 
+  const navigate=useNavigate();
 
   const location = useLocation();
   let tmpAry = location.pathname.split("/");
@@ -33,11 +27,13 @@ function FillInPage() {
     });
   }, []);
 
-  let questionsList = [];
+
   useEffect(() => {
+    let questionsList = [];
     const showQues = onSnapshot(
       collection(db, "allUsers", "user_" + user.uid, "userSurveys", theSurvey, "Questions"), (snapshot) => {
         snapshot.forEach((doc) => {
+          console.log(doc);
           questionsList.push({ ...doc.data(), id: doc.data().id, type: doc.data().type, content: doc.data().content });
         });
         setSurveyData(questionsList);
@@ -59,9 +55,6 @@ function FillInPage() {
 
 
 
-
-
-
   const recordAns = (e) => {
     let id = e.target.id.replace("ans", "");
     let newAllAns = [];
@@ -79,13 +72,14 @@ function FillInPage() {
         allAns.forEach((element, index) => {
           allAnsObj[index] = element;
         });
-        const surveyAnswers = doc(db, "allUsers", "user_" + user.uid, "userSurveys", theSurvey, "Answers", "Ans1");  //要改第幾張答案!!
+        const surveyAnswers = doc(db, "allUsers", "user_" + user.uid, "userSurveys", theSurvey, "Answers", "Ans2");  //要改第幾張答案!!
         await setDoc(surveyAnswers,
          allAnsObj 
         , { merge: true })
           .then(async () => {
             console.log("success");
-            //跳轉到發布頁面
+            //跳轉到感謝頁面
+            navigate("/thanks/"+theSurvey);
           }).catch(() => { console.log("fail") });
       // }
     // }

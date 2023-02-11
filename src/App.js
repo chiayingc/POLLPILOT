@@ -11,6 +11,7 @@ import AddNewPage from "./pages/AddNewPage";
 import AddQuesPage from "./pages/AddQuesPage";
 import ReleasePage from "./pages/ReleasePage";
 import FillInPage from "./pages/FillInPage";
+import ThanksPage from "./pages/ThanksPage";
 import { UserContext } from "./helper/Context";
 
 
@@ -34,6 +35,9 @@ function App() {
                     
                     <Route path="/fillin" element={<FillInPage />} />
                     <Route path="/fillin/:fillin" element={<FillInPage />} />
+
+                    <Route path="/thanks" element={<ThanksPage />} />
+                    <Route path="/thanks/:thanks" element={<ThanksPage />} />
 
                     <Route path="/" element={<HomePage />} />
                     <Route path="/signup" element={<SignUpPage />} />

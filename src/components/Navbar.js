@@ -22,12 +22,13 @@ function Navbar() {
   const signout=async()=>{
     await signOut(auth);
   }
+  const navigate=useNavigate();
 
 
   return (
     <div id='navbar'>
       <div id='nav_logo'> 
-        <img src={pplogo} className="pplogo"/> 
+        <img src={pplogo} className="pplogo" onClick={()=>{navigate("/dashboard")}}/> 
       </div>
       {user?(
             <div id='nav_btns'>

@@ -80,6 +80,7 @@ body>div{
 #nav_logo{
     display: grid;
     align-items: center;
+    cursor: pointer;
 }
 
 .pplogo{

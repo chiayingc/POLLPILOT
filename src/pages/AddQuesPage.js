@@ -52,7 +52,7 @@ function AddQuesPage() {
 
 
   const saveQues = async () => {
-
+    console.log(allQuestions);
     let size = Object.keys(allQuestions).length;
 
     for (let i = 1; i <= size; i++) {

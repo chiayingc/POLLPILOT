@@ -20,15 +20,18 @@ function FillInPage() {
   const location = useLocation();
   let tmpAry = location.pathname.split("/");
   let theSurvey = tmpAry[tmpAry.length - 1];
+  console.log(theSurvey);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      console.log(user);
     });
   }, []);
 
 
   useEffect(() => {
+    console.log("here");
     let questionsList = [];
     const showQues = onSnapshot(
       collection(db, "allUsers", "user_" + user.uid, "userSurveys", theSurvey, "Questions"), (snapshot) => {
@@ -37,6 +40,7 @@ function FillInPage() {
           questionsList.push({ ...doc.data(), id: doc.data().id, type: doc.data().type, content: doc.data().content });
         });
         setSurveyData(questionsList);
+        console.log(questionsList);
       });
     return showQues;
   }, [user]);

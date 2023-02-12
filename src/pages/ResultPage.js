@@ -13,6 +13,7 @@ function ResultPage() {
 
     let tmpAry = location.pathname.split("/");
     let theSurvey = tmpAry[tmpAry.length - 1];
+    // console.log(theSurvey);
 
     useEffect(() => {
         onAuthStateChanged(auth, async (currentUser) => {
@@ -39,17 +40,19 @@ function ResultPage() {
 
       function Ans(props) {
         /////這邊要大改喔
+        // console.log(props.content);
+        // for(let i=0; i<props.content.length;i++){
+        //     console.log(i);
+        // }
+        // console.log(props.content);
         
-    // console.log(props.content);
           let ans =
             <div >
-              {props.content[1][0]}_ {props.content[1][1]}
-              <br/>
-              {props.content[2][0]}_ {props.content[2][1]}
-              <br/>
-              {props.content[3][0]}_ {props.content[3][1]}
-              <br/>
-              {props.content[4][0]}_ {props.content[4][1]}
+                {/* {props.content[1][0]}  */}
+              {props.content[1][0]}_ {props.content[1][1]} <br/>
+              {props.content[2][0]}_ {props.content[2][1]} <br/>
+              {props.content[3][0]}_ {props.content[3][1]} <br/>
+              {/* {props.content[4][0]}_ {props.content[4][1]}  */}
             </div>
           return ans;
         

@@ -47,7 +47,7 @@ function DashBoardPage() {
 
       let thesur =
         <div id={'userSurvey'+props.id} 
-                onClick={()=>{navigate("/result/"+props.serial)}}>
+                onClick={()=>{navigate("/result/"+props.serial+"survey"+props.id)}}>
           <p>{props.name}</p>
           {/* <p>{props.serial}</p> */}
         </div>

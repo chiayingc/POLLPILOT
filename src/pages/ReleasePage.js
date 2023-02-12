@@ -20,7 +20,7 @@ function ReleasePage() {
     let successful =document.execCommand('copy');
 
     if(successful){
-      alert("success");
+      alert("複製成功！");
     }
     else{
       alert("fail");

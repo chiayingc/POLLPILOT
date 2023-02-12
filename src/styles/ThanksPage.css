@@ -1,0 +1,27 @@
+#thankspage{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    color: #444;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+#thankspage >img{
+    width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+
+#thankspage >h2{
+    position: relative;
+    top:8vh;
+}
+
+#thankspage >button{
+    margin-top: 35px;
+}

@@ -32,7 +32,7 @@ function App() {
                     <Route path="/addques" element={<AddQuesPage />} />
                     <Route path="/release" element={<ReleasePage />} />
                     <Route path="/release/:survey" element={<ReleasePage />} />
-                    
+
                     <Route path="/fillin" element={<FillInPage />} />
                     <Route path="/fillin/:fillin" element={<FillInPage />} />
 

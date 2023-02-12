@@ -41,7 +41,7 @@ function AddNewPage() {
           //把代碼放進問卷資料裡面
 
         const userSurveys=doc(db,"allUsers","user_"+user.uid,"userSurveys",serial+"survey"+survey);
-        await setDoc(userSurveys, { Settings:{
+        await setDoc(userSurveys, {
             id:survey,
             name:surveyTitle,
             titleAlign:surveyTitleAlign,
@@ -51,7 +51,7 @@ function AddNewPage() {
             key:surveyKey,
             showNum:surveyShowNum,
             serial:serial
-        } }, { merge: true })
+         }, { merge: true })
         .then(async()=>{
             console.log("success"); 
             //更改紀錄user的問卷張數 

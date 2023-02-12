@@ -18,6 +18,8 @@ function FillInPage() {
   const navigate=useNavigate();
 
   const location = useLocation();
+  console.log(location);
+  console.log(location.pathname);
   let tmpAry = location.pathname.split("/");
   let theSurvey = tmpAry[tmpAry.length - 1];
   console.log(theSurvey);
@@ -49,9 +51,9 @@ function FillInPage() {
   function AQue(props) {
     if (props.type == "A") {
       let aque =
-        <div>
-          <div>{props.content}</div>
-          <input type="text" id={"ans" + props.id} placeholder={props.id} onChange={recordAns} />
+        <div className='fillin_aque'>
+          <div className='fillin_que'>{props.content}</div>
+          <input type="text" className='fillin_ans' id={"ans" + props.id} placeholder={props.id} onChange={recordAns} />
         </div>
       return aque;
     }
@@ -68,7 +70,7 @@ function FillInPage() {
     // console.log(allAns);
   }
 
-  const test = async () => {
+  const fillin = async () => {
     // console.log(allAns);
     // for (let i = 0; i < allAns.length; i++) {
     //   if (allAns[i] != undefined) {
@@ -89,26 +91,12 @@ function FillInPage() {
     // }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
-    <div>
-      <div>
+    <div id='fillinpage'>
+      <div id='fillinpage_questions'>
         {surveyData.map((que, index) => <AQue key={index} id={que.id} type={que.type} content={que.content} />)}
       </div>
-      <div onClick={test}>idsahgidsakjg</div>
+      <button onClick={fillin} id='btn_fillin'>送出問卷</button>
     </div>
   )
 }

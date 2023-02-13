@@ -6,12 +6,14 @@ import { doc, collection, setDoc,getDocs, query, where, onSnapshot } from 'fireb
 import { UserContext } from '../helper/Context'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 //////路徑要改 不能依賴user
 
 function FillInPage() {
   const { user, setUser } = useContext(UserContext);
   const [surveyData, setSurveyData] = useState([]);
+  const [surveySetting, setSurveySetting]=useState([]);
 
   const [allAns, setAllAns] = useState([]);
 
@@ -27,7 +29,22 @@ function FillInPage() {
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      // console.log(user);
+
+        // console.log("HERE");
+        let surveySetting = [];
+        const getSetting = onSnapshot(
+          collection(db, "allUsers", "user_" + currentUser.uid, "userSurveys"), (snapshot) => {
+            snapshot.forEach((doc) => {
+              // console.log(doc.data().name);
+              surveySetting.push({ ...doc.data(),id:doc.data().id, name: doc.data().name, serial: doc.data().serial , welcomeText:doc.data().welcomeText, showNum:doc.data().showNum  });
+            });
+            setSurveySetting(surveySetting);
+            console.log(surveySetting);
+          });
+        return getSetting;
+
+   
+
     });
   }, []);
 
@@ -93,8 +110,10 @@ function FillInPage() {
 
   return (
     <div id='fillinpage'>
+      <Navbar/>
+      <div>{surveySetting.welcomeText}</div>
       <div id='fillinpage_questions'>
-        {surveyData.map((que, index) => <AQue key={index} id={que.id} type={que.type} content={que.content} />)}
+        {surveyData.map((que, index) => <AQue key={index} id={que.id} type={que.type} content={que.content} showNum={surveySetting.showNum}/>)}
       </div>
       <button onClick={fillin} id='btn_fillin'>送出問卷</button>
     </div>

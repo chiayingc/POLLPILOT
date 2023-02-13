@@ -3,9 +3,9 @@
     display: grid;
     justify-items: center;
     color: #666;
-    margin-top: 10vh;
+    /* margin-top: 10vh; */
     margin-bottom: 10vh;
-    padding: 30px;
+    /* padding: 30px; */
     grid-template-rows: auto 10%;
     row-gap: 30px;
 }

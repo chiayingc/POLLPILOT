@@ -6,6 +6,7 @@ import { doc, collection, setDoc,getDocs, query, where, onSnapshot } from 'fireb
 import { UserContext } from '../helper/Context'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 function ResultPage() {
     const { user, setUser } = useContext(UserContext);
@@ -61,6 +62,7 @@ function ResultPage() {
 
   return (
     <div id='resultpage'>
+        <Navbar/>
       <div id='resultpage_answer'>
         {resultData.map((ans, index) => <Ans key={index} content={ans}/>)}
       </div>

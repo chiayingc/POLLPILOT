@@ -29,7 +29,8 @@ body > div{
 
 #addquespage_main_left{
     padding: 50px;
-    padding-left: 150px;
+    /* padding-left: 150px; */
+    padding-left: 300px;
 }
 
 #questions{

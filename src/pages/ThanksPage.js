@@ -7,6 +7,7 @@ import { UserContext } from '../helper/Context'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import humaaans from '../assets/Humaaans.png'
+import Navbar from '../components/Navbar'
 
 
 
@@ -38,6 +39,7 @@ function ThanksPage() {
 
         return (
             <div id='thankspage'>
+                <Navbar/>
                 <img src={humaaans} />
                 <h2>{thanksText}</h2>
                 {/* <button onClick={close}>關閉</button> */}

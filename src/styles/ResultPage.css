@@ -1,0 +1,15 @@
+body > div{
+    width: 100%;
+}
+
+#resultpage{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    color: #666;
+}
+
+
+#resultpage_answer{
+    margin-top: 30px;
+}

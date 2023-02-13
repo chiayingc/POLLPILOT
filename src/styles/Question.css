@@ -6,11 +6,12 @@
     margin-top: 5px;
 }
 
-#qus >input{
-    width: calc(100% - 1.2rem);
-    outline: none;
+.qus >input{
     font-size: 16px;
-    padding: .5rem .6rem;
+    padding: .2rem .6rem;
+    border: solid #888;
+    border-width: 0px 0px 1px 0px;
+    margin-right: 20px;
 }
 
 .qus_title{

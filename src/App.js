@@ -35,10 +35,10 @@ function App() {
                     <Route path="/release/:survey" element={<ReleasePage />} />
 
                     <Route path="/fillin" element={<FillInPage />} />
-                    <Route path="/fillin/:fillin" element={<FillInPage />} />
+                    <Route path="/fillin/:fillin/:fillin" element={<FillInPage />} />
 
                     <Route path="/thanks" element={<ThanksPage />} />
-                    <Route path="/thanks/:thanks" element={<ThanksPage />} />
+                    <Route path="/thanks/:thanks/:thanks" element={<ThanksPage />} />
 
                     <Route path="/result/:result" element={<ResultPage />} />
 

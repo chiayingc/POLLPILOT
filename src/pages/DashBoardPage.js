@@ -14,30 +14,29 @@ function DashBoardPage() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [surveyList, setSurveyList]=useState([]);
-  // console.log(user);
+  const [shortUid, setShortUid]=useState("");
 
   // const [user, setUser] = useState({});
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
       if (currentUser) {
+        setUser(currentUser);
+      setShortUid(currentUser.uid.substring(0,4));
         // console.log("HERE");
         let surveyList = [];
         const showSurvey = onSnapshot(
-          collection(db, "allUsers", "user_" + currentUser.uid, "userSurveys"), (snapshot) => {
+          collection(db, "allUsers", "user_" + currentUser.uid.substring(0,4), "userSurveys"), (snapshot) => {
             snapshot.forEach((doc) => {
-              // console.log(doc.data().name);
+              console.log(doc.data());
               surveyList.push({ ...doc.data(),id:doc.data().id, name: doc.data().name, serial: doc.data().serial });
             });
             setSurveyList(surveyList);
-            console.log(surveyList);
           });
         return showSurvey;
 
       } else {
         navigate("/signin");
-        // setLoggedIn(false);
       }
     });
   }, []);

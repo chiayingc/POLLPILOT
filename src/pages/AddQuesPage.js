@@ -7,6 +7,10 @@ import { UserContext } from '../helper/Context'
 import { auth, db } from '../../firebase-config.js'
 import { doc, collection, addDoc, setDoc, getDoc, arrayUnion } from 'firebase/firestore'
 import { useLocation, useNavigate } from 'react-router-dom'
+import {
+  onAuthStateChanged
+} from 'firebase/auth'
+
 
 function AddQuesPage() {
   const navigate = useNavigate();
@@ -26,6 +30,19 @@ function AddQuesPage() {
 
   const [id, setId] = useState("");
   const [type, setType] = useState("");
+
+  const [shortUid, setShortUid]=useState("");
+
+  useEffect(()=>{
+    onAuthStateChanged(auth, async(currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        setShortUid(currentUser.uid.substring(0,4));
+      }else {
+        navigate("/signin");
+      }
+    });
+},[]);
 
 
   const done = async (e) => {
@@ -52,12 +69,10 @@ function AddQuesPage() {
 
 
   const saveQues = async () => {
-    console.log(allQuestions);
     let size = Object.keys(allQuestions).length;
 
     for (let i = 1; i <= size; i++) {
-      console.log(allQuestions[i]);
-      const userSurveys = doc(db, "allUsers", "user_" + user.uid, "userSurveys", serial + "survey" + survey, "Questions", "Que" + allQuestions[i][0]);
+      const userSurveys = doc(db, "allUsers", "user_" + shortUid, "userSurveys", serial + "survey" + survey, "Questions", "Que" + allQuestions[i][0]);
       await setDoc(userSurveys, {
         id: allQuestions[i][0],
         type: allQuestions[i][1],

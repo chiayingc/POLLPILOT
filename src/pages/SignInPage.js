@@ -42,7 +42,7 @@ function SignInPage() {
         } catch (error) {
             // console.log(error.message);
             // setLoggedIn(false);
-            setSigninHint("登入失敗:" + error.message);
+            setSigninHint("登入失敗:" + error.message.substring(8, [error.message.length]));
         }
 
     };
@@ -52,7 +52,6 @@ function SignInPage() {
     }
     return (
         <div id='signinpage'>
-            {user?<h1>Logged in!</h1>:<h1>You are NOT LOGGED IN</h1>}
             <div id='signinpage_main'>
                 <div id='signinpage_main_left'>
                     <div id="logo">
@@ -69,13 +68,12 @@ function SignInPage() {
                             <div id='aaa'>
                                 <p>您的密碼</p>
                                 <div>
-                                    <input type="text" placeholder='請輸入您的密碼'
+                                    <input type="password" placeholder='請輸入您的密碼'
                                         onChange={(e) => { setSigninPassword(e.target.value) }} />
                                     <img />
                                     <p>忘記密碼了嗎</p>
                                 </div>
                                 <p className='hint' id='signin_hint'>{signinHint}</p>
-                                {/* <p className='hint'>hint // {user?user.email:"未登入或登入失敗"}</p> */}
                             </div>
                             <button onClick={signin}>
                                 登入
@@ -83,7 +81,6 @@ function SignInPage() {
                         </form>
                         <div>
                             <p>其他登入</p>
-                            <button onClick={signout}>測試登出</button>
                             {/* <button>使用 Facebook 登入</button> */}
                             <div><p>還沒有註冊嗎？</p> <p><Link to={"/signup"}>前往註冊</Link></p></div>
                         </div>

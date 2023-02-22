@@ -15,6 +15,8 @@ import ThanksPage from "./pages/ThanksPage";
 import ResultPage from "./pages/ResultPage";
 import { UserContext } from "./helper/Context";
 
+import Test from './pages/Test';
+
 
 function App() {
 
@@ -43,8 +45,11 @@ function App() {
                     <Route path="/result/:result" element={<ResultPage />} />
 
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/signup" element={<SignUpPage />} />
-                    <Route path="/signin" element={<SignInPage />} />
+                    {/* <Route path="/signup" element={<SignUpPage />} />
+                    <Route path="/signin" element={<SignInPage />} /> */}
+                    <Route path="/signup" element={<Test sign={"signup"}/>} />
+                    <Route path="/signin" element={<Test sign={"signin"}/>} />
+                    <Route path="/test" element={<Test />} />
 
                     {/* <Route path="/list" element={ <ListPage/> }/> */}
                 </Routes>

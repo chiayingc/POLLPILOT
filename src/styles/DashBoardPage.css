@@ -18,7 +18,7 @@
     padding: 20px;
     padding-top: 30px;
     box-shadow: 2px 1px 1px 1px rgba(6,6,6,0.05);
-    height: calc(100vh - 95px);
+    height: calc(100vh - 105px);
     display: grid;
     grid-template-rows: 35px 30px 35px;
     row-gap: 10px;

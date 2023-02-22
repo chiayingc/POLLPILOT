@@ -86,7 +86,8 @@ function FillInPage() {
     let id = e.target.id.replace("ans", "");
     let newAllAns = [];
     newAllAns = allAns;
-    newAllAns[id] = [id, e.target.value];
+    // newAllAns[id] = [id, e.target.value];
+    newAllAns[id] = [e.target.value];
     setAllAns(newAllAns);
     // console.log(allAns);
   }

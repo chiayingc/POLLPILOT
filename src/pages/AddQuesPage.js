@@ -31,18 +31,18 @@ function AddQuesPage() {
   const [id, setId] = useState("");
   const [type, setType] = useState("");
 
-  const [shortUid, setShortUid]=useState("");
+  const [shortUid, setShortUid] = useState("");
 
-  useEffect(()=>{
-    onAuthStateChanged(auth, async(currentUser) => {
+  useEffect(() => {
+    onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        setShortUid(currentUser.uid.substring(0,4));
-      }else {
+        setShortUid(currentUser.uid.substring(0, 4));
+      } else {
         navigate("/signin");
       }
     });
-},[]);
+  }, []);
 
 
   const done = async (e) => {
@@ -70,8 +70,11 @@ function AddQuesPage() {
 
   const saveQues = async () => {
     let size = Object.keys(allQuestions).length;
-
+    let allQueType=[];
     for (let i = 1; i <= size; i++) {
+      if(allQueType[i]==undefined){allQueType[i]=[]}
+      allQueType[i]=allQuestions[i][1];
+      setAllQues(allQueType);
       const userSurveys = doc(db, "allUsers", "user_" + shortUid, "userSurveys", serial + "survey" + survey, "Questions", "Que" + allQuestions[i][0]);
       await setDoc(userSurveys, {
         id: allQuestions[i][0],
@@ -80,9 +83,20 @@ function AddQuesPage() {
       }, { merge: true })
         .then(async () => {
           console.log("success");
-          // navigate("/fillin/"+ serial + "survey" + survey);
-          navigate("/release/"+ serial + "survey" + survey);
-          //跳轉到發布頁面
+          const addCount = doc(db, "allUsers", "user_" + shortUid, "userSurveys", serial + "survey" + survey, "Answers", "count");
+          await setDoc(addCount,
+            {
+              queCount: queCount,
+              queType:allQues
+            },
+            { merge: true })
+            .then(() => {
+              // navigate("/fillin/"+ serial + "survey" + survey);
+              navigate("/release/" + serial + "survey" + survey);
+              //跳轉到發布頁面
+            })
+            .catch(()=>{console.log("fail")});
+
         }).catch(() => { console.log("fail") });
 
     }

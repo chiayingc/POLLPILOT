@@ -7,9 +7,34 @@ body > div{
     display: grid;
     justify-items: center;
     color: #666;
+
+    margin-top: 30px;
+
+}
+
+#resultpage_content{
+    width: 40%;
+    padding: 20px;
+    margin-top: 30px;
 }
 
 
-#resultpage_answer{
-    margin-top: 30px;
+
+.result_que_A{
+    color: rebeccapurple;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 3px;
+    display: grid;
+}
+
+.result_oneans_A{
+    color: blue;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px;
+}
+
+.result_oneque_A{
+    margin-bottom: 35px;
 }

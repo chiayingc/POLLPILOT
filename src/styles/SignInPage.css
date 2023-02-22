@@ -1,136 +1,206 @@
-input{
-    outline: none;
+@media (max-width:1980px) {
+
+    input {
+        outline: none;
+    }
+
+    #signinpage {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(to right, #fff 0%, #fff 42%, rgb(250, 250, 250) 42%, rgb(250, 250, 250) 100%);
+        display: grid;
+        justify-items: center;
+
+    }
+
+    #signinpage_main {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 45% 55%;
+    }
+
+    #signinpage_main_right {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        /* padding: 40px; */
+    }
+
+    .signbk1 {
+        width: 100%;
+        height: 90vh;
+    }
+
+    #signinpage_main_left {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        width: 100%;
+    }
+
+    #signinpage_main_left>div {
+        width: 300px;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        padding-left: 20%;
+    }
+
+    .form_column {
+        font-size: .9rem;
+        font-weight: 600;
+    }
+
+    .second_title {
+        font-size: .5rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .hint {
+        color: rgb(233, 0, 0);
+        font-size: .5rem;
+        font-weight: 500;
+        margin-top: 5px;
+    }
+
+    .sign_btn {
+        font-size: .5rem;
+    }
+
+    .sign_btn>a {
+        color: #666;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    #signinpage_main_left>div>form {
+        width: 300px;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        /* grid-template-rows: 70px 110px 50px; */
+        row-gap: 10px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* #signinpage_main_left>div>form>div>input, */
+    /* #aaa>div> input  */
+    .sign_input {
+        width: 300px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        height: 28px;
+        background-color: #FFFFFF;
+        border: 1px solid #F7DEDC;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: .5rem;
+        padding: .4rem 1rem;
+        text-align: left;
+        vertical-align: baseline;
+        /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); */
+        outline: none;
+        touch-action: manipulation;
+    }
+
+
+    #signinpage_main_left>div>div>button,
+    #signinpage_main_left>div>form>button {
+        width: 300px;
+        height: 30px;
+        margin-top: 10px;
+
+        background-color: #FFFFFF;
+        border: 0;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #111827;
+        font-size: .8rem;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: baseline;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    #signinpage_main_left>div>div {
+        width: 300px;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        grid-template-rows: 20px 60px 30px;
+        row-gap: 2px;
+
+    }
+
+    #signinpage_main_left>div>div>div {
+        width: 300px;
+        display: grid;
+        grid-template-columns: 90px auto;
+    }
+
 }
 
-#signinpage{
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(to right, #fff 0%, #fff 50%, rgb(228, 228, 228) 50%, rgb(228, 228, 228) 100% );
-    display: grid;
-    justify-items: center;
+@media (max-width:1280px) {
+
+    #signinpage_main_left>div,
+    #signinpage_main_left>div>form,
+    #signinpage_main_left>div>div,
+    #signinpage_main_left>div>div>div,
+    #signinpage_main_left>div>div>button,
+    #signinpage_main_left>div>form>button,
+    #signinpage_main_left>div>form,
+    .sign_input {
+        width: 230px;
+    }
+
+    #signinpage_main_left>div {
+        padding-left: 15%;
+    }
 }
 
-#signinpage_main{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+@media (max-width:800px) {
+    #signinpage_main {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    #signinpage{
+        background: linear-gradient(to right, #fff 0%, #fff 48%, rgb(250, 250, 250) 48%, rgb(250, 250, 250) 100%);
+    }
 }
 
-#logo{
-    padding: 0;
-    margin: 0;
-    max-width: 120px;
-    position: absolute;
-    top:20px;
-    left:30px;
+@media (max-width:600px) {
+
+    #signinpage{
+        background:#FAFAFA;
+        display: block;
+    }
+
+    #signinpage_main {
+        grid-template-columns: 1fr 0;
+    }
+
+    #signinpage_main_right {
+        display: none;
+    }
+
+    .signbk1{
+        display: none;
+    }
+
+    #signinpage_main_left{
+        margin-top: 10vh;
+    }
+
+    #signinpage_main_left>div {
+        padding-left: 0;
+    }
+
+
+
 }
-
-#logo > img{
-    width: 100%;
-}
-
-#signinpage_main_right{
-    display: grid;
-    justify-items: center;
-    align-content: center;
-    padding: 40px;
-}
-
-#signinpage_main_right>img{
-    max-width: 100%;
-}
-
-#signinpage_main_left{
-    display: grid;
-    justify-items: center;
-    align-content: center;
-}
-
-#signinpage_main_left >div{
-    width: 300px;
-    display: grid;
-    justify-items: center;
-    align-content: center;
-}
-
-#signinpage_main_left >div >form{
-    width: 300px;
-    display: grid;
-    justify-items: center;
-    align-content: center;
-    grid-template-rows: 70px 110px 50px;
-    row-gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-#signinpage_main_left >div >form >div, #aaa{
-    width: 300px;
-}
-
-#aaa>div{
-    display: grid;
-    grid-template-columns: 90% 10%;
-}
-
-#signinpage_main_left >div >form >div >input, 
-#aaa>div>input{
-    width: 300px;
-    margin-top: 8px;
-    
-    background-color: #FFFFFF;
-    border: 0;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    padding: .75rem 1rem;
-    text-align: left;
-    vertical-align: baseline;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    outline: none;
-    touch-action: manipulation;
-}
-
-.hint{
-    color: red;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-#signinpage_main_left >div >div >button,
-#signinpage_main_left >div >form >button{
-    width: 300px;
-    height: 40px;
-    margin-top: 10px;
-
-    background-color: #FFFFFF;
-    border: 0;
-    border-radius: 5px;
-    box-sizing: border-box;
-    color: #111827;
-    font-size: 16px;
-    text-align: center;
-    vertical-align: baseline;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    /* user-select: none;
-    -webkit-user-select: none; */
-    touch-action: manipulation;
-}
-
-#signinpage_main_left >div >div{
-    width: 300px;
-    display: grid;
-    justify-items: center;
-    align-content: center;
-    grid-template-rows: 20px 60px 30px;
-    row-gap: 2px;
-    
-}
-
-#signinpage_main_left >div >div >div{
-    width: 300px;
-    display: grid;
-    grid-template-columns: 50% 50%;    
-}
-

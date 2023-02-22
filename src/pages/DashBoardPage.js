@@ -28,7 +28,7 @@ function DashBoardPage() {
         const showSurvey = onSnapshot(
           collection(db, "allUsers", "user_" + currentUser.uid.substring(0,4), "userSurveys"), (snapshot) => {
             snapshot.forEach((doc) => {
-              console.log(doc.data());
+              // console.log(doc.data());
               surveyList.push({ ...doc.data(),id:doc.data().id, name: doc.data().name, serial: doc.data().serial });
             });
             setSurveyList(surveyList);

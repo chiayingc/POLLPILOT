@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../styles/SignInPage.css'
 import { Link, useNavigate } from 'react-router-dom'
-import home from '../assets/home.png'
-import pplogo from '../assets/pp-logo-tmp_05.png'
+import signbk1 from '../assets/signbk1.svg'
+import Navbar from '../components/Navbar'
 import { auth } from '../../firebase-config.js'
 import {
     signInWithEmailAndPassword,
@@ -52,42 +52,40 @@ function SignInPage() {
     }
     return (
         <div id='signinpage'>
+            <Navbar type={1} />
             <div id='signinpage_main'>
                 <div id='signinpage_main_left'>
-                    <div id="logo">
-                        <img src={pplogo} />
-                    </div>
                     <div>
-                        <h2>登入</h2>
+                        <h3>登入</h3>
                         <form>
                             <div>
-                                <p>您的電子郵件地址</p>
-                                <input type="text" placeholder='請輸入您的電子郵件地址'
+                                <p className='form_column'>您的電子郵件地址</p>
+                                <input className='sign_input' type="text" placeholder='請輸入您的電子郵件地址'
                                     onChange={(e) => { setSigninEmail(e.target.value) }} />
                             </div>
-                            <div id='aaa'>
-                                <p>您的密碼</p>
+                            <div>
+                                <p className='form_column'>您的密碼</p>
                                 <div>
-                                    <input type="password" placeholder='請輸入您的密碼'
+                                    <input className='sign_input' type="password" placeholder='請輸入您的密碼'
                                         onChange={(e) => { setSigninPassword(e.target.value) }} />
                                     <img />
-                                    <p>忘記密碼了嗎</p>
+                                    <p className='second_title'>忘記密碼了嗎</p>
                                 </div>
-                                <p className='hint' id='signin_hint'>{signinHint}</p>
+                                <p className='hint' id='signin_hint'>{signinHint}sdfasgd</p>
                             </div>
                             <button onClick={signin}>
                                 登入
                             </button>
                         </form>
                         <div>
-                            <p>其他登入</p>
+                            {/* <p>其他登入</p> */}
                             {/* <button>使用 Facebook 登入</button> */}
-                            <div><p>還沒有註冊嗎？</p> <p><Link to={"/signup"}>前往註冊</Link></p></div>
+                            <div><p className='sign_btn'>還沒有註冊嗎？</p> <p className='sign_btn'><Link to={"/signup"}>前往註冊</Link></p></div>
                         </div>
                     </div>
                 </div>
                 <div id='signinpage_main_right'>
-                    <img src={home} />
+                    <iframe className='signbk1' src={signbk1}></iframe>
                 </div>
             </div>
         </div>

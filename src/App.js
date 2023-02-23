@@ -16,6 +16,7 @@ import ResultPage from "./pages/ResultPage";
 import { UserContext } from "./helper/Context";
 
 import Test from './pages/Test';
+import TestDB from "./pages/TestDB";
 
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
                     <Route path="/signup" element={<Test sign={"signup"}/>} />
                     <Route path="/signin" element={<Test sign={"signin"}/>} />
                     <Route path="/test" element={<Test />} />
+
+                    {/* 測試資料庫 */}
+                    <Route path="/testDB" element={<TestDB />} /> 
 
                     {/* <Route path="/list" element={ <ListPage/> }/> */}
                 </Routes>

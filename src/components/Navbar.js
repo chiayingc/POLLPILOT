@@ -66,6 +66,17 @@ function Navbar(props) {
 
   }
 
+  if (props.type == 3) {
+
+    result = <div id='navbar'>
+      <div id='nav_logo'>
+        <img src={pplogo} className="pplogo" onClick={() => { navigate("/dashboard") }} />
+      </div>
+    </div>
+  }
+
+  
+
   return result
 }
 export default Navbar

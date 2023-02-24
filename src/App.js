@@ -4,8 +4,6 @@ import React,{useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import SignUpPage from "./pages/SignUpPage";
-import SignInPage from "./pages/SignInPage";
 import DashBoardPage from "./pages/DashBoardPage";
 import AddNewPage from "./pages/AddNewPage";
 import AddQuesPage from "./pages/AddQuesPage";
@@ -15,7 +13,7 @@ import ThanksPage from "./pages/ThanksPage";
 import ResultPage from "./pages/ResultPage";
 import { UserContext } from "./helper/Context";
 
-import Test from './pages/Test';
+import Signpage from './pages/Signpage';
 import TestDB from "./pages/TestDB";
 
 
@@ -46,11 +44,10 @@ function App() {
                     <Route path="/result/:result" element={<ResultPage />} />
 
                     <Route path="/" element={<HomePage />} />
-                    {/* <Route path="/signup" element={<SignUpPage />} />
-                    <Route path="/signin" element={<SignInPage />} /> */}
-                    <Route path="/signup" element={<Test sign={"signup"}/>} />
-                    <Route path="/signin" element={<Test sign={"signin"}/>} />
-                    <Route path="/test" element={<Test />} />
+
+                    <Route path="/signup" element={<Signpage sign={"signup"}/>} />
+                    <Route path="/signin" element={<Signpage sign={"signin"}/>} />
+                    <Route path="/test" element={<Signpage />} />
 
                     {/* 測試資料庫 */}
                     <Route path="/testDB" element={<TestDB />} /> 

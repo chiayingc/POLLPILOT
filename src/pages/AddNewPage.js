@@ -13,16 +13,13 @@ function AddNewPage() {
     const { state } = useLocation();
     const userData = state;
     const { user, setUser } = useContext(UserContext);
-    let surveyTitle = "未命名問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creater = userData[3];
+    let surveyTitle = "未命名問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creater;
     let surveyStatus = 0, surveyTitleAlign = 0;
     let surveyShowNum = true;
-
-
 
     useEffect(() => {
         onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
-                console.log(userData);
                 // setUser(currentUser);
             } else {
                 navigate("/signin");
@@ -41,26 +38,31 @@ function AddNewPage() {
 
         //要再篩選資料內容(比如serial不能為空等等)
 
+        let Settings = {
+            name: surveyTitle, //問卷名稱
+            serial: surveySerial, //問卷編號
+            titleAlign: surveyTitleAlign,
+            showNum: surveyShowNum,
+            welcomeText: surveyWelcomeText,
+            thanksText: surveyThanksText,
+            status: surveyStatus,
+            key: surveyKey
+        }
+
         await setDoc(addSurvey, {
-            creater: creater,
-            Settings: {
-                name: surveyTitle, //問卷名稱
-                serial: surveySerial, //問卷編號
-                titleAlign: surveyTitleAlign,
-                showNum: surveyShowNum,
-                welcomeText: surveyWelcomeText,
-                thanksText: surveyThanksText,
-                status: surveyStatus,
-                key: surveyKey
-            }
+            creater: userData[3],
+            Settings: Settings,
+            version: 0
         }, { merge: true })
             .then(() => {
                 console.log("set success");
                 navigate("/addques", {
-                    state: surveySerial
+                    state: Settings
                 });
             })
-            .catch(() => { console.log("set failed"); });
+            .catch(() => {  //加alert讓使用者知道沒有新增成功
+                console.log("set failed");
+            });
 
 
 
@@ -176,6 +178,6 @@ function AddNewPage() {
         </div>
     )
 }
-import '../styles/AddNewPage.css'
+
 
 export default AddNewPage

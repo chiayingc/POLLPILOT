@@ -13,78 +13,56 @@ import { UserContext } from '../helper/Context'
 function DashBoardPage() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  // const [surveyList, setSurveyList]=useState([]);
-  let surveyList = [];
+  const [surveyList, setSurveyList] = useState([]);
+  const [userData, setuserData] = useState([]);
   let useruid = "";
-  let shortUid = "";
-  let userData = [];
-  // const [shortUid, setShortUid]=useState("");
-
-  // const [user, setUser] = useState({});
+  let userdata = [];
 
   useEffect(() => {
     onAuthStateChanged(auth, async (currentUser) => {
-      // console.log(currentUser);
       if (currentUser) {
         useruid = currentUser.uid;
 
         const getUser = doc(db, "users", useruid);
         await getDoc(getUser)
           .then((data) => {
-            // console.log("userData:", data.data()); 
-            // console.log(data.data().uid);
-            // console.log(data.data().registTime);
-            userData = []
-            userData.push(data.data().uid,
+            userdata = []
+            userdata.push(data.data().uid,
               data.data().name,
               data.data().email,
               data.data().usermark);
           });
-        // console.log(userData);
+          setuserData(userdata);
 
         const surveys = collection(db, "surveys");
-        const userSurveys = query(surveys, where("creater", "==", userData[3]));
-        // console.log(userSurveys);
+        const userSurveys = query(surveys, where("creater", "==", userdata[3]));
         const test = onSnapshot(
-        userSurveys, (snapshot) => {
-          snapshot.forEach((doc) => {
-            console.log(doc.data()); //doc.data()  ->所有問卷內容 ;   doc.id ->所有問卷名稱
-            //         surveyList.push({ ...doc.data(),id:doc.data().id, name: doc.data().name, serial: doc.data().serial });
+          userSurveys, (snapshot) => {
+            let surveyList = [];
+            snapshot.forEach((doc) => {
+              let settings = doc.data().Settings;
+        //let version=doc.data().version; // 編輯問卷時要用版本
+              // console.log(settings); //doc.data()  ->所有問卷內容 ;   doc.id ->所有問卷名稱
+              surveyList.push({ ...settings, id: doc.id, name: settings.name, serial: settings.serial, showNum: settings.showNum, status: settings.status, thanksText: settings.thanksText, welcomeText: settings.welcomeText, key: settings.key });
+            });
+            setSurveyList(surveyList);
           });
-        });
         return test
-          // const surveysData=await getDocs(userSurveys);
-          // surveysData.forEach(async (doc) => {
-          //   console.log(doc.id);
-          // });
-
-
-          // shortUid=
-          // setShortUid(currentUser.uid.substring(0,4));
-          //   // console.log("HERE");
-
-          //   const showSurvey = onSnapshot(
-          //     collection(db, "allUsers", "user_" + currentUser.uid.substring(0,4), "userSurveys"), (snapshot) => {
-          //       snapshot.forEach((doc) => {
-          //         // console.log(doc.data());
-          //         surveyList.push({ ...doc.data(),id:doc.data().id, name: doc.data().name, serial: doc.data().serial });
-          //       });
-          //       // setSurveyList(surveyList);
-          //     });
-          //   return showSurvey;
-
-        } else {
-          navigate("/signin");
-        }
-      });
+      } else {
+        navigate("/signin");
+      }
+    });
   }, []);
 
 
   function Survey(props) {
+    // console.log(props);
 
+    //這邊要新增編輯問卷的選項(可以去編輯,也可以去看結果)
     let thesur =
       <div id={'userSurvey' + props.id}
-        onClick={() => { navigate("/result/" + props.serial + "survey" + props.id) }}>
+        // 這邊要調整一下路徑 看resultpage要怎麼取得data
+        onClick={() => {navigate("/result/"+props.id)}}>
         <p>{props.name}</p>
         {/* <p>{props.serial}</p> */}
       </div>

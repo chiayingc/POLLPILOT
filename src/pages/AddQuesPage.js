@@ -62,7 +62,7 @@ function AddQuesPage() {
     //這邊要加入判斷type 改變content內容
     let content = document.querySelector("#" + type + "queContent" + id).value;
     // console.log("#" + type + "queContent" + id);
-    if(content!=''){
+    if (content != '') {
       let theQue = { id: id, type: type, queSerial: queSerial, content: content };   //這邊要改成obj 不要用array
       if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
         return;
@@ -70,7 +70,7 @@ function AddQuesPage() {
       let newAllQues = allQuestions;
       newAllQues[e.target.id.replace("Adone", "")] = theQue;
       setAllQuestions(newAllQues);
-      setTheQue('');
+      // setTheQue('');
     }
   };
 
@@ -80,15 +80,22 @@ function AddQuesPage() {
     const newAllQ = allQuestions.filter(ele => ele);
     // console.log(newAllQ);
 
-//如果是編輯問卷, 這邊Version版本要改!
-    const setQues= doc(db, "surveys", serial, "questions", "version1");
+    //如果是編輯問卷, 這邊Version版本要改!
+    const setQues = doc(db, "surveys", serial, "questions", "version1");
     await setDoc(setQues, {
-            questions:newAllQ
-          }, { merge: true })
-          .then(() => {
-                    console.log("success");
-                  })
-                            .catch(()=>{console.log("fail")});
+      questions: newAllQ
+    }, { merge: true })
+      .then(async () => {
+        console.log("success");
+        const setVersion = doc(db, "surveys", serial);
+        await setDoc(setVersion, {
+          version: 0
+        }).then(() => {
+          navigate("/release/" + serial);
+        }).catch(() => { console.log("fail") });
+
+      })
+      .catch(() => { console.log("fail") });
   }
 
   const addQue = (e) => {   //新增題目區塊

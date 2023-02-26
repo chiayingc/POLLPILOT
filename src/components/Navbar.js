@@ -66,11 +66,11 @@ function Navbar(props) {
 
   }
 
-  if (props.type == 3) {
+  if (props.type == 3 || props.type==4) {
 
     result = <div id='navbar'>
       <div id='nav_logo'>
-        <img src={pplogo} className="pplogo" onClick={() => { navigate("/dashboard") }} />
+        <img src={pplogo} className="pplogo"  onClick={() => { props.type==3? navigate("/dashboard"):navigate("/") }} />
       </div>
     </div>
   }

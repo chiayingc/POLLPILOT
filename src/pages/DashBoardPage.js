@@ -60,10 +60,10 @@ function DashBoardPage() {
 
     //這邊要新增編輯問卷的選項(可以去編輯,也可以去看結果)
     let thesur =
-      <div id={'userSurvey' + props.id}
+      <div id={'userSurvey' + props.id} className='eachSurvey'
         // 這邊要調整一下路徑 看resultpage要怎麼取得data
         onClick={() => {navigate("/result/"+props.id)}}>
-        <p>{props.name}</p>
+        <p className='survey_name'>{props.name}</p>
         {/* <p>{props.serial}</p> */}
       </div>
     return thesur;
@@ -100,12 +100,17 @@ function DashBoardPage() {
               </option>
             </select>
           </div>
-          <div id="dashboard_addnew">
-            <div onClick={() => {
+          <div id="dashboard_addnew" onClick={() => {
               navigate("/addnew", {
                 state: userData
               });
             }}>
+            {/* <div onClick={() => {
+              navigate("/addnew", {
+                state: userData
+              });
+            }}> */}
+            <div>
               {/* <img/> */}+
               {/* <p><Link to={user ? "/addnew" : "/signin"}>建立新問卷</Link></p> */}
               <p>建立新問卷</p>

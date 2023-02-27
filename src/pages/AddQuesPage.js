@@ -78,7 +78,15 @@ function AddQuesPage() {
     // console.log(serial);
 
     const newAllQ = allQuestions.filter(ele => ele);
-    // console.log(newAllQ);
+    console.log(newAllQ);
+    let newQuesType={}
+
+    for(let i=0; i<newAllQ.length; i++){
+      newQuesType[newAllQ[i].queSerial]=newAllQ[i].type;
+      // console.log(newQuesType);
+    }
+
+    // console.log(allQues);
 
     //如果是編輯問卷, 這邊Version版本要改!
     const setQues = doc(db, "surveys", serial, "questions", "version1");
@@ -89,8 +97,9 @@ function AddQuesPage() {
         console.log("success");
         const setVersion = doc(db, "surveys", serial);
         await setDoc(setVersion, {
-          version: 0
-        }).then(() => {
+          questionsType:newQuesType,
+          version: 1    //如果是編輯問卷, 這邊Version版本要改!
+        }, { merge: true }).then(() => {
           navigate("/release/" + serial);
         }).catch(() => { console.log("fail") });
 

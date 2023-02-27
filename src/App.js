@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 // import ListPage from "./components/ListPage.js";
 // import HomePage from "./components/HomePage.js";
 import { Route, Routes } from "react-router-dom";
@@ -26,33 +26,19 @@ function App() {
             {/* <Navbar/> */}
             <UserContext.Provider value={{ user, setUser }}>
                 <Routes>
-
-                    {/* 要改成個別uid的路徑 */}
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/dashboard" element={<DashBoardPage />} />
-                    {/* 要加問卷號碼path   */}
                     <Route path="/addnew" element={<AddNewPage />} />
                     <Route path="/addques" element={<AddQuesPage />} />
-                    <Route path="/release" element={<ReleasePage />} />
-                    <Route path="/release/:survey" element={<ReleasePage />} />
-
-                    <Route path="/fillin" element={<FillInPage />} />
+                    <Route path="/release/:release" element={<ReleasePage />} />
                     <Route path="/fillin/:fillin" element={<FillInPage />} />
-
-                    <Route path="/thanks" element={<ThanksPage />} />
                     <Route path="/thanks/:thanks" element={<ThanksPage />} />
-
                     <Route path="/result/:result" element={<ResultPage />} />
-
-                    <Route path="/" element={<HomePage />} />
-
-                    <Route path="/signup" element={<Signpage sign={"signup"}/>} />
-                    <Route path="/signin" element={<Signpage sign={"signin"}/>} />
-                    <Route path="/test" element={<Signpage />} />
-
+                    <Route path="/signup" element={<Signpage sign={"signup"} />} />
+                    <Route path="/signin" element={<Signpage sign={"signin"} />} />
+                    {/* <Route path="/test" element={<Signpage />} /> */}
                     {/* 測試資料庫 */}
-                    <Route path="/testDB" element={<TestDB />} /> 
-
-                    {/* <Route path="/list" element={ <ListPage/> }/> */}
+                    {/* <Route path="/testDB" element={<TestDB />} /> */}
                 </Routes>
             </UserContext.Provider>
         </div>

@@ -52,7 +52,7 @@ function AddNewPage() {
         await setDoc(addSurvey, {
             creater: userData[3],
             Settings: Settings,
-            version: 0
+            version: 1
         }, { merge: true })
             .then(() => {
                 console.log("set success");

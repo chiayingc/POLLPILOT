@@ -14,24 +14,9 @@ function FillInPage() {
   const location = useLocation();
   let tmpAry = location.pathname.split("/");
   let serial = tmpAry[tmpAry.length - 1];
-  console.log(serial);
-  // let newAllAns = [];
   let newAllAns = {};
-  // const [allAns, setAllAns] = useState([]);
   const [surveyQues, setSurveyQues] = useState([]);  //記錄所有題目內容
   const [surveySettings, setSurveySettings] = useState([]);
-
-  // let surveySetting;
-  // let surveyData = [];
-  // let version;
-
-
-  // const [ansCount, setAnsCount] = useState();
-  // console.log(location);
-  // console.log(location.pathname);
-
-  // let shortUid = tmpAry[tmpAry.length - 2];
-
 
 
   useEffect(() => {
@@ -39,85 +24,19 @@ function FillInPage() {
     const getSetting = doc(db, "surveys", serial);
     getDoc(getSetting)
       .then(async (data) => {
-        console.log(data.data());
         let version = data.data().version;
         let surveySetting = [version, data.data().Settings];
-        // setSurveySettings([version, data.data().Settings]);
-
-        let questionsList = [];
         const getQues = doc(db, "surveys", serial, "questions", "version" + version);
         await getDoc(getQues)
           .then((data) => {
-            console.log(data.data().questions)
             setSurveySettings(surveySetting);
             setSurveyQues(data.data().questions);
           });
       });
-
-    // console.log(surveySettings);
-    // let questionsList = [];
-    // const getQues=doc(db, "surveys", serial, "questions", "version"+version);
-    // const getQues = onSnapshot(
-    //     collection(db, "surveys", serial, "questions"), (snapshot) => {
-    //       snapshot.forEach((doc) => {
-    //         // console.log(doc);
-    //         questionsList.push({ ...doc.data(), id: doc.data().id, type: doc.data().type, content: doc.data().content });
-    //       });
-    //       setSurveyData(questionsList);
-    //       // console.log(questionsList);
-    //     });
-    // return showQues;
-
-
-
-
-    // const countAns = doc(db, "allUsers", "user_" + shortUid, "userSurveys", theSurvey, "Answers", "count");
-    // const data = getDoc(countAns)
-    //   .then((data) => {
-    //     setAnsCount(data.data().ansCount + 1);
-    //   });
-
-
   }, []);
 
-
-  // useEffect(() => {
-  // async () => {
-  // let surveySetting = [];
-  // const getSetting = onSnapshot(
-  //   collection(db, "allUsers", "user_" + shortUid, "userSurveys"), (snapshot) => {
-  //     snapshot.forEach((doc) => {
-  //       // console.log(doc.data().name);
-  //       surveySetting.push({ ...doc.data(), id: doc.data().id, name: doc.data().name, serial: doc.data().serial, welcomeText: doc.data().welcomeText, showNum: doc.data().showNum });
-  //     });
-  //     setSurveySetting(surveySetting);
-  //     console.log(surveySetting);
-  //   });
-  // return getSetting;
-  // }
-  // }, []);
-
-
-  // useEffect(() => {
-  // console.log("here");
-  // let questionsList = [];
-  // const showQues = onSnapshot(
-  //   collection(db, "allUsers", "user_" + shortUid, "userSurveys", theSurvey, "Questions"), (snapshot) => {
-  //     snapshot.forEach((doc) => {
-  //       // console.log(doc);
-  //       questionsList.push({ ...doc.data(), id: doc.data().id, type: doc.data().type, content: doc.data().content });
-  //     });
-  //     setSurveyData(questionsList);
-  //     // console.log(questionsList);
-  //   });
-  // return showQues;
-  // }, []);
-
-
   function AQue(props) {
-    // console.log(props);
     let queData = props.quedata;
-    // console.log(queData);
 
     if (queData.type == "A") {
       let aque =
@@ -182,50 +101,11 @@ function FillInPage() {
         console.log("success");
         navigate("/thanks/" + serial);
       }).catch(() => { console.log("fail") });
-
-
-    // let len = surveyQues.length;
-    // let keys = [];
-    // for (let i = 0; i < len; i++) {
-
-    // keys.push(surveyQues[i].queSerial);
-    // }
-
-
-    // console.log(allAns);
-    // for (let i = 0; i < allAns.length; i++) {
-    //   if (allAns[i] != undefined) {
-
-    // let allAnsObj = {};
-    // allAns.forEach((element, index) => {
-    //   allAnsObj[index] = element;
-    // });
-    // const surveyAnswers = doc(db, "allUsers", "user_" + shortUid, "userSurveys", theSurvey, "Answers", "Ans" + ansCount);  //要改第幾張答案!!
-    // await setDoc(surveyAnswers,
-    //   allAnsObj
-    //   , { merge: true })
-    //   .then(async () => {
-    //     console.log("success");
-    //     console.log(ansCount);
-    //     const addCount = doc(db, "allUsers", "user_" + shortUid, "userSurveys", theSurvey, "Answers", "count");
-    //     await setDoc(addCount,
-    //       {
-    //         ansCount: ansCount
-    //       },
-    //       { merge: true })
-    //       .then(() => {
-    //         //跳轉到感謝頁面
-    //         navigate("/thanks/" + shortUid + "/" + theSurvey);
-    //       });
-
-    //   }).catch(() => { console.log("fail") });
-    // // }
-    // // }
   }
 
   return (
     <div id='fillinpage'>
-      <Navbar />
+      <Navbar type={4}/>
 
       {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
       <button onClick={fillin} id='btn_fillin'>送出問卷</button>

@@ -13,12 +13,12 @@ import {
 import { Link } from 'react-router-dom'
 
 function HomePage() {
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const [url, setUrl] = useState("/signin");
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      // setUser(currentUser);
       if (currentUser) {
         // console.log(user);
         setUrl("/dashboard");
@@ -31,7 +31,6 @@ function HomePage() {
 
   return (
     <div id='homepage'>
-      
       <Navbar type={2} />
       <iframe className='home_bk1' src={homepage_bk1}></iframe>
       <iframe className='home_bk2' src={homepage_bk2}></iframe>

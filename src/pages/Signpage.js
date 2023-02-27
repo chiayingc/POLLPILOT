@@ -47,11 +47,12 @@ function Signpage(props) {
 
     const signup = async (e) => {
         e.preventDefault();
-        try {
-            if (userName == "") {
-                setErrorHint("資料輸入不完全");
-            }
-            else {
+        if (userName == "" || signupEmail == "" || signupPassword == "" ||
+            userName == undefined || signupEmail == undefined || signupPassword == undefined) {
+            setErrorHint("資料輸入不完全");
+        }
+        else {
+            try {
                 await createUserWithEmailAndPassword(
                     auth,
                     signupEmail,
@@ -59,23 +60,24 @@ function Signpage(props) {
                     .then(() => {
                         // 把使用者註冊資料放進資料庫
                         onAuthStateChanged(auth, async (currentUser) => {
-                            let random = Date.now().toString(36);
-                            let shortuid = currentUser.uid.substring(0, 4);
-
-                            const createUser = doc(db, "users", currentUser.uid);
-                            await setDoc(createUser, {
-                                name: userName,
-                                email: signupEmail,
-                                uid: currentUser.uid,
-                                usermark: random + shortuid,
-                                registTime: Date.now()
-                            }, { merge: true })
-                                .then(() => {
-                                    console.log("create successed!");
-                                    alert("註冊成功");
-                                    navigate("/dashboard");
-                                })
-                                .catch(() => { console.log("create fail") });
+                            if (currentUser) {
+                                let random = Date.now().toString(36);
+                                let shortuid = currentUser.uid.substring(0, 4);
+                                const createUser = doc(db, "users", currentUser.uid);
+                                await setDoc(createUser, {
+                                    name: userName,
+                                    email: signupEmail,
+                                    uid: currentUser.uid,
+                                    usermark: random + shortuid,
+                                    registTime: Date.now()
+                                }, { merge: true })
+                                    .then(() => {
+                                        console.log("create successed!");
+                                        alert("註冊成功");
+                                        navigate("/dashboard");
+                                    })
+                                    .catch(() => { console.log("create fail") });
+                            }
                         });
                     })
                     .catch((error) => {
@@ -84,15 +86,13 @@ function Signpage(props) {
                         setErrorHint(error.message);
                         alert("註冊失敗");
                     });
+            } catch (error) {
+                //註冊失敗
+                // console.log(3);
+                setErrorHint(error.message.substring(8, [error.message.length]));
+                alert("註冊失敗");
             }
-
-        } catch (error) {
-            //註冊失敗
-            // console.log(3);
-            setErrorHint(error.message.substring(8, [error.message.length]));
-            alert("註冊失敗");
         }
-
     };
 
     const SignForm = () => {

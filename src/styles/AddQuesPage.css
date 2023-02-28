@@ -2,7 +2,15 @@ body>div {
     width: 100%;
 }
 
+body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+
 @media (max-width:1980px) {
+    .swal2-popup{
+        width: 30em !important;
+        font-size: .4rem !important;
+    }
 
     #addquespage {
         width: 100%;
@@ -18,9 +26,9 @@ body>div {
         column-gap: 20px;
     }
 
-    /* #questype_menu {
-        display: none;
-    } */
+    #questype_menu {
+        cursor: pointer;
+    }
 
     #questype_menu>img {
         /* display: none; */
@@ -140,9 +148,9 @@ body>div {
     /* 這邊要調整右邊跟左邊的寬度比 */
     /* # */
     #questions{
-        padding-left: 15px;
-        padding-right: 15px;
-        width: 90%;
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-right: 20px;
     }
 
 }

@@ -105,9 +105,10 @@ function FillInPage() {
 
   return (
     <div id='fillinpage'>
-      <Navbar type={4}/>
-
-      {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
+      <Navbar type={4} />
+      <div className='fillin_questions'>
+        {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
+      </div>
       <button onClick={fillin} id='btn_fillin'>送出問卷</button>
 
       {/* <div>{surveySetting.welcomeText}</div>

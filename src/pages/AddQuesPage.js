@@ -11,6 +11,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth'
 import menu from '../assets/add-to-queue.png'
+import Swal from 'sweetalert2'
 
 
 function AddQuesPage() {
@@ -74,10 +75,59 @@ function AddQuesPage() {
       let newAllQues = allQuestions;
       newAllQues[e.target.id.replace("Adone", "")] = theQue;
       setAllQuestions(newAllQues);
+      document.querySelector("#" + type + "remove" + id).className="Aremove";
       // setTheQue('');
     }
     e.target.className = "noshow";
   };
+
+  const remove = async (e) => {
+    e.preventDefault();
+    let type = e.target.id.substr(0, 1);
+    let eid = e.target.id.replace(type + "remove", "");
+    // let tmp = document.querySelector("#" + type + "queContent" + eid).value;
+    // if (tmp == '') {
+    //   document.querySelector("#qus" + eid).className = 'noshow';
+    // }
+    // else {
+
+    Swal.fire({
+      title: '確定要刪除題目嗎?',
+      text: "此動作無法復原",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#E6CAD7',
+      cancelButtonColor: '#E9E5E1',
+      confirmButtonText: '確定',
+      cancelButtonText: '取消'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let newAllQues = allQuestions.filter((ele) => ele.id != eid);
+        console.log(newAllQues);
+        setAllQuestions(newAllQues);
+        // 這邊要加入把整個題目匡拔掉
+        document.querySelector("#qus" + eid).className = 'noshow';
+        // Swal.fire(
+        //   'Deleted!',
+        //   'Your file has been deleted.',
+        //   'success'
+        // )
+      }
+    })
+
+
+                // var yes = confirm('確定要刪除題目嗎？此動作無法復原');
+                // if (yes) {
+                //   console.log("yes");
+                //   // console.log(allQuestions);
+                //   let newAllQues = allQuestions.filter((ele) => ele.id != eid);
+                //   // console.log(newAllQues);
+                //   setAllQuestions(newAllQues);
+                //   // 這邊要加入把整個題目匡拔掉
+                //   document.querySelector("#qus" + eid).className = 'noshow';
+                // }
+    // }
+  }
 
   const saveQues = async () => {
     // console.log(serial);
@@ -120,11 +170,11 @@ function AddQuesPage() {
     setQueCount(queCount + 1);
   }
 
-  const handelMenu=(e)=>{
+  const handelMenu = (e) => {
     // console.log(e);
     // console.log("hi");
     document.querySelector("#addquespage_main_right").className = "noshow";
-    document.querySelector("#questype_menu").className='questype_menu';
+    document.querySelector("#questype_menu").className = 'questype_menu';
   }
 
   return (
@@ -134,7 +184,7 @@ function AddQuesPage() {
         <div id='addquespage_main_left'>
           {/* <Question allQ={allQues} recordQue={recordQue} done={done} /> */}
           {/* //這邊要再加入要不要顯示題號的設定 回傳不同的html結果 */}
-          <Question allQ={allQues} done={done} />
+          <Question allQ={allQues} done={done} remove={remove} />
           {/* <Question allQ={allQues} /> */}
           {/* {allQues.map((allq, index) => <Question key={index} allQ={allq} />)} */}
         </div>
@@ -142,16 +192,16 @@ function AddQuesPage() {
           <div id='questype_menu' className='questype_menu'
             onClick={() => {
               document.querySelector("#questype_menu").className = "noshow";
-              document.querySelector("#addquespage_main_right").addEventListener('click',handelMenu);
-              document.querySelector("#addquespage_main_right").className='addquespage_main_right';
-              
+              document.querySelector("#addquespage_main_right").addEventListener('click', handelMenu);
+              document.querySelector("#addquespage_main_right").className = 'addquespage_main_right';
+
             }}>
             <img src={menu} />
             <p className='addhint'>新增題目</p>
           </div>
           : ''}
 
-        <div id='addquespage_main_right' className={mobile?'noshow':'addquespage_main_right'}>
+        <div id='addquespage_main_right' className={mobile ? 'noshow' : 'addquespage_main_right'}>
           <h5>選擇題型</h5>
           <div id='ques_type'>
             <button onClick={addQue} value={"A"}>單行文字</button>

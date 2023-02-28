@@ -3,7 +3,7 @@ import React from 'react'
 
 
 // 帶入count(第幾題) 設定div id
-function Question({ allQ, recordQue, done }) {
+function Question({ allQ, remove, done }) {
   // function Question({ allQ }) {
 
   let allQuestions = [];
@@ -22,6 +22,7 @@ function Question({ allQ, recordQue, done }) {
         {/* <input id={"AqueContent"+id} className="qus_titleA" type="text" onChange={recordQue} /> */}
         <br />
         <div className='done'>
+          <button id={"Aremove" + id} className="noshow" onClick={remove}>刪除</button>
           <button id={"Adone" + id} className="Adone" onClick={done}>完成</button>
         </div>
       </div>

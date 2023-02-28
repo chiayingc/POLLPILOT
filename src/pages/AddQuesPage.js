@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import {
   onAuthStateChanged
 } from 'firebase/auth'
+import menu from '../assets/add-to-queue.png'
 
 
 function AddQuesPage() {
@@ -19,6 +20,7 @@ function AddQuesPage() {
   const { state } = useLocation();
   const serial = state.serial;  //這份問卷的編號
 
+  const [mobile, setMobile] = useState(false);
   const [queCount, setQueCount] = useState(0); //紀錄第幾題(所有題目)
 
   const [allQues, setAllQues] = useState([]); //紀錄所有題目題型
@@ -40,6 +42,8 @@ function AddQuesPage() {
 
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
+        if (window.innerWidth < 600) { setMobile(true); }
+
         //取得問卷資訊、問題版本    (如果是新增,用0開始; 如果是編輯問卷題目, 從資料庫取)
         // const getVersion = doc(db, "surveys", serial);
         // await getDoc(getVersion)
@@ -72,6 +76,7 @@ function AddQuesPage() {
       setAllQuestions(newAllQues);
       // setTheQue('');
     }
+    e.target.className = "noshow";
   };
 
   const saveQues = async () => {
@@ -79,10 +84,10 @@ function AddQuesPage() {
 
     const newAllQ = allQuestions.filter(ele => ele);
     console.log(newAllQ);
-    let newQuesType={}
+    let newQuesType = {}
 
-    for(let i=0; i<newAllQ.length; i++){
-      newQuesType[newAllQ[i].queSerial]=newAllQ[i].type;
+    for (let i = 0; i < newAllQ.length; i++) {
+      newQuesType[newAllQ[i].queSerial] = newAllQ[i].type;
       // console.log(newQuesType);
     }
 
@@ -97,7 +102,7 @@ function AddQuesPage() {
         console.log("success");
         const setVersion = doc(db, "surveys", serial);
         await setDoc(setVersion, {
-          questionsType:newQuesType,
+          questionsType: newQuesType,
           version: 1    //如果是編輯問卷, 這邊Version版本要改!
         }, { merge: true }).then(() => {
           navigate("/release/" + serial);
@@ -115,6 +120,13 @@ function AddQuesPage() {
     setQueCount(queCount + 1);
   }
 
+  const handelMenu=(e)=>{
+    // console.log(e);
+    // console.log("hi");
+    document.querySelector("#addquespage_main_right").className = "noshow";
+    document.querySelector("#questype_menu").className='questype_menu';
+  }
+
   return (
     <div id='addquespage'>
       <Navbar type={1} />
@@ -126,7 +138,20 @@ function AddQuesPage() {
           {/* <Question allQ={allQues} /> */}
           {/* {allQues.map((allq, index) => <Question key={index} allQ={allq} />)} */}
         </div>
-        <div id='addquespage_main_right'>
+        {mobile ?
+          <div id='questype_menu' className='questype_menu'
+            onClick={() => {
+              document.querySelector("#questype_menu").className = "noshow";
+              document.querySelector("#addquespage_main_right").addEventListener('click',handelMenu);
+              document.querySelector("#addquespage_main_right").className='addquespage_main_right';
+              
+            }}>
+            <img src={menu} />
+            <p className='addhint'>新增題目</p>
+          </div>
+          : ''}
+
+        <div id='addquespage_main_right' className={mobile?'noshow':'addquespage_main_right'}>
           <h5>選擇題型</h5>
           <div id='ques_type'>
             <button onClick={addQue} value={"A"}>單行文字</button>

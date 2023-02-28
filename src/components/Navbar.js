@@ -13,6 +13,7 @@ import { UserContext } from '../helper/Context'
 
 function Navbar(props) {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   // console.log(user);
 
   useEffect(() => {
@@ -23,8 +24,9 @@ function Navbar(props) {
 
   const signout = async () => {
     await signOut(auth);
+    navigate("/")
   }
-  const navigate = useNavigate();
+  
   let result;
 
   if (props.type == 1) {

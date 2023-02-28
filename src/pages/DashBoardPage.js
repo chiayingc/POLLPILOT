@@ -32,7 +32,7 @@ function DashBoardPage() {
               data.data().email,
               data.data().usermark);
           });
-          setuserData(userdata);
+        setuserData(userdata);
 
         const surveys = collection(db, "surveys");
         const userSurveys = query(surveys, where("creater", "==", userdata[3]));
@@ -41,11 +41,14 @@ function DashBoardPage() {
             let surveyList = [];
             snapshot.forEach((doc) => {
               let settings = doc.data().Settings;
-        //let version=doc.data().version; // 編輯問卷時要用版本
+              //let version=doc.data().version; // 編輯問卷時要用版本
               // console.log(settings); //doc.data()  ->所有問卷內容 ;   doc.id ->所有問卷名稱
               surveyList.push({ ...settings, id: doc.id, name: settings.name, serial: settings.serial, showNum: settings.showNum, status: settings.status, thanksText: settings.thanksText, welcomeText: settings.welcomeText, key: settings.key });
             });
-            setSurveyList(surveyList);
+            if(surveyList==''){
+              const userSurveys=document.querySelector("#user_surveys");
+              userSurveys.className="user_surveys_hide";}
+            setSurveyList(surveyList);            
           });
         return test
       } else {
@@ -62,7 +65,7 @@ function DashBoardPage() {
     let thesur =
       <div id={'userSurvey' + props.id} className='eachSurvey'
         // 這邊要調整一下路徑 看resultpage要怎麼取得data
-        onClick={() => {navigate("/result/"+props.id)}}>
+        onClick={() => { navigate("/result/" + props.id) }}>
         <p className='survey_name'>{props.name}</p>
         {/* <p>{props.serial}</p> */}
       </div>
@@ -101,10 +104,10 @@ function DashBoardPage() {
             </select>
           </div>
           <div id="dashboard_addnew" onClick={() => {
-              navigate("/addnew", {
-                state: userData
-              });
-            }}>
+            navigate("/addnew", {
+              state: userData
+            });
+          }}>
             {/* <div onClick={() => {
               navigate("/addnew", {
                 state: userData
@@ -124,9 +127,9 @@ function DashBoardPage() {
                 </div> */}
           </div>
 
-          <div id='user_surveys' className='user_surveys'>
-            {surveyList.map((sur, index) => <Survey key={index} id={sur.id} name={sur.name} serial={sur.serial} />)}
-          </div>
+            <div id='user_surveys' className='user_surveys'>
+              {surveyList.map((sur, index) => <Survey key={index} id={sur.id} name={sur.name} serial={sur.serial} />)}
+            </div>
 
 
         </div>

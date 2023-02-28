@@ -1,5 +1,5 @@
 body {
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 @media (max-width:1980px) {
@@ -129,6 +129,9 @@ body {
         color: #111827;
     }
 
+    .user_surveys_hide {
+        display: none;
+    }
 
     .user_surveys {
         display: grid;
@@ -136,9 +139,12 @@ body {
         column-gap: 15px;
         row-gap: 15px;
         padding-right: 20px;
-        height: 395px;
+        height:fit-content;
+        max-height: 395px;
+        overflow-y: auto;
+        
         width: fit-content;
-        overflow-y: scroll;
+
         box-shadow: 2px 2px 4px rgba(207, 207, 207, 0.2);
         padding-bottom: 10px;
         border-radius: 5px;
@@ -218,10 +224,42 @@ body {
     }
 }
 
-@media (max-width:670px) {
+@media (min-width:360px) and (max-width:700px) {
 
     /* ////////////////////////////// */
     /* 左邊看要隱藏還是要變小放在上面 */
     /* ////////////////////////////// */
-}
+    #dashboardpage_main_left {
+        display: none;
+    }
 
+    #dashboardpage_main {
+        /* width: fit-content; */
+        grid-template-columns: 1fr;
+        width: 100%;
+        justify-items: center;
+        
+    }
+
+    #dashboardpage_main_right {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 346px;
+        /* justify-items: center; */
+        /* max-width: 90vw; */
+        grid-template-rows: 28px 20px 110px auto;
+    }
+
+    .user_surveys {
+        column-gap: 8px;
+        padding-right: 8px;
+        grid-template-columns: repeat(2, 160px);
+        justify-self: center;
+    }
+
+    #dashboard_addnew, .user_surveys>div {
+        width: 160px;
+        height: 102px;
+    }
+
+}

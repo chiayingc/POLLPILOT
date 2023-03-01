@@ -76,14 +76,17 @@ function ResultPage() {
 
                 for (let i = 0; i < allQuestions.length; i++) {
                   if (allQuestions[i].type == "A") {
-                    oneResult=[];
-                    allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
+                    oneResult = [];
+                    // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
                     for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
                       let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allAns[allQuestions[i].queSerial][j]}</p>;    //因為是簡答題,取字串
                       oneResult.push(oneAns);
                     }
 
                     aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
+                      {/* 題號(要再看是否修改) */}
+                      <h4>{i+1}</h4>  
+                      <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
                       {oneResult}
                     </div>
                     allContents.push(aResult);
@@ -105,7 +108,7 @@ function ResultPage() {
 
   return (
     <div id='resultpage'>
-      <Navbar type={1}/>
+      <Navbar type={1} />
       <div id='resultpage_content'>
         {resultFinal}
       </div>

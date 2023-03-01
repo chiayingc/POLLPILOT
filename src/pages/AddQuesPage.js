@@ -73,10 +73,13 @@ function AddQuesPage() {
         return;
       }
       let newAllQues = allQuestions;
-      newAllQues[e.target.id.replace("Adone", "")] = theQue;
+      console.log("R:",newAllQues);
+      newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
+      console.log("N:",newAllQues);
+
       setAllQuestions(newAllQues);
-      document.querySelector("#" + type + "remove" + id).className="Aremove";
-      // setTheQue('');
+      // document.querySelector("#" + type + "remove" + id).className="Aremove";
+
     }
     e.target.className = "noshow";
   };
@@ -91,6 +94,16 @@ function AddQuesPage() {
     // }
     // else {
 
+
+    console.log(1,allQuestions);
+    let tmp=allQuestions;
+    tmp[eid] = '';
+    // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
+    // console.log(2,newAllQues);
+    // 這邊要加入把整個題目匡拔掉
+    
+
+
     Swal.fire({
       title: '確定要刪除題目嗎?',
       text: "此動作無法復原",
@@ -102,11 +115,19 @@ function AddQuesPage() {
       cancelButtonText: '取消'
     }).then((result) => {
       if (result.isConfirmed) {
-        let newAllQues = allQuestions.filter((ele) => ele.id != eid);
-        console.log(newAllQues);
-        setAllQuestions(newAllQues);
-        // 這邊要加入把整個題目匡拔掉
+
         document.querySelector("#qus" + eid).className = 'noshow';
+        setAllQuestions(tmp);
+        console.log(3,allQuestions);
+              // console.log(1,allQuestions);
+              // // let tmp=allQuestions;
+              // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
+              // // console.log(2,newAllQues);
+              // // 這邊要加入把整個題目匡拔掉
+              // document.querySelector("#qus" + eid).className = 'noshow';
+              // setAllQuestions(newAllQues);
+              // console.log(3,allQuestions);
+        
         // Swal.fire(
         //   'Deleted!',
         //   'Your file has been deleted.',
@@ -141,7 +162,7 @@ function AddQuesPage() {
       // console.log(newQuesType);
     }
 
-    // console.log(allQues);
+    console.log(newAllQ);
 
     //如果是編輯問卷, 這邊Version版本要改!
     const setQues = doc(db, "surveys", serial, "questions", "version1");

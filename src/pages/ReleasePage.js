@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../helper/Context'
 import Navbar from '../components/Navbar'
 import '../styles/ReleasePage.css'
@@ -10,6 +11,7 @@ import {
   signOut
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import link from '../assets/link.png'
 
 function ReleasePage() {
   const { user, setUser } = useContext(UserContext);
@@ -48,18 +50,26 @@ function ReleasePage() {
     window.getSelection().removeAllRanges();    
   }
 
+  const openLink=()=>{
+    window.open("https://pollpilot-1c440.web.app/fillin/"+serial);
+  }
+
   return (
     <div id='releasepage'>
-      <Navbar />
+      <Navbar type={1} />
       <div id='releasepage_main'>
-        <h2>問卷已經發布成功!</h2>
+        <h3>問卷已經發布成功 !</h3>
         <div id='releasepage_content'>
-          <div>img + 分享你的問卷</div>
-          <div>
-            <span id="url">{"https://pollpilot-1c440.web.app/fillin/"+serial}</span>
-            <button onClick={copyUrl}>複製</button>
+          <div className='releacepage_secondtitle'>
+            <img src={link} onClick={copyUrl}/>
+            <p>分享你的問卷</p>
           </div>
-          <div>QR code</div>
+          <div className='releacepage_copylink'>
+            <span id="url" onClick={openLink}>{"https://pollpilot-1c440.web.app/fillin/"+serial}</span>
+            <button className='copylink' onClick={copyUrl}>複製</button>
+          </div>
+          <br/>
+          {/* <div>QR code</div> */}
         </div>
       </div>
     </div>

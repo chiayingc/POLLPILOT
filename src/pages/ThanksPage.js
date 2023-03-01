@@ -5,7 +5,6 @@ import { auth, db } from '../../firebase-config.js'
 import { doc, collection, setDoc, getDocs, getDoc, getString } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-import humaaans from '../assets/Humaaans.png'
 import Navbar from '../components/Navbar'
 
 
@@ -25,18 +24,19 @@ function ThanksPage() {
             .then(async (data) => {
                 setThanksText(data.data().Settings.thanksText);
             }).catch((error) => {
-                        console.log(error);
-                    });
-            }, []);
+                console.log(error);
+            });
+    }, []);
 
-        return (
-            <div id='thankspage'>
-                <Navbar type={4}/>
-                <img src={humaaans} />
-                <h2>{thanksText}</h2>
-                {/* <button onClick={close}>關閉</button> */}
+    return (
+        <div id='thankspage'>
+            <Navbar type={4} />
+            <div className='thankspage_content'>
+                <p>{thanksText}</p>
             </div>
-        )
-    }
+            {/* <button onClick={close}>關閉</button> */}
+        </div>
+    )
+}
 
 export default ThanksPage

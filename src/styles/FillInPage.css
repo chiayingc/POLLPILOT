@@ -17,13 +17,14 @@
         justify-items: center;
         padding: 30px;
         row-gap: 40px;
-        height: calc(80vh - 120px);
+        max-height: calc(80vh - 120px);
         overflow-y: auto;
     }
 
     .fillin_aque {
         width: 80%;
         display: grid;
+        grid-template-rows: fit-content fit-content;
         justify-items: left;
         row-gap: 8px;
     }

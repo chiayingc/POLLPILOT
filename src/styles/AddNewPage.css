@@ -108,7 +108,7 @@
         padding: 10px;
     }
 
-    #title_align>button {
+    .align_btn {
         margin-right: 15px;
         padding: 15px;
         width: 100px;
@@ -128,7 +128,37 @@
         touch-action: manipulation;
     }
 
-    #title_align>button>svg {
+    .align_btn:hover {
+        background-color: #dedad539;
+    }
+
+    .align_btn_c {
+        margin-right: 15px;
+        padding: 15px;
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        background-color: #e2d4c656;
+        border: .5px solid rgb(251, 246, 234);
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: .8rem;
+        font-weight: 600;
+        color: #444;
+        /* text-align: center; */
+        /* vertical-align: baseline; */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .align_btn_c:hover {
+        background-color: #e2d4c656;
+        border: .5px solid rgb(251, 246, 234);
+    }
+
+    .align_btn>svg,
+    .align_btn_c>svg {
         padding-bottom: 5px;
         width:35px;
         height:44px;
@@ -138,7 +168,7 @@
         margin-top: 10px;
     }
 
-    #num_button>button {
+    .num_btn, .num_btn_c {
         margin-right: 10px;
 
         width: 90px;
@@ -156,6 +186,18 @@
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
         cursor: pointer;
         touch-action: manipulation;
+    }
+
+    .num_btn_c{
+        background-color: #e2d4c656;
+    }
+
+    .num_btn_c:hover {
+        background-color: #e2d4c656;
+    }
+
+    .num_btn:hover {
+        background-color: #cabdb156;
     }
 
     #welcome_text>textarea,

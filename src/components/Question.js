@@ -22,7 +22,7 @@ function Question({ allQ, remove, done }) {
         {/* <input id={"AqueContent"+id} className="qus_titleA" type="text" onChange={recordQue} /> */}
         <br />
         <div className='done'>
-          <button id={"Aremove" + id} className="noshow" onClick={remove}>刪除</button>
+          <button id={"Aremove" + id} className="Aremove" onClick={remove}>刪除</button>
           <button id={"Adone" + id} className="Adone" onClick={done}>完成</button>
         </div>
       </div>

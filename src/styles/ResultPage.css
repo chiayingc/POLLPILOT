@@ -7,34 +7,51 @@ body > div{
     display: grid;
     justify-items: center;
     color: #666;
-
+    background-color: #EEE;
     /* margin-top: 30px; */
 
 }
 
 #resultpage_content{
-    width: 40%;
-    padding: 20px;
-    margin-top: 30px;
+    width: 75%;
+    max-height: calc(100vh - 34px);
+    overflow-y: auto;
+    /* padding-top: 30px; */
+    /* padding: 30px; */
+    /* margin-top: 30px; */
+    
+}
+
+.result_oneque_A{
+    background-color: #FAFAFA;
+    margin-bottom: 2px;
+    padding: 30px;
+    display: grid;
+    grid-template-rows: 1rem fit-content auto;
+    /* row-gap: 10px; */
 }
 
 
 
 .result_que_A{
+    
     color: rebeccapurple;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 3px;
+    font-size: 1rem;
+    font-weight: 700;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    vertical-align: baseline;
     display: grid;
+    
 }
 
 .result_oneans_A{
-    color: blue;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 2px;
+    color: #666;
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    
 }
 
-.result_oneque_A{
-    margin-bottom: 35px;
-}

@@ -62,25 +62,39 @@ function AddQuesPage() {
   const done = async (e) => {
     e.preventDefault();
     let queSerial = Date.now().toString(36).slice(2, 8);
-    let id = e.target.id.replace("Adone", "");
     let type = e.target.id.substr(0, 1);
+    let id = e.target.id.replace(type + "done", "");
+    console.log("67:", type, id);
     //這邊要加入判斷type 改變content內容
-    let content = document.querySelector("#" + type + "queContent" + id).value;
-    // console.log("#" + type + "queContent" + id);
-    if (content != '') {
-      let theQue = { id: id, type: type, queSerial: queSerial, content: content };   //這邊要改成obj 不要用array
-      if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
-        return;
+    if (type == "A" || type == "B") {
+      console.log("HI");
+      let content = document.querySelector("#" + type + "queContent" + id).value;
+      // console.log("#" + type + "queContent" + id);
+      if (content != '') {
+        let theQue = { id: id, type: type, queSerial: queSerial, content: content };
+        if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
+          return;
+        }
       }
+
       let newAllQues = allQuestions;
-      console.log("R:",newAllQues);
-      newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
-      console.log("N:",newAllQues);
+      console.log("R:", newAllQues);
+      // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
+      newAllQues[id] = theQue;
+      console.log("N:", newAllQues);
 
       setAllQuestions(newAllQues);
       // document.querySelector("#" + type + "remove" + id).className="Aremove";
 
     }
+
+    if (type == "C") {
+      console.log('hi');
+      let ctitle = document.querySelector("#" + type + "quetitle" + id).value;
+      // console.log("title:", ctitle);
+      
+    }
+
     e.target.className = "noshow";
   };
 
@@ -95,13 +109,13 @@ function AddQuesPage() {
     // else {
 
 
-    console.log(1,allQuestions);
-    let tmp=allQuestions;
+    console.log(1, allQuestions);
+    let tmp = allQuestions;
     tmp[eid] = '';
     // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
     // console.log(2,newAllQues);
     // 這邊要加入把整個題目匡拔掉
-    
+
 
 
     Swal.fire({
@@ -118,16 +132,16 @@ function AddQuesPage() {
 
         document.querySelector("#qus" + eid).className = 'noshow';
         setAllQuestions(tmp);
-        console.log(3,allQuestions);
-              // console.log(1,allQuestions);
-              // // let tmp=allQuestions;
-              // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
-              // // console.log(2,newAllQues);
-              // // 這邊要加入把整個題目匡拔掉
-              // document.querySelector("#qus" + eid).className = 'noshow';
-              // setAllQuestions(newAllQues);
-              // console.log(3,allQuestions);
-        
+        console.log(3, allQuestions);
+        // console.log(1,allQuestions);
+        // // let tmp=allQuestions;
+        // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
+        // // console.log(2,newAllQues);
+        // // 這邊要加入把整個題目匡拔掉
+        // document.querySelector("#qus" + eid).className = 'noshow';
+        // setAllQuestions(newAllQues);
+        // console.log(3,allQuestions);
+
         // Swal.fire(
         //   'Deleted!',
         //   'Your file has been deleted.',
@@ -137,16 +151,16 @@ function AddQuesPage() {
     })
 
 
-                // var yes = confirm('確定要刪除題目嗎？此動作無法復原');
-                // if (yes) {
-                //   console.log("yes");
-                //   // console.log(allQuestions);
-                //   let newAllQues = allQuestions.filter((ele) => ele.id != eid);
-                //   // console.log(newAllQues);
-                //   setAllQuestions(newAllQues);
-                //   // 這邊要加入把整個題目匡拔掉
-                //   document.querySelector("#qus" + eid).className = 'noshow';
-                // }
+    // var yes = confirm('確定要刪除題目嗎？此動作無法復原');
+    // if (yes) {
+    //   console.log("yes");
+    //   // console.log(allQuestions);
+    //   let newAllQues = allQuestions.filter((ele) => ele.id != eid);
+    //   // console.log(newAllQues);
+    //   setAllQuestions(newAllQues);
+    //   // 這邊要加入把整個題目匡拔掉
+    //   document.querySelector("#qus" + eid).className = 'noshow';
+    // }
     // }
   }
 
@@ -156,31 +170,31 @@ function AddQuesPage() {
     const newAllQ = allQuestions.filter(ele => ele);
     console.log(newAllQ);
     let newQuesType = {}
+    console.log(newAllQ);
 
     for (let i = 0; i < newAllQ.length; i++) {
       newQuesType[newAllQ[i].queSerial] = newAllQ[i].type;
       // console.log(newQuesType);
     }
 
-    console.log(newAllQ);
 
-    //如果是編輯問卷, 這邊Version版本要改!
-    const setQues = doc(db, "surveys", serial, "questions", "version1");
-    await setDoc(setQues, {
-      questions: newAllQ
-    }, { merge: true })
-      .then(async () => {
-        console.log("success");
-        const setVersion = doc(db, "surveys", serial);
-        await setDoc(setVersion, {
-          questionsType: newQuesType,
-          version: 1    //如果是編輯問卷, 這邊Version版本要改!
-        }, { merge: true }).then(() => {
-          navigate("/release/" + serial);
-        }).catch(() => { console.log("fail") });
+    // //如果是編輯問卷, 這邊Version版本要改!
+    // const setQues = doc(db, "surveys", serial, "questions", "version1");
+    // await setDoc(setQues, {
+    //   questions: newAllQ
+    // }, { merge: true })
+    //   .then(async () => {
+    //     console.log("success");
+    //     const setVersion = doc(db, "surveys", serial);
+    //     await setDoc(setVersion, {
+    //       questionsType: newQuesType,
+    //       version: 1    //如果是編輯問卷, 這邊Version版本要改!
+    //     }, { merge: true }).then(() => {
+    //       navigate("/release/" + serial);
+    //     }).catch(() => { console.log("fail") });
 
-      })
-      .catch(() => { console.log("fail") });
+    //   })
+    //   .catch(() => { console.log("fail") });
   }
 
   const addQue = (e) => {   //新增題目區塊

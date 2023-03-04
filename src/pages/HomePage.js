@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/HomePage.css'
-import pplogo from '../assets/pp-logo-tmp_06.png'
+import pplogo from '../assets/pp-logo.png'
 import homepage_bk1 from '../assets/homepage_bk1.svg'
 import homepage_bk2 from '../assets/homepage_bk2.svg'
 import homepage_bk3 from '../assets/homepage_bk3.svg'

@@ -11,12 +11,12 @@
     width: 40%;
     height: fit-content;
     padding: 30px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    line-height: 1.5rem;
+    line-height: 1.2rem;
     background-color: #FAFAFA;
-    border: thick double #F7D6DB;
-    /* border: thick double #e6e6e6; */
+    /* border: thick double #F7D6DB; */
+    border: thick double #e6e6e6;
 }
 
 #thankspage >button{

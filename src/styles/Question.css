@@ -2,14 +2,15 @@
 .qus{
     width: 100%;
     /* margin-top: 5px; */
-    height: 90px;
-    margin-bottom: 10px;
+    min-height: 90px;
+    height: fit-content;
+    margin-bottom: 15px;
 }
 
 .qus_title_inputA{
-    width: calc(100% - 1.2rem - 2px);
+    width: calc(100% - 1.2rem - 2px);    
     /* height: calc(25px - .4rem); */
-    font-size: .8rem;
+    /* font-size: .8rem; */
     padding: .2rem .6rem;
     border: 1px solid #888;
     border-radius: 2px;
@@ -17,7 +18,20 @@
     background-color: inherit;
 }
 
-.qus_titleA{
+.qus_title_inputB{
+    width: calc(100% - 1.2rem - 2px);
+    padding: .2rem .6rem;
+    border: 1px solid #888;
+    border-radius: 2px;
+    outline: none;
+    resize: none;
+    height: 3rem;
+    background-color: inherit;
+    overflow-y: auto;
+}
+
+.qus_titleA,
+.qus_titleB{
     width: calc(100% - 1.2rem);
     font-size: .9rem;
     padding: .2rem .6rem .2rem .6rem;
@@ -32,7 +46,8 @@
     justify-content: right;
 }
 
-.Adone{
+.Adone,
+.Bdone{
     cursor: pointer;
     background-color: #f7f0e9;
     color: #666;
@@ -43,15 +58,18 @@
     margin-left: 8px;
 }
 
-.Adone:hover{
+.Adone:hover,
+.Bdone:hover{
     background-color: #e9e5e1;
 }
 
-.Adone:focus{
+.Adone:focus,
+.Bdone:focus{
     display: none;
 }
 
-.Aremove{
+.Aremove,
+.Bremove{
     cursor: pointer;
     background-color: #e9e5e1;
     color: #666;
@@ -60,7 +78,8 @@
     border: 1px solid #bebebe;
 }
 
-.Aremove:hover{
+.Aremove:hover,
+.Bremove:hover{
     background-color: #f7f0e9;
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import pplogo from '../assets/pp-logo-tmp_05.png'
+import pplogo from '../assets/pp-logo.png'
 import '../styles/Navbar.css'
 
 import { auth } from '../../firebase-config.js'

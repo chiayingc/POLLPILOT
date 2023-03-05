@@ -144,6 +144,9 @@ body {
 }
 
 @media (max-width:800px) {
+    #addquespage_main_left {
+        padding-left: 0;
+    }
 
     /* 這邊要調整右邊跟左邊的寬度比 */
     /* # */

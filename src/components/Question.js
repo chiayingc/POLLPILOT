@@ -12,31 +12,35 @@
     console.log("b");
   
     let allQuestions = [];
-    let allQueC = [];
+    let allQueCD = [];
   
-    const QueC = ({ options, count, id }) => {
-      console.log(options);
-      console.log(count);
-      allQueC = [];
+    const QueC = ({ options, count, id, type }) => {
+      console.log(type);
+      allQueCD = [];
       if (count != undefined) {
-        
         let tmpopt;
         for (let i = 0; i < count.count; i++) {
           console.log("i:", i, "id:", id);
           tmpopt = '';
           if (options[id] != undefined && options[id][i] != undefined) { tmpopt = options[id][i]; }
           let tmp = '';
-          tmpopt != '' ? tmp = <input key={'coption' + i} id={'coption_' + id + '_' + i} type='text' name='option' value={tmpopt} onChange={recordOption} /> :
-            tmp = <input key={'coption' + i} id={'coption_' + id + '_' + i} type='text' name='option' onChange={recordOption} />
+          tmpopt != '' ? tmp = <input key={type=="C"?'coption' + i:'doption' + i} id={type=="C"?'coption_' + id + '_' + i:'doption_' + id + '_' + i} type='text'   placeholder={tmpopt} className='cd_radio_text' 
+                          onChange={recordOption}
+                          onClick={() => { document.querySelector("#"+type+"done" + id).className = type+"done" }} /> 
+                       :  tmp = <input key={type=="C"?'coption' + i:'doption' + i} id={type=="C"?'coption_' + id + '_' + i:'doption_' + id + '_' + i} type='text'  className='cd_radio_text'
+                          onChange={recordOption} 
+                          onClick={() => { document.querySelector("#"+type+"done" + id).className = type+"done" }} />
   
-          let oneQueC = (<div key={'quec' + i}>
-            <input key={'cradio' + i} id={'cradio' + id} type='radio' name='quec' readOnly />
+          let oneQueCD = (<div key={type=="C"?'quec' + i:'qued'+i} className='cd_radio'>
+            <input key={type=="C"?'cradio' + i:'dradio' + i} id={type=="C"?'cradio' + id+"_"+i:'dradio' + i} type='radio' name={type=="C"?'quec'+id:'qued'+id+'_'+i} className='cd_radio_radio' 
+                   onClick={()=>{console.log(id+","+i);}}/>
+            <label className="cd_radio_label" htmlFor={type=="C"?'cradio' + id+"_"+i:'dradio' + i}></label>
             {tmp}
           </div>);
-          allQueC.push(oneQueC);
+          allQueCD.push(oneQueCD);
         }
       }
-      return <div>{allQueC}</div>
+      return <div>{allQueCD}</div>
     }
   
     const recordOption = (e) => {
@@ -95,8 +99,8 @@
         let oneQue = <div key={id} id={"qus" + id} className="qus">
           <input id={"CqueContent" + id} className="qus_titleC" type="text" placeholder='標題'
             onClick={() => { document.querySelector("#Cdone" + id).className = "Cdone" }} />
-          <br />
-          <button onClick={() => {
+          
+          <button className='btn_addradio' onClick={() => {
             let tmp = count;
             tmp[0] = { id: 0, count: 0 };
             if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
@@ -105,7 +109,7 @@
             setCount([...count]);
 
           }}>+</button>
-          <QueC options={options} count={count[id]} id={id} />
+          <QueC options={options} count={count[id]} id={id} type={"C"} />
           {/* {allQueC} */}
   
           {/* {countC.map((item, index) => <A key={index} count={item} />)} */}
@@ -116,6 +120,36 @@
           <div className='done'>
             <button id={"Cremove" + id} className="Cremove" onClick={remove}>刪除</button>
             <button id={"Cdone" + id} className="Cdone" onClick={(e)=>{doneC(e,options[id])}}>完成</button>
+          </div>
+        </div>
+        allQuestions.push(oneQue);
+      }
+
+      if (allQ[i] == "D") {
+        let oneQue = <div key={id} id={"qus" + id} className="qus">
+          <input id={"DqueContent" + id} className="qus_titleD" type="text" placeholder='標題'
+            onClick={() => { document.querySelector("#Ddone" + id).className = "Ddone" }} />
+          
+          <button className='btn_addradio' onClick={() => {
+            let tmp = count;
+            tmp[0] = { id: 0, count: 0 };
+            if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
+            const c = count.find(q => q?.id === id);
+            c.count++;
+            setCount([...count]);
+
+          }}>+</button>
+          <QueC options={options} count={count[id]} id={id}  type={"D"}/>
+          {/* {allQueC} */}
+  
+          {/* {countC.map((item, index) => <A key={index} count={item} />)} */}
+  
+          {/* <input type='text' onChange={handeltest}/> */}
+  
+          <br />
+          <div className='done'>
+            <button id={"Dremove" + id} className="Dremove" onClick={remove}>刪除</button>
+            <button id={"Ddone" + id} className="Ddone" onClick={(e)=>{doneC(e,options[id])}}>完成</button>
           </div>
         </div>
         allQuestions.push(oneQue);

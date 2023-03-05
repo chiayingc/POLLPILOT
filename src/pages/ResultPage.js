@@ -46,9 +46,15 @@ function ResultPage() {
 
       });
       if (allAnswers[0] != undefined && allAnswers[0] != null) {
-        queSerials = Object.keys(allAnswers[0]);
+        console.log(allAnswers);
+        // let tmp=allAnswers.filter(ele => ele !== {});
+        // console.log(tmp);
+  //03.06這邊要改 如果答案裡面有空值的要排除//
+        queSerials = Object.keys(allAnswers[1]);   
+        console.log(queSerials);
         allAns = [];
         allAnswers.forEach((obj) => {
+          console.log(obj);
           for (let j = 0; j < queSerials.length; j++) {
             if (allAns[queSerials[j]] == undefined) { allAns[queSerials[j]] = [] }
             allAns[queSerials[j]].push(obj[queSerials[j]]);
@@ -75,7 +81,8 @@ function ResultPage() {
                 // console.log(allAns);
 
                 for (let i = 0; i < allQuestions.length; i++) {
-                  if (allQuestions[i].type == "A") {
+    //03.06 這邊要修改, B的回答是textarea 要再改
+                  if (allQuestions[i].type == "A" || allQuestions[i].type == "B" ) {
                     oneResult = [];
                     // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
                     for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
@@ -83,6 +90,42 @@ function ResultPage() {
                       oneResult.push(oneAns);
                     }
 
+                    aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
+                      {/* 題號(要再看是否修改) */}
+                      <h4>{i+1}</h4>  
+                      <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
+                      {oneResult}
+                    </div>
+                    allContents.push(aResult);
+                    key += 1;
+                  }
+                  if (allQuestions[i].type == "C") {
+                    oneResult = [];
+                    // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
+                  //這題的所有選項
+                    // let thealloptions=allQuestions[i].options;
+let count=new Array(allQuestions[i].options.length).fill(0);                  
+                    for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
+                  //這裡要改成計數    
+
+/////////////////////////////////////////////這個範圍內都要改掉///////////////////
+
+for(let k=0; k<allQuestions[i].options.length; k++){
+  // console.log(allAns[allQuestions[i].queSerial][j]);
+  if(allAns[allQuestions[i].queSerial][j]==k){
+    count[k]+=1;
+    // console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
+  }
+}
+
+/////////////////////////////////////////////這個範圍內都要改掉///////////////////
+
+        
+                      // let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allAns[allQuestions[i].queSerial][j]]}</p>;   
+                      let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]}</p>; 
+                      oneResult.push(oneAns);
+                    }
+console.log(count);
                     aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
                       {/* 題號(要再看是否修改) */}
                       <h4>{i+1}</h4>  

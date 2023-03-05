@@ -69,7 +69,7 @@ function AddQuesPage() {
     // console.log("#" + type + "queContent" + id);
     if (content != '') {
       let theQue = { id: id, type: type, queSerial: queSerial, content: content };   //這邊要改成obj 不要用array
-      if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
+      if (theQue.id == "" || theQue.type == "" || theQue.queSerial == "" || theQue.content == "" ) {
         return;
       }
       let newAllQues = allQuestions;
@@ -88,26 +88,28 @@ function AddQuesPage() {
   const doneC = async (e,options) => {
     e.preventDefault();
     console.log("here");
-    console.log(options);
+    console.log("o:::",options);
     let queSerial = Date.now().toString(36).slice(2, 8);
     let type = e.target.id.substr(0, 1);
     let id = e.target.id.replace(type+"done", "");
     console.log(id,type);
     // //這邊要加入判斷type 改變content內容
-    // let content = document.querySelector("#" + type + "queContent" + id).value;
+    let content = document.querySelector("#" + type + "queContent" + id).value;
+    let option = options.filter(ele => ele.trim() !== '');
     // // console.log("#" + type + "queContent" + id);
     // if (content != '') {
-    //   let theQue = { id: id, type: type, queSerial: queSerial, content: content };   //這邊要改成obj 不要用array
-    //   if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
-    //     return;
-    //   }
-    //   let newAllQues = allQuestions;
-    //   console.log("R:",newAllQues);
+      let theQue = { id: id, type: type, queSerial: queSerial, content: content, options:option };   
+      if (theQue.id == "" || theQue.type == "" || theQue.queSerial == "" || theQue.content == "" || theQue.options == "") {
+        console.log("empty");
+        return;
+      }
+      let newAllQues = allQuestions;
+      console.log("R:",newAllQues);
     //   // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
-    //   newAllQues[id] = theQue;
-    //   console.log("N:",newAllQues);
+      newAllQues[id] = theQue;
+      console.log("N:",newAllQues);
 
-    //   setAllQuestions(newAllQues);
+      setAllQuestions(newAllQues);
     //   // document.querySelector("#" + type + "remove" + id).className="Aremove";
 
     // }
@@ -128,6 +130,9 @@ function AddQuesPage() {
 
     console.log(1, allQuestions);
     let tmp = allQuestions;
+    // if(type=="A" || type=="B"){tmp[eid] = '';}
+    // if(type=="C"){tmp[eid]=}
+    
     tmp[eid] = '';
     // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
     // console.log(2,newAllQues);
@@ -196,22 +201,22 @@ function AddQuesPage() {
 
 
     // //如果是編輯問卷, 這邊Version版本要改!
-    // const setQues = doc(db, "surveys", serial, "questions", "version1");
-    // await setDoc(setQues, {
-    //   questions: newAllQ
-    // }, { merge: true })
-    //   .then(async () => {
-    //     console.log("success");
-    //     const setVersion = doc(db, "surveys", serial);
-    //     await setDoc(setVersion, {
-    //       questionsType: newQuesType,
-    //       version: 1    //如果是編輯問卷, 這邊Version版本要改!
-    //     }, { merge: true }).then(() => {
-    //       navigate("/release/" + serial);
-    //     }).catch(() => { console.log("fail") });
+    const setQues = doc(db, "surveys", serial, "questions", "version1");
+    await setDoc(setQues, {
+      questions: newAllQ
+    }, { merge: true })
+      .then(async () => {
+        console.log("success");
+        const setVersion = doc(db, "surveys", serial);
+        await setDoc(setVersion, {
+          questionsType: newQuesType,
+          version: 1    //如果是編輯問卷, 這邊Version版本要改!
+        }, { merge: true }).then(() => {
+          navigate("/release/" + serial);
+        }).catch(() => { console.log("fail") });
 
-    //   })
-    //   .catch(() => { console.log("fail") });
+      })
+      .catch(() => { console.log("fail") });
   }
 
   const addQue = (e) => {   //新增題目區塊

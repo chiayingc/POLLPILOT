@@ -6,9 +6,44 @@ import { doc, collection, setDoc, getDoc, query, where, onSnapshot } from 'fireb
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 
-//////路徑要改 不能依賴user
 
 function FillInPage() {
+
+  const [selectedValue, setSelectedValue] = useState({});
+  const [checkedList, setCheckedList] = useState({});
+
+  const handleOptionChange = (event) => {
+    // console.log("handleOptionChange");
+    // console.log(event.target.name);
+    // console.log(checkedList);
+    let id = event.target.name.substr(4, 1);
+    let val = event.target.value;
+
+    const newArr = [...selectedValue[id]]; // 先複製一份陣列
+    const newCheck = [...checkedList[id]];
+
+    if (selectedValue[id].includes(val)) {
+      let tmp = newArr.filter(ele => ele != val);
+      console.log(tmp);
+      setSelectedValue(prevState => ({ ...prevState, [id]: tmp }));
+      
+      if (!newCheck[val]) { newCheck[val] = false; }
+      newCheck[val] = false;
+      setCheckedList(prevState => ({ ...prevState, [id]: newCheck }));
+    }
+
+    else {
+      newArr.push(val);
+      console.log(newArr);
+      setSelectedValue(prevState => ({ ...prevState, [id]: newArr }));
+      
+      if (!newCheck[val]) { newCheck[val] = false; }
+      newCheck[val] = true;
+      setCheckedList(prevState => ({ ...prevState, [id]: newCheck }));
+    }
+
+  };
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,17 +70,101 @@ function FillInPage() {
       });
   }, []);
 
+
+  function Options(props) {
+    let id = props.id;
+
+    // let option =
+    //   <div>
+    //     <div className='cd_radio'>
+    //       <input id={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}
+    //         type='radio'
+    //         name={props.type == "C" ? 'quec' + props.id : 'qued' + props.id + '_' + props.index}
+    //         className='cd_radio_radio'
+    //         value={props.index}
+    //         checked={checkedList[id] && checkedList[id][props.index] !== undefined ? checkedList[id][props.index] : false}  //判斷原本有沒有在裡面 沒有的話才checked
+    //         onChange={()=>{}}
+    //         onClick={(e)=>{handleOptionChange(e)}}
+    //       />
+    //       <label className="cd_radio_label" htmlFor={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}></label>
+    //       {props.option}
+    //     </div>
+    //   </div>
+
+    // let tmp=props.type == "C" ? 'quec' + props.id : 'qued' + props.id + '_' + props.index;
+    // let tmp=props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index;
+
+    let option =
+      <div>
+        <div >
+          <input id={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}
+            type='radio'
+            name={props.type == "C" ? 'quec' + props.id : 'qued' + props.id + '_' + props.index}
+            // className='cd_radio_radio'
+            value={props.index}
+            checked={checkedList[id] && checkedList[id][props.index] !== undefined ? checkedList[id][props.index] : false}  //判斷原本有沒有在裡面 沒有的話才checked
+            onChange={()=>{
+              // console.log(selectedValue);
+            }}
+            onClick={(e)=>{handleOptionChange(e);
+              
+            // let v=  document.querySelector('[name="'+tmp+'"]').value;
+            // let v=  document.querySelector("#"+tmp).value;
+            // console.log(v);
+            }}
+          />
+          <label htmlFor={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}></label>
+          {props.option}
+        </div>
+      </div>
+    return <div>
+      {option}
+    </div>
+  }
+
   function AQue(props) {
     let queData = props.quedata;
-
+    let formcontents = [];
     if (queData.type == "A") {
       let aque =
-        <div className='fillin_aque'>
+        <div key={queData.queSerial} className='fillin_aque'>
           <div className='fillin_que'>{queData.content}</div>
           <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} placeholder={queData.serial} onChange={recordAns} />
         </div>
-      return aque;
+      // return aque;
+      formcontents.push(aque);
     }
+
+    if (queData.type == "B") {
+      let bque =
+        <div key={queData.queSerial}>
+          <div>{queData.content}</div>
+          <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} placeholder={queData.serial} onChange={recordAns} />
+        </div>
+      formcontents.push(bque);
+    }
+
+    if (queData.type == "C" || queData.type=="D") {
+      // setSelectedValue((prevValue)=>(...prevValue,{queData.id:}))
+
+      useEffect(() => {
+        if (!selectedValue[queData.id]) {
+          setSelectedValue(prevState => ({ ...prevState, [queData.id]: [] }));
+        }
+        if (!checkedList[queData.id]) {
+          setCheckedList(prevState => ({ ...prevState, [queData.id]: [] }));
+        }
+      }, [queData.id, selectedValue, checkedList]);
+
+      let cque =
+        <div key={queData.id}>
+          <div>{queData.content}</div>
+          {queData.options.map((item, index) => <Options key={index} option={item} id={queData.id} serial={queData.queSerial} index={index} />)}
+        </div>
+      formcontents.push(cque);
+    }
+
+    return formcontents
   }
 
 

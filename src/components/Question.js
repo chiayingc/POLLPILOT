@@ -3,13 +3,13 @@
   
   
   // 帶入count(第幾題) 設定div id
-  function Question({ allQ, remove, done }) {
+  function Question({ allQ, remove, done, doneC }) {
     // function Question({ allQ }) {
     const [count, setCount] = useState([]);
     const [options, setOptions] = useState([]);
     // let count;
     // console.log(count);
-    // console.log("b");
+    console.log("b");
   
     let allQuestions = [];
     let allQueC = [];
@@ -22,7 +22,7 @@
         
         let tmpopt;
         for (let i = 0; i < count.count; i++) {
-          // console.log("i:", i, "id:", id);
+          console.log("i:", i, "id:", id);
           tmpopt = '';
           if (options[id] != undefined && options[id][i] != undefined) { tmpopt = options[id][i]; }
           let tmp = '';
@@ -46,13 +46,13 @@
       let ctitleid = tmp[0];
   
       let thequec = options;
-      // console.log(thequec);
+      console.log(thequec);
       if (thequec[ctitleid] == undefined) { thequec[ctitleid] = []; }
       if (thequec[ctitleid][coptionid] == undefined) { thequec[ctitleid][coptionid] = []; }
       thequec[ctitleid][coptionid] = e.target.value;
       setOptions(thequec);
-      // console.log("t:", thequec);
-      // console.log("o:", options);
+      console.log("t:", thequec);
+      console.log("o:", options);
       // console.log(e.target.value);
     }
   
@@ -93,26 +93,17 @@
       }
       if (allQ[i] == "C") {
         let oneQue = <div key={id} id={"qus" + id} className="qus">
-          <input id={"Cquetitle" + id} className="qus_titleC" type="text" placeholder='標題'
+          <input id={"CqueContent" + id} className="qus_titleC" type="text" placeholder='標題'
             onClick={() => { document.querySelector("#Cdone" + id).className = "Cdone" }} />
           <br />
           <button onClick={() => {
             let tmp = count;
             tmp[0] = { id: 0, count: 0 };
             if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
-            // console.log(count);
-            // console.log("id:",id);
-            // console.log("count:",count);
-            const c = count.find(q => q.id === id);
+            const c = count.find(q => q?.id === id);
             c.count++;
             setCount([...count]);
-            // tmp[id].count+=1;
-            // setCount(tmp);
-            // console.log(count);
-            // console.log(count[id]);
-            // console.log(typeof(count[id]));
-            // QueC(count);
-            // count+=1;
+
           }}>+</button>
           <QueC options={options} count={count[id]} id={id} />
           {/* {allQueC} */}
@@ -124,7 +115,7 @@
           <br />
           <div className='done'>
             <button id={"Cremove" + id} className="Cremove" onClick={remove}>刪除</button>
-            <button id={"Cdone" + id} className="Cdone" onClick={done}>完成</button>
+            <button id={"Cdone" + id} className="Cdone" onClick={(e)=>{doneC(e,options[id])}}>完成</button>
           </div>
         </div>
         allQuestions.push(oneQue);

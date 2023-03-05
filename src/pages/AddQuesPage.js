@@ -63,40 +63,57 @@ function AddQuesPage() {
     e.preventDefault();
     let queSerial = Date.now().toString(36).slice(2, 8);
     let type = e.target.id.substr(0, 1);
-    let id = e.target.id.replace(type + "done", "");
-    console.log("67:", type, id);
+    let id = e.target.id.replace(type+"done", "");
     //這邊要加入判斷type 改變content內容
-    if (type == "A" || type == "B") {
-      console.log("HI");
-      let content = document.querySelector("#" + type + "queContent" + id).value;
-      // console.log("#" + type + "queContent" + id);
-      if (content != '') {
-        let theQue = { id: id, type: type, queSerial: queSerial, content: content };
-        if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
-          return;
-        }
+    let content = document.querySelector("#" + type + "queContent" + id).value;
+    // console.log("#" + type + "queContent" + id);
+    if (content != '') {
+      let theQue = { id: id, type: type, queSerial: queSerial, content: content };   //這邊要改成obj 不要用array
+      if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
+        return;
       }
-
       let newAllQues = allQuestions;
-      console.log("R:", newAllQues);
+      console.log("R:",newAllQues);
       // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
       newAllQues[id] = theQue;
-      console.log("N:", newAllQues);
+      console.log("N:",newAllQues);
 
       setAllQuestions(newAllQues);
       // document.querySelector("#" + type + "remove" + id).className="Aremove";
 
     }
-
-    if (type == "C") {
-      console.log('hi');
-      let ctitle = document.querySelector("#" + type + "quetitle" + id).value;
-      // console.log("title:", ctitle);
-      
-    }
-
     e.target.className = "noshow";
   };
+
+  const doneC = async (e,options) => {
+    e.preventDefault();
+    console.log("here");
+    console.log(options);
+    let queSerial = Date.now().toString(36).slice(2, 8);
+    let type = e.target.id.substr(0, 1);
+    let id = e.target.id.replace(type+"done", "");
+    console.log(id,type);
+    // //這邊要加入判斷type 改變content內容
+    // let content = document.querySelector("#" + type + "queContent" + id).value;
+    // // console.log("#" + type + "queContent" + id);
+    // if (content != '') {
+    //   let theQue = { id: id, type: type, queSerial: queSerial, content: content };   //這邊要改成obj 不要用array
+    //   if (theQue[0] == "" || theQue[1] == "" || theQue[2] == "" || theQue[3] == "") {
+    //     return;
+    //   }
+    //   let newAllQues = allQuestions;
+    //   console.log("R:",newAllQues);
+    //   // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
+    //   newAllQues[id] = theQue;
+    //   console.log("N:",newAllQues);
+
+    //   setAllQuestions(newAllQues);
+    //   // document.querySelector("#" + type + "remove" + id).className="Aremove";
+
+    // }
+    e.target.className = "noshow";
+  };
+
 
   const remove = async (e) => {
     e.preventDefault();
@@ -219,7 +236,7 @@ function AddQuesPage() {
         <div id='addquespage_main_left'>
           {/* <Question allQ={allQues} recordQue={recordQue} done={done} /> */}
           {/* //這邊要再加入要不要顯示題號的設定 回傳不同的html結果 */}
-          <Question allQ={allQues} done={done} remove={remove} />
+          <Question allQ={allQues} done={done} doneC={doneC} remove={remove} />
           {/* <Question allQ={allQues} /> */}
           {/* {allQues.map((allq, index) => <Question key={index} allQ={allq} />)} */}
         </div>

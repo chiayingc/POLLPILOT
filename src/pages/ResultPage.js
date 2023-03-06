@@ -9,6 +9,11 @@ import {
   onAuthStateChanged
 } from 'firebase/auth'
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 
 function ResultPage() {
   // const { user, setUser } = useContext(UserContext);
@@ -24,6 +29,7 @@ function ResultPage() {
   let allAns = []; //紀錄整理各題所有答案
   let version;
   let allQuestions = [];
+  let data;
   // let answer = {};
 
   let queTypes = {}; //紀錄所有題目題型
@@ -116,7 +122,36 @@ for(let k=0; k<allQuestions[i].options.length; k++){
     count[k]+=1;
     // console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
   }
+
+
+data = {
+  labels: allQuestions[i].options,
+  datasets: [
+    {
+      label: allQuestions[i].options[k],
+      data: count,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 }
+
 
 /////////////////////////////////////////////這個範圍內都要改掉///////////////////
 
@@ -130,8 +165,14 @@ console.log(count);
                       {/* 題號(要再看是否修改) */}
                       <h4>{i+1}</h4>  
                       <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
-                      {oneResult}
+                      {/* {oneResult} */}
+                      <div className='pie'>
+                      <Pie data={data} />
+                      </div>
+                      
                     </div>
+
+
                     allContents.push(aResult);
                     key += 1;
                   }

@@ -52,15 +52,15 @@ function ResultPage() {
 
       });
       if (allAnswers[0] != undefined && allAnswers[0] != null) {
-        console.log(allAnswers);
         // let tmp=allAnswers.filter(ele => ele !== {});
         // console.log(tmp);
   //03.06這邊要改 如果答案裡面有空值的要排除//
-        queSerials = Object.keys(allAnswers[1]);   
-        console.log(queSerials);
+        let tmp=allAnswers.filter(object=>Object.keys(object).length!=0);
+        allAnswers=tmp;
+        queSerials = Object.keys(allAnswers[0]);   
+
         allAns = [];
         allAnswers.forEach((obj) => {
-          console.log(obj);
           for (let j = 0; j < queSerials.length; j++) {
             if (allAns[queSerials[j]] == undefined) { allAns[queSerials[j]] = [] }
             allAns[queSerials[j]].push(obj[queSerials[j]]);

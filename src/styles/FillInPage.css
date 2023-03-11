@@ -126,6 +126,13 @@
         display: none;
     }
 
+    /* //// */
+
+    .qus_title_inputB{
+        width: calc(100% - 22px);
+    }
+    /* //// */
+
 
 
 

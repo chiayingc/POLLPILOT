@@ -15,6 +15,7 @@ import { UserContext } from "./helper/Context";
 
 import Signpage from './pages/Signpage';
 import TestDB from "./pages/TestDB";
+import Quiz from "./pages/Quiz";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                     {/* <Route path="/test" element={<Signpage />} /> */}
                     {/* 測試資料庫 */}
                     {/* <Route path="/testDB" element={<TestDB />} /> */}
+                    <Route path="/test" element={<Quiz />} />
                 </Routes>
             </UserContext.Provider>
         </div>

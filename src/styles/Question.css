@@ -157,12 +157,12 @@
         background-color: #e9e5e1;
     }
 
-    .Adone:focus,
+    /* .Adone:focus,
     .Bdone:focus,
     .Cdone:focus,
     .Ddone:focus {
         display: none;
-    }
+    } */
 
     .Aremove,
     .Bremove,

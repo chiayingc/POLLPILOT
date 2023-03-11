@@ -87,6 +87,9 @@ function AddQuesPage() {
 
   const doneC = async (e,options) => {
     e.preventDefault();
+    if(options){  ///////////如果有選項才繼續.... 這邊要再修改
+    
+    
     console.log("here");
     console.log("o:::",options);
     let queSerial = Date.now().toString(36).slice(2, 8);
@@ -114,6 +117,8 @@ function AddQuesPage() {
 
     // }
     e.target.className = "noshow";
+    console.log(e.target.id);
+  }
   };
 
 

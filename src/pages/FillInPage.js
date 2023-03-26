@@ -12,33 +12,30 @@ function FillInPage() {
 
   const [selectedValue, setSelectedValue] = useState({});
   const [checkedList, setCheckedList] = useState({});
-  console.log(selectedValue);
-  console.log(checkedList);
-  console.log("render");
 
-  const handleOptionChange = (serial,index) => {
+  const handleOptionChange = (serial, index) => {
     // let tmp=selectedValue;
     // Object.assign(tmp,newAllAns);
 
     const newArr = [...selectedValue[serial]]; // 先複製一份陣列
     const newCheck = [...checkedList[serial]];
 
-    if (selectedValue[serial][0]!=index) {
+    if (selectedValue[serial][0] != index) {
       let tmp = [index]
       setSelectedValue(prevState => ({ ...prevState, [serial]: tmp }));
-      
+
       newCheck.fill(false);
       newCheck[index] = true;
       setCheckedList(prevState => ({ ...prevState, [serial]: newCheck }));
     }
 
-  
+
 
   };
 
 
-//////////////////這邊還沒改//////////////////////////////////////////////  
-  const handleDOptionChange = (serial,index) => {
+  //////////////////這邊還沒改//////////////////////////////////////////////  
+  const handleDOptionChange = (serial, index) => {
     // let tmpp=selectedValue;
     // Object.assign(tmpp,newAllAns);
     // setSelectedValue(tmpp);
@@ -48,9 +45,9 @@ function FillInPage() {
 
     if (selectedValue[serial].includes(index)) {
       let tmp = newArr.filter(ele => ele != index);
-      console.log(serial,":",tmp);
+      console.log(serial, ":", tmp);
       setSelectedValue(prevState => ({ ...prevState, [serial]: tmp }));
-      
+
       // if (!newCheck[val]) { newCheck[val] = false; }
       newCheck[index] = false;
       setCheckedList(prevState => ({ ...prevState, [serial]: newCheck }));
@@ -60,14 +57,14 @@ function FillInPage() {
       newArr.push(index);
       console.log(newArr);
       setSelectedValue(prevState => ({ ...prevState, [serial]: newArr }));
-      
+
       if (!newCheck[index]) { newCheck[index] = false; }
       newCheck[index] = true;
       setCheckedList(prevState => ({ ...prevState, [serial]: newCheck }));
     }
   };
-  
-//////////////////這邊還沒改//////////////////////////////////////////////
+
+  //////////////////這邊還沒改//////////////////////////////////////////////
 
 
   const navigate = useNavigate();
@@ -99,8 +96,8 @@ function FillInPage() {
   function Options(props) {
     let id = props.id;
     // console.log(props);
-    let serial=props.serial;
-    let index=props.index;
+    let serial = props.serial;
+    let index = props.index;
 
     // let option =
     //   <div>
@@ -123,8 +120,8 @@ function FillInPage() {
     // let tmp=props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index;
 
     let option =
-      <div>
-        <div >
+      <div className='anoption' >
+        {/* <div> */}
 
           {/* 這個寫法是多選題的~~~~ 要改成type D */}
           <input id={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}
@@ -133,21 +130,21 @@ function FillInPage() {
             // className='cd_radio_radio'
             value={props.index}
             checked={
-              
               checkedList[serial] && checkedList[serial][index] !== undefined ? checkedList[serial][index] : false}  //判斷原本有沒有在裡面 沒有的話才checked
-            onChange={()=>{
+            onChange={() => {
               // console.log(selectedValue);
             }}
-            onClick={(e)=>{props.type == "C" ?handleOptionChange(serial,index):handleDOptionChange(serial,index);
-              
-            // let v=  document.querySelector('[name="'+tmp+'"]').value;
-            // let v=  document.querySelector("#"+tmp).value;
-            // console.log(v);
+            onClick={(e) => {
+              props.type == "C" ? handleOptionChange(serial, index) : handleDOptionChange(serial, index);
+
+              // let v=  document.querySelector('[name="'+tmp+'"]').value;
+              // let v=  document.querySelector("#"+tmp).value;
+              // console.log(v);
             }}
           />
           <label htmlFor={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}></label>
-          {props.option}
-        </div>
+          <p className='fillin_option'>{props.option}</p>
+        {/* </div> */}
       </div>
     return <div>
       {option}
@@ -157,8 +154,8 @@ function FillInPage() {
   function AQue(props) {
     let queData = props.quedata;
     let formcontents = [];
-    
-   
+
+
 
     if (queData.type == "A") {
       let aque =
@@ -180,7 +177,7 @@ function FillInPage() {
       formcontents.push(bque);
     }
 
-    if (queData.type == "C" || queData.type=="D") {
+    if (queData.type == "C" || queData.type == "D") {
       useEffect(() => {
         if (!selectedValue[queData.queSerial]) {
           setSelectedValue(prevState => ({ ...prevState, [queData.queSerial]: [] }));
@@ -198,7 +195,7 @@ function FillInPage() {
         </div>
       formcontents.push(cque);
     }
-    
+
 
     return formcontents
   }
@@ -217,9 +214,9 @@ function FillInPage() {
     //   queSerial: ansSerial,
     //   value: e.target.value
     // };
-    newAllAns[ansSerial] =e.target.value  ;
-    let tmpp=selectedValue;
-    Object.assign(tmpp,newAllAns);
+    newAllAns[ansSerial] = e.target.value;
+    let tmpp = selectedValue;
+    Object.assign(tmpp, newAllAns);
     setSelectedValue(tmpp);
 
     // setSelectedValue[]

@@ -112,6 +112,11 @@
         display: none;
     }
 
+    .selected, .unselect{
+        width: 30px;
+        background-color: #888;
+    }
+
 
     .btn_addradio {
         background-color: #f6e4e7;

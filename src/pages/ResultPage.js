@@ -105,7 +105,12 @@ function ResultPage() {
                     allContents.push(aResult);
                     key += 1;
                   }
-                  if (allQuestions[i].type == "C") {
+
+                  // if (allQuestions[i].type == "D") {
+                  //   console.log(allAns[allQuestions[i].queSerial]);
+                    
+                  // }
+                    if (allQuestions[i].type == "C" || allQuestions[i].type == "D") {
                     oneResult = [];
                     // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
                   //這題的所有選項
@@ -120,15 +125,44 @@ for(let k=0; k<allQuestions[i].options.length; k++){
   // console.log(allAns[allQuestions[i].queSerial][j]);
   if(allAns[allQuestions[i].queSerial][j]==k){
     count[k]+=1;
+    
     // console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
   }
+
+    if (allQuestions[i].type == "D") {
+      // oneResult = [];
+      console.log("D"+allQuestions[i].options);
+count=new Array(allQuestions[i].options.length).fill(0);                  
+      for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
+    //這裡要改成計數    
+
+/////////////////////////////////////////////這個範圍內都要改掉///////////////////
+
+// for(let k=0; k<allQuestions[i].options.length; k++){
+
+for (let l = 0; l < allAns[allQuestions[i].queSerial][j].length; l++) {
+  if (allAns[allQuestions[i].queSerial][j][l] >= 0 && allAns[allQuestions[i].queSerial][j][l] < count.length) {
+    count[allAns[allQuestions[i].queSerial][j][l]]++;
+  }
+}
+
+// console.log(allAns[allQuestions[i].queSerial][j]);
+// if(allAns[allQuestions[i].queSerial][j]==k){
+// count[k]+=1;
+
+// console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
+console.log(count);
+}
+    }
 
 
 data = {
   labels: allQuestions[i].options,
   datasets: [
     {
-      label: allQuestions[i].options[k],
+      label: allQuestions[i].options[0],  //改內容
+
+      
       data: count,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',

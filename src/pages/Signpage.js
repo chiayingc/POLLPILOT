@@ -115,7 +115,7 @@ function Signpage(props) {
                             <img />
                             <p className='second_title'>忘記密碼了嗎</p>
                         </div>
-                        <p className='hint' id='signin_hint'>{errorHint}sdfasgd</p>
+                        <p className='hint' id='signin_hint'>{errorHint}</p>
                     </div>
                     <button onClick={signin}>
                         登入
@@ -150,7 +150,7 @@ function Signpage(props) {
                                 onChange={(e) => { signupPassword = e.target.value; }} />
                             <img />
                         </div>
-                        <p className='hint' >hint // {errorHint ? errorHint : ""}</p>
+                        <p className='hint' >{errorHint ? errorHint : ""}</p>
                     </div>
                     <button onClick={signup}>註冊</button>
                 </form>

@@ -65,7 +65,7 @@ function AddNewPage() {
 
     return (
         <div id='addnewpage'>
-            <Navbar />
+            <Navbar type={1} />
             <div id='addnewpage_main'>
                 <div id='survey_setting'>
                     <h3>問卷頁面設定</h3>

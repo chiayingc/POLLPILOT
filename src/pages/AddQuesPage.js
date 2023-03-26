@@ -89,9 +89,6 @@ function AddQuesPage() {
     e.preventDefault();
     if(options){  ///////////如果有選項才繼續.... 這邊要再修改
     
-    
-    console.log("here");
-    console.log("o:::",options);
     let queSerial = Date.now().toString(36).slice(2, 8);
     let type = e.target.id.substr(0, 1);
     let id = e.target.id.replace(type+"done", "");

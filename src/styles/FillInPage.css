@@ -29,6 +29,10 @@
         row-gap: 8px;
     }
 
+    .anoption{
+        display: flex;
+    }
+
     .fillin_que {
         /* width: calc(100% - 11px); */
         width: 100%;
@@ -37,6 +41,12 @@
         font-size: .8rem;
         font-weight: 600;
         word-wrap: break-word;
+    }
+
+    .fillin_option {
+        /* width: calc(100% - 11px); */
+        font-size: .6rem;
+        font-weight: 500;
     }
 
     .fillin_ans {

@@ -132,8 +132,8 @@
         display: grid;
         justify-items: center;
         align-content: center;
-        grid-template-rows: 20px 60px 30px;
-        row-gap: 2px;
+        /* grid-template-rows: 20px 60px 30px; */
+        row-gap: 8px;
 
     }
 

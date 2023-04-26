@@ -49,7 +49,8 @@
         font-weight: 500;
     }
 
-    .fillin_ans {
+    .fillin_ans,
+    .fillin_ans_num {
         width: calc(100% - 22px);
         padding: 3px 10px 3px 10px;
         outline: none;
@@ -58,6 +59,54 @@
         border-width: 0px 0px 1px 0px;
         outline: none;
         color: #222;
+        background-color: inherit;
+    }
+
+    .fillin_ans:focus,
+    .fillin_ans_num:focus {
+        width: calc(100% - 22px);
+        padding: 3px 10px 3px 10px;
+        outline: none;
+        font-size: .8rem;
+        border: solid #c79c98;
+        border-width: 0px 0px 1px 0px;
+        outline: none;
+        color: #222;
+        background-color: inherit;
+    }
+
+    .fillin_intro{
+        width: 100%;
+        color: #2f2f2f;
+        font-size: 1rem;
+        font-weight: 600;
+        /* word-wrap: break-word;
+        border: 1px outset #c79c98; */
+        border-radius: 3px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
+        padding: .4rem .8rem .4rem .8rem;
+    }
+
+    .fillin_category{
+        width: fit-content;
+        padding: .2rem .6rem .2rem .6rem;
+        color: #1a1a1a;
+        font-size: .8rem;
+        font-weight: 700;
+        /* border: solid #cbcbcb; */
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 0px;
+        border-width: 0px 0px 1px 0px;
+    }
+
+    .fillin_ans_date{
+        width: fit-content;
+        padding: .2rem .6rem .2rem .6rem;
+        cursor: pointer;
+        /* outline: none; */
+        font-size: .8rem;
+        border: solid #888;
+        border-width: 0px 0px 1px 0px;
+        color: #666;
         background-color: inherit;
     }
 

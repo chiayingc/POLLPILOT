@@ -161,7 +161,7 @@ function FillInPage() {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
           <div className='fillin_que'>{queData.content}</div>
-          <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} placeholder={queData.serial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
+          <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} placeholder={queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       // return aque;
       formcontents.push(aque);
@@ -172,7 +172,7 @@ function FillInPage() {
         <div key={queData.queSerial} className='fillin_aque'>
           <div className='fillin_que'>{queData.content}</div>
           {/* className要改 */}
-          <textarea type="text" className='qus_title_inputB' id={"ans" + queData.queSerial} placeholder={queData.serial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
+          <textarea type="text" className='qus_title_inputB' id={"ans" + queData.queSerial} placeholder={queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       formcontents.push(bque);
     }
@@ -195,6 +195,66 @@ function FillInPage() {
         </div>
       formcontents.push(cque);
     }
+
+    //F 數字題
+    if (queData.type == "F") {
+      let aque =
+        <div key={queData.queSerial} className='fillin_aque'>
+          <div className='fillin_que'>{queData.content}</div>
+          <input type="number" className='fillin_ans_num' id={"ans" + queData.queSerial} placeholder="請輸入數字" onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
+        </div>
+      // return aque;
+      formcontents.push(aque);
+    }
+
+    //G range題
+    if (queData.type == "G") {
+      let aque =
+        <div key={queData.queSerial} className='fillin_aque'>
+          <div className='fillin_que'>{queData.content}</div>
+          {/* 這裡要加入range大小(資料來源)跟間隔顯示、range樣式 */}
+          <input className='fillin_ans_range' type='range' min='0' max='100' step='10' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue='10' />  
+        </div>
+      // return aque;
+      formcontents.push(aque);
+    }
+
+    //H 引言
+    if (queData.type == "H") {
+      let aque =
+        <div key={queData.queSerial} className='fillin_aque'>
+          {/* 如果有題號不要加題號 */}
+          <div className='fillin_intro'>{queData.content}</div>
+        </div>
+      // return aque;
+      formcontents.push(aque);
+    }
+
+
+    //I 分類標題
+    if (queData.type == "I") {
+      let aque =
+        <div key={queData.queSerial} className='fillin_aque'>
+          {/* 如果有題號 要不要加題號?? */}
+          <div className='fillin_category'>{queData.content}</div>
+        </div>
+      // return aque;
+      formcontents.push(aque);
+    }
+
+    //J 日期
+    if (queData.type == "J") {
+      let aque =
+        <div key={queData.queSerial} className='fillin_aque'>
+          <div className='fillin_que'>{queData.content}</div>
+          {/* 這邊要補預設日期 */}
+          <input type="date" className='fillin_ans_date' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue="" />
+        </div>
+      // return aque;
+      formcontents.push(aque);
+    }
+
+    
 
 
     return formcontents

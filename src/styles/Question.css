@@ -1,5 +1,6 @@
 @media (max-width:1920px) {
-    .qus {
+    .qus,
+    .categoryI {
         width: calc(100% - 60px);
         /* margin-top: 5px; */
         min-height: 90px;
@@ -10,7 +11,19 @@
         border-radius: 2px;
         padding: 30px;
         background-color: #fbfbfb;
+    }
 
+    .introH{
+        width: calc(100% - 60px);
+        /* margin-top: 5px; */
+        min-height: 90px;
+        height: fit-content;
+        margin-bottom: 3px;
+        display: grid;
+        border: 1.5px dashed #e8e8e8;
+        border-radius: 3px;
+        padding: 30px;
+        background-color: #fbfbfb;
     }
 
     .qus_title_inputA {
@@ -36,10 +49,26 @@
         overflow-y: auto;
     }
 
+    .qus_title_inputJ{
+        /* width: calc(100% - 1.2rem - 2px); */
+        width: fit-content;
+        padding: .1rem;
+        border: 1px solid #888;
+        border-radius: 2px;
+        margin-bottom: 3px;
+        background-color: inherit;
+        cursor: pointer;
+    }
+
     .qus_titleA,
     .qus_titleB,
     .qus_titleC,
-    .qus_titleD {
+    .qus_titleD,
+    .qus_titleF,
+    .qus_titleG,
+    .qus_titleH,
+    .qus_titleI,
+    .qus_titleJ {
         width: calc(100% - 1.2rem);
         font-size: .9rem;
         padding: .2rem .6rem .2rem .6rem;
@@ -112,7 +141,8 @@
         display: none;
     }
 
-    .selected, .unselect{
+    .selected,
+    .unselect {
         width: 30px;
         background-color: #888;
     }
@@ -144,7 +174,12 @@
     .Adone,
     .Bdone,
     .Cdone,
-    .Ddone {
+    .Ddone,
+    .Fdone,
+    .Gdone,
+    .Hdone,
+    .Idone,
+    .Jdone {
         cursor: pointer;
         background-color: #f7f0e9;
         color: #666;
@@ -153,12 +188,18 @@
         padding: .1rem 0 .1rem 0;
         border: 1px solid #bebebe;
         margin-left: 8px;
+        max-height: 1.4rem;
     }
 
     .Adone:hover,
     .Bdone:hover,
     .Cdone:hover,
-    .Ddone:hover {
+    .Ddone:hover,
+    .Fdone:hover,
+    .Gdone:hover,
+    .Hdone:hover,
+    .Idone:hover,
+    .Jdone:hover {
         background-color: #e9e5e1;
     }
 
@@ -172,21 +213,71 @@
     .Aremove,
     .Bremove,
     .Cremove,
-    .Dremove {
+    .Dremove,
+    .Fremove,
+    .Gremove,
+    .Hremove,
+    .Iremove,
+    .Jremove {
         cursor: pointer;
         background-color: #e9e5e1;
         color: #666;
         font-size: .5rem;
         padding: .1rem 0 .1rem 0;
         border: 1px solid #bebebe;
+        max-height: 1.4rem;
     }
 
     .Aremove:hover,
     .Bremove:hover,
     .Cremove:hover,
-    .Dremove:hover {
+    .Dremove:hover,
+    .Fremove:hover,
+    .Gremove:hover,
+    .Hremove:hover,
+    .Iremove:hover,
+    .Jremove:hover {
         background-color: #f7f0e9;
     }
+
+    .rangeG {
+        padding: .2rem .6rem .2rem .6rem;
+        font-size: .8rem;
+        margin-top: .1rem;
+        margin-bottom: .2rem;
+        border: 1px #e2c0d0 dashed;
+        border-radius: 3px;
+        width: fit-content;
+        cursor: pointer;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 1rem 1fr;
+        column-gap: .5rem;
+    }
+
+    .rangeG:hover {
+        background-color: #fff5fa;
+        border-color: #cecece;
+    }
+
+    .infoicon {
+        width: 1rem;
+
+    }
+
+
+    /*F數字題隱藏箭頭*/
+    /* Chrome, Safari, Edge, Opera */
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
 
     .noshow {
         display: none;

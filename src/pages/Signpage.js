@@ -5,10 +5,11 @@ import { Link, useNavigate } from 'react-router-dom'
 // import signbk1 from '../assets/signbk1.svg'
 import signbk1 from '../assets/illustration_home_01.svg'
 import Navbar from '../components/Navbar'
-import { auth, db } from '../../firebase-config.js'
+import { auth, db, provider } from '../../firebase-config.js'
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signInWithPopup,
     onAuthStateChanged,
 } from 'firebase/auth'
 import { UserContext } from '../helper/Context'
@@ -96,6 +97,12 @@ function Signpage(props) {
         }
     };
 
+    const signingoogle = ()=>{
+        signInWithPopup(auth, provider).then((data)=>{
+            localStorage.setItem("email",data.user.email);
+        });
+    }
+
     const SignForm = () => {
         let form;
         if (props.sign == "signin") {
@@ -123,7 +130,7 @@ function Signpage(props) {
                 </form>
                 <div>
                     {/* <p>其他登入</p> */}
-                    {/* <button>使用 Facebook 登入</button> */}
+                    {/* <button onClick={signingoogle}>使用 Google 登入</button> */}
                     <div><p className='sign_btn'>還沒有註冊嗎？</p> <p className='sign_btn'><Link to={"/signup"}>前往註冊</Link></p></div>
                 </div>
             </div>
@@ -156,7 +163,7 @@ function Signpage(props) {
                 </form>
                 <div>
                     <p className='sign_btn'>其他註冊</p>
-                    <button>使用 Facebook 註冊</button>
+                    {/* <button>使用 Facebook 註冊</button> */}
                     <div><p className='sign_btn'>已經有帳號嗎？</p> <p className='sign_btn'><Link to={"/signin"}>前往登入</Link></p></div>
                 </div>
             </div>

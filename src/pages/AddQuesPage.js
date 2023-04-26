@@ -38,6 +38,8 @@ function AddQuesPage() {
 
 
 
+
+
   console.log("a");
   useEffect(() => {
 
@@ -191,7 +193,8 @@ function AddQuesPage() {
   const saveQues = async () => {
     // console.log(serial);
 
-    const newAllQ = allQuestions.filter(ele => ele);
+    const newAllQ = allQuestions.filter(ele => ele).map((ele, index) => ({...ele, id: index+1}));;
+
     console.log(newAllQ);
     let newQuesType = {}
     console.log(newAllQ);

@@ -1,6 +1,7 @@
 import { doc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import infoicon from '../assets/info.png';
+import Swal from 'sweetalert2'
 
 
 // 帶入count(第幾題) 設定div id
@@ -14,6 +15,80 @@ function Question({ allQ, remove, done, doneC }) {
 
   let allQuestions = [];
   let allQueCD = [];
+
+  const QueG = ({ options, id, type }) => {
+    console.log("QueG:", options, id, type);
+
+    let tmp = (<>
+      <div className='rangeG' onClick={() => {
+
+        Swal.fire({
+          title: '輸入區間',
+          // <div  style="font-size:1rem;">userId:<p> ${userID}</p></div><br/>
+          html: `<hr/>
+          <div><span>最小值: </span><input type="number" id="range_min"} /></div><br/>
+          <div><span>最大值: </span><input type="number" id="range_max"} /></div><br/>
+          <div><span>間隔(不設定請留空): </span><input type="number" id="range_gap"} /></div>
+          `,
+          showCancelButton: true,
+          confirmButtonText: '確定',
+          cancelButtonText: '取消',
+          focusConfirm: false,
+          preConfirm: () => {
+            const rangeMin = document.querySelector('#range_min').value;
+            const rangeMax = document.querySelector('#range_max').value;
+            const rangeGap = document.querySelector('#range_gap').value;
+            // if (!lineID || !empNo) {
+            //   Swal.showValidationMessage(`Please enter lineID and empNo`)
+            // }
+            // return { lineID: lineID, empNo: empNo }
+            return { rangeMin: rangeMin, rangeMax: rangeMax, rangeGap: rangeGap }
+            // console.log(rangeMin,rangeMax,rangeGap);
+          }
+        }).then((result) => {
+          console.log(result.value);
+          console.log(id);
+          let rangeMin = result.value.rangeMin;
+          let rangeMax = result.value.rangeMax;
+          let rangeGap = result.value.rangeGap;
+
+          let thequec = options;
+          // console.log(thequec);
+          // if (thequec[id] == undefined) { thequec[id] = []; }
+          // if (thequec[id]['rangeMin'] == undefined) { thequec[id]['rangeMin'] = 1; thequec[id]['rangeMax'] = 100; thequec[id]['rangeGap'] = 1; }
+
+          rangeMin != '' ? thequec[id]['rangeMin'] = parseInt(rangeMin) : thequec[id]['rangeMin']=thequec[id]['rangeMin'];
+          rangeMax != '' ? thequec[id]['rangeMax'] = parseInt(rangeMax) : thequec[id]['rangeMax']=thequec[id]['rangeMax'];
+          rangeGap != '' ? thequec[id]['rangeGap'] = parseInt(rangeGap) : thequec[id]['rangeGap']=thequec[id]['rangeGap'];
+          // console.log(thequec[id]);
+
+
+          // thequec[ctitleid][coptionid] = e.target.value;
+          setOptions(thequec);
+
+          document.querySelector("#rangebar"+id).min=options[id]['rangeMin'];
+          document.querySelector("#rangebar"+id).max=options[id]['rangeMax'];
+          document.querySelector("#rangebar"+id).step=options[id]['rangeGap'];
+          document.querySelector("#rangebar_min"+id).innerText=options[id]['rangeMin'];
+          document.querySelector("#rangebar_max"+id).innerText=options[id]['rangeMax'];
+          document.querySelector("#range_min"+id).innerText=options[id]['rangeMin'];
+          document.querySelector("#range_max"+id).innerText=options[id]['rangeMax'];
+
+
+        })
+
+      }}>
+        <img src={infoicon} className='infoicon' />
+        <div>介於區間 <span id={'range_min'+id}>{options[id]['rangeMin']}</span> - <span id={'range_max'+id}>{options[id]['rangeMax']}</span></div>
+      </div>
+      
+      <span id={'rangebar_min'+id}>{options[id]['rangeMin']}</span>
+      <input id={'rangebar'+id} type='range' min={options[id]['rangeMin']} max={options[id]['rangeMax']} step={options[id]['rangeGap']} />
+      <span id={'rangebar_max'+id}>{options[id]['rangeMax']}</span>
+    </>);
+
+    return <div>{tmp}</div>
+  };
 
   const QueC = ({ options, count, id, type }) => {
     console.log(type);
@@ -180,19 +255,21 @@ function Question({ allQ, remove, done, doneC }) {
 
     //G 數字滑桿題
     if (allQ[i] == "G") {
+      let thequec = options;
+      // console.log(thequec);
+      if (thequec[id] == undefined) { thequec[id] = []; }
+      if (thequec[id]['rangeMin'] == undefined) { thequec[id]['rangeMin'] = 1; thequec[id]['rangeMax'] = 100; thequec[id]['rangeGap'] = 1; }
+
+      // <QueG options={options} id={id} type={"G"} />
       let oneQue = <div key={id} id={"qus" + id} className="qus">
         <input id={"GqueContent" + id} className="qus_titleG" type="text" placeholder='標題'
           onClick={() => { document.querySelector("#Gdone" + id).className = "Gdone" }} />
 
-        <p className='rangeG' onClick={() => { console.log("改區間!") }}>
-          <img src={infoicon} className='infoicon'/>
-          數字區間0-100
-        </p>
-        <input type='range' min='0' max='100' step='10' />
+        <QueG options={options} id={id} type={"G"} />
         <br />
         <div className='done'>
           <button id={"Gremove" + id} className="Gremove" onClick={remove}>刪除</button>
-          <button id={"Gdone" + id} className="Gdone" onClick={done}>完成</button>
+          <button id={"Gdone" + id} className="Gdone" onClick={(e) => { doneC(e, options[id]) }}>完成</button>  /////////////////////////////////////////////////////
         </div>
       </div>
       allQuestions.push(oneQue);
@@ -231,7 +308,7 @@ function Question({ allQ, remove, done, doneC }) {
 
 
     //J 日期題
-      // 要加入可以選起訖
+    // 要加入可以選起訖
     if (allQ[i] == "J") {
       let oneQue = <div key={id} id={"qus" + id} className="qus">
         <input id={"JqueContent" + id} className="qus_titleJ" type="text" placeholder='標題'
@@ -249,7 +326,7 @@ function Question({ allQ, remove, done, doneC }) {
 
 
 
-// /分隔線 矩陣題 星級題
+    // /分隔線 矩陣題 星級題
 
   }
 

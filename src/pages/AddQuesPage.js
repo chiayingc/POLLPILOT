@@ -88,6 +88,7 @@ function AddQuesPage() {
   };
 
   const doneC = async (e,options) => {
+    console.log('doneC');
     e.preventDefault();
     if(options){  ///////////如果有選項才繼續.... 這邊要再修改
     
@@ -98,9 +99,11 @@ function AddQuesPage() {
     // //這邊要加入判斷type 改變content內容
     let content = document.querySelector("#" + type + "queContent" + id).value;
     let option = options.filter(ele => ele.trim() !== '');
+    if(type=="G"){option=Object.values(options);;}
     // // console.log("#" + type + "queContent" + id);
     // if (content != '') {
-      let theQue = { id: id, type: type, queSerial: queSerial, content: content, options:option };   
+    let theQue = { id: id, type: type, queSerial: queSerial, content: content, options:option };
+
       if (theQue.id == "" || theQue.type == "" || theQue.queSerial == "" || theQue.content == "" || theQue.options == "") {
         console.log("empty");
         return;

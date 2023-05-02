@@ -54,10 +54,10 @@ function ResultPage() {
       if (allAnswers[0] != undefined && allAnswers[0] != null) {
         // let tmp=allAnswers.filter(ele => ele !== {});
         // console.log(tmp);
-  //03.06這邊要改 如果答案裡面有空值的要排除//
-        let tmp=allAnswers.filter(object=>Object.keys(object).length!=0);
-        allAnswers=tmp;
-        queSerials = Object.keys(allAnswers[0]);   
+        //03.06這邊要改 如果答案裡面有空值的要排除//
+        let tmp = allAnswers.filter(object => Object.keys(object).length != 0);
+        allAnswers = tmp;
+        queSerials = Object.keys(allAnswers[0]);
 
         allAns = [];
         allAnswers.forEach((obj) => {
@@ -87,8 +87,8 @@ function ResultPage() {
                 // console.log(allAns);
 
                 for (let i = 0; i < allQuestions.length; i++) {
-    //03.06 這邊要修改, B的回答是textarea 要再改
-                  if (allQuestions[i].type == "A" || allQuestions[i].type == "B" || allQuestions[i].type == "F" || allQuestions[i].type == "J" ) {
+                  //03.06 這邊要修改, B的回答是textarea 要再改
+                  if (allQuestions[i].type == "A" || allQuestions[i].type == "B" || allQuestions[i].type == "F" || allQuestions[i].type == "J") {
                     oneResult = [];
                     // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
                     for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
@@ -98,112 +98,124 @@ function ResultPage() {
 
                     aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
                       {/* 題號(要再看是否修改) */}
-                      <h4>{i+1}</h4>  
+                      <h4>{i + 1}</h4>
                       <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
                       {oneResult}
                     </div>
                     allContents.push(aResult);
                     key += 1;
                   }
-
-                  // if (allQuestions[i].type == "D") {
-                  //   console.log(allAns[allQuestions[i].queSerial]);
-                    
-                  // }
-                    if (allQuestions[i].type == "C" || allQuestions[i].type == "D") {
-                    oneResult = [];
+////
+                  if (allQuestions[i].type == "H" || allQuestions[i].type == "I") {
                     // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
-                  //這題的所有選項
-                    // let thealloptions=allQuestions[i].options;
-let count=new Array(allQuestions[i].options.length).fill(0);                  
-                    for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
-                  //這裡要改成計數    
 
-/////////////////////////////////////////////這個範圍內都要改掉///////////////////
-
-for(let k=0; k<allQuestions[i].options.length; k++){
-  // console.log(allAns[allQuestions[i].queSerial][j]);
-  if(allAns[allQuestions[i].queSerial][j]==k){
-    count[k]+=1;
-    
-    // console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
-  }
-
-    if (allQuestions[i].type == "D") {
-      // oneResult = [];
-      console.log("D"+allQuestions[i].options);
-count=new Array(allQuestions[i].options.length).fill(0);                  
-      for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
-    //這裡要改成計數    
-
-/////////////////////////////////////////////這個範圍內都要改掉///////////////////
-
-// for(let k=0; k<allQuestions[i].options.length; k++){
-
-for (let l = 0; l < allAns[allQuestions[i].queSerial][j].length; l++) {
-  if (allAns[allQuestions[i].queSerial][j][l] >= 0 && allAns[allQuestions[i].queSerial][j][l] < count.length) {
-    count[allAns[allQuestions[i].queSerial][j][l]]++;
-  }
-}
-
-// console.log(allAns[allQuestions[i].queSerial][j]);
-// if(allAns[allQuestions[i].queSerial][j]==k){
-// count[k]+=1;
-
-// console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
-console.log(count);
-}
-    }
-
-
-data = {
-  labels: allQuestions[i].options,
-  datasets: [
-    {
-      label: allQuestions[i].options[0],  //改內容
-
-      
-      data: count,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
-}
-
-
-/////////////////////////////////////////////這個範圍內都要改掉///////////////////
-
-        
-                      // let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allAns[allQuestions[i].queSerial][j]]}</p>;   
-                      let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]}</p>; 
-                      oneResult.push(oneAns);
-                    }
-console.log(count);
                     aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
                       {/* 題號(要再看是否修改) */}
-                      <h4>{i+1}</h4>  
+                      {/* <h4>{i + 1}</h4> */}
+                      <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
+                    </div>
+                    allContents.push(aResult);
+                    key += 1;
+                  }
+////
+                  // if (allQuestions[i].type == "D") {
+                  //   console.log(allAns[allQuestions[i].queSerial]);
+
+                  // }
+                  if (allQuestions[i].type == "C" || allQuestions[i].type == "D") {
+                    oneResult = [];
+                    // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
+                    //這題的所有選項
+                    // let thealloptions=allQuestions[i].options;
+                    let count = new Array(allQuestions[i].options.length).fill(0);
+                    for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
+                      //這裡要改成計數    
+
+                      /////////////////////////////////////////////這個範圍內都要改掉///////////////////
+
+                      for (let k = 0; k < allQuestions[i].options.length; k++) {
+                        // console.log(allAns[allQuestions[i].queSerial][j]);
+                        if (allAns[allQuestions[i].queSerial][j] == k) {
+                          count[k] += 1;
+
+                          // console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
+                        }
+
+                        if (allQuestions[i].type == "D") {
+                          // oneResult = [];
+                          console.log("D" + allQuestions[i].options);
+                          count = new Array(allQuestions[i].options.length).fill(0);
+                          for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
+                            //這裡要改成計數    
+
+                            /////////////////////////////////////////////這個範圍內都要改掉///////////////////
+
+                            // for(let k=0; k<allQuestions[i].options.length; k++){
+
+                            for (let l = 0; l < allAns[allQuestions[i].queSerial][j].length; l++) {
+                              if (allAns[allQuestions[i].queSerial][j][l] >= 0 && allAns[allQuestions[i].queSerial][j][l] < count.length) {
+                                count[allAns[allQuestions[i].queSerial][j][l]]++;
+                              }
+                            }
+
+                            // console.log(allAns[allQuestions[i].queSerial][j]);
+                            // if(allAns[allQuestions[i].queSerial][j]==k){
+                            // count[k]+=1;
+
+                            // console.log(allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]);
+                            console.log(count);
+                          }
+                        }
+
+
+                        data = {
+                          labels: allQuestions[i].options,
+                          datasets: [
+                            {
+                              label: allQuestions[i].options[0],  //改內容
+
+
+                              data: count,
+                              backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                              ],
+                              borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                              ],
+                              borderWidth: 1,
+                            },
+                          ],
+                        };
+                      }
+
+
+                      /////////////////////////////////////////////這個範圍內都要改掉///////////////////
+
+
+                      // let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allAns[allQuestions[i].queSerial][j]]}</p>;   
+                      let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allQuestions[i].options[allAns[allQuestions[i].queSerial][j]]}</p>;
+                      oneResult.push(oneAns);
+                    }
+                    console.log(count);
+                    aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
+                      {/* 題號(要再看是否修改) */}
+                      <h4>{i + 1}</h4>
                       <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
                       {/* {oneResult} */}
                       <div className='pie'>
-                      <Pie data={data} />
+                        <Pie data={data} />
                       </div>
-                      
+
                     </div>
 
 

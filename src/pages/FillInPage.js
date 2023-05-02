@@ -213,7 +213,9 @@ function FillInPage() {
         <div key={queData.queSerial} className='fillin_aque'>
           <div className='fillin_que'>{queData.content}</div>
           {/* 這裡要加入range大小(資料來源)跟間隔顯示、range樣式 */}
-          <input className='fillin_ans_range' type='range' min='0' max='100' step='10' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue='10' />  
+          <span>{queData.options[0]}</span>
+          <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} />  
+          <span>{queData.options[1]}</span>
         </div>
       // return aque;
       formcontents.push(aque);
@@ -279,6 +281,7 @@ function FillInPage() {
     Object.assign(tmpp, newAllAns);
     setSelectedValue(tmpp);
 
+    // console.log(selectedValue);
     // setSelectedValue[]
 
     // newAllAns[ansSerial] = [e.target.value];

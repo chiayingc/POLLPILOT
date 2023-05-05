@@ -66,6 +66,23 @@ function AddQuesPage() {
     let queSerial = Date.now().toString(36).slice(2, 8);
     let type = e.target.id.substr(0, 1);
     let id = e.target.id.replace(type+"done", "");
+    
+    if(type=="K"){
+      let theQue = { id: id, type: type, queSerial: queSerial };   //這邊要改成obj 不要用array
+      if (theQue.id == "" || theQue.type == "" || theQue.queSerial == "") {
+        return;
+      }
+      let newAllQues = allQuestions;
+      console.log("R:",newAllQues);
+      // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
+      newAllQues[id] = theQue;
+      console.log("N:",newAllQues);
+
+      setAllQuestions(newAllQues);
+      e.target.className = "noshow";
+      return;
+    
+    }
     //這邊要加入判斷type 改變content內容
     let content = document.querySelector("#" + type + "queContent" + id).value;
     // console.log("#" + type + "queContent" + id);
@@ -273,7 +290,7 @@ function AddQuesPage() {
             <button onClick={addQue} value={"B"}>多行文字</button>
             <button onClick={addQue} value={"C"}>單選題</button>
             <button onClick={addQue} value={"D"}>多選題</button>
-            <button onClick={addQue} value={"E"}>矩陣題</button>
+            {/* <button onClick={addQue} value={"E"}>矩陣題</button> */}
             <button onClick={addQue} value={"F"}>數字題</button>
             <button onClick={addQue} value={"G"}>數字滑桿</button>
             <button onClick={addQue} value={"H"}>引言</button>

@@ -88,7 +88,7 @@ function ResultPage() {
 
                 for (let i = 0; i < allQuestions.length; i++) {
                   //03.06 這邊要修改, B的回答是textarea 要再改
-                  if (allQuestions[i].type == "A" || allQuestions[i].type == "B" || allQuestions[i].type == "F" || allQuestions[i].type == "J") {
+                  if (allQuestions[i].type == "A" || allQuestions[i].type == "B" || allQuestions[i].type == "F" || allQuestions[i].type == "J" || allQuestions[i].type == "G") {
                     oneResult = [];
                     // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
                     for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答

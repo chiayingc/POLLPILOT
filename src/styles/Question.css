@@ -179,7 +179,8 @@
     .Gdone,
     .Hdone,
     .Idone,
-    .Jdone {
+    .Jdone,
+    .Kdone {
         cursor: pointer;
         background-color: #f7f0e9;
         color: #666;
@@ -199,7 +200,8 @@
     .Gdone:hover,
     .Hdone:hover,
     .Idone:hover,
-    .Jdone:hover {
+    .Jdone:hover,
+    .Kdone:hover {
         background-color: #e9e5e1;
     }
 
@@ -218,7 +220,8 @@
     .Gremove,
     .Hremove,
     .Iremove,
-    .Jremove {
+    .Jremove,
+    .Kremove {
         cursor: pointer;
         background-color: #e9e5e1;
         color: #666;
@@ -236,7 +239,8 @@
     .Gremove:hover,
     .Hremove:hover,
     .Iremove:hover,
-    .Jremove:hover {
+    .Jremove:hover,
+    .Kremove:hover {
         background-color: #f7f0e9;
     }
 

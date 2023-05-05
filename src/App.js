@@ -16,6 +16,7 @@ import { UserContext } from "./helper/Context";
 import Signpage from './pages/Signpage';
 import TestDB from "./pages/TestDB";
 import Quiz from "./pages/Quiz";
+import ClosePage from "./pages/ClosePage";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/result/:result" element={<ResultPage />} />
                     <Route path="/signup" element={<Signpage sign={"signup"} />} />
                     <Route path="/signin" element={<Signpage sign={"signin"} />} />
+                    <Route path="/close" element={<ClosePage />} />
                     {/* <Route path="/test" element={<Signpage />} /> */}
                     {/* 測試資料庫 */}
                     {/* <Route path="/testDB" element={<TestDB />} /> */}

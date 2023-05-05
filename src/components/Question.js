@@ -2,6 +2,7 @@ import { doc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import infoicon from '../assets/info.png';
 import Swal from 'sweetalert2'
+import ColoredLine from '../components/ColoredLine'
 
 
 // 帶入count(第幾題) 設定div id
@@ -326,7 +327,20 @@ function Question({ allQ, remove, done, doneC }) {
 
 
 
-    // /分隔線 矩陣題 星級題
+    // /分隔線 
+    if (allQ[i] == "K") {
+      let oneQue = <div key={id} id={"qus" + id} className="qus">
+        <ColoredLine color={'#666'}/>
+        <br />
+        <div className='done'>
+          <button id={"Kremove" + id} className="Kremove" onClick={remove}>刪除</button>
+          <button id={"Kdone" + id} className="Kdone" onClick={done}>完成</button>
+        </div>
+      </div>
+      allQuestions.push(oneQue);
+    }
+    
+    //矩陣題 星級題
 
   }
 

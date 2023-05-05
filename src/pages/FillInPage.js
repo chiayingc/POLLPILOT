@@ -6,6 +6,7 @@ import { doc, collection, setDoc, getDoc, query, where, onSnapshot } from 'fireb
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { render } from 'react-dom'
+import ColoredLine from '../components/ColoredLine'
 
 
 function FillInPage() {
@@ -88,8 +89,15 @@ function FillInPage() {
           .then((data) => {
             setSurveySettings(surveySetting);
             setSurveyQues(data.data().questions);
+            console.log(surveySetting[1]);
+
+            if(surveySetting[1].status==2){
+              console.log("問卷關閉中");
+              navigate("/close");
+            }
           });
       });
+    
   }, []);
 
 
@@ -256,6 +264,19 @@ function FillInPage() {
       formcontents.push(aque);
     }
 
+    //K 分隔線
+    if (queData.type == "K") {
+      let aque =
+        <div key={queData.queSerial} className='fillin_aque'>
+          <ColoredLine color={'#666'}/>
+        </div>
+      // return aque;
+      formcontents.push(aque);
+    }
+
+
+
+    
     
 
 
@@ -323,7 +344,7 @@ function FillInPage() {
 
   return (
     <div id='fillinpage'>
-      <Navbar type={4} />
+      <Navbar type={4} />newnew
       <div className='fillin_questions'>
         {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
       </div>

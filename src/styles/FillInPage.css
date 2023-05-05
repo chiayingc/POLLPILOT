@@ -21,6 +21,16 @@
         overflow-y: auto;
     }
 
+    .survey_title_left{
+        justify-self: left;
+    }
+    .survey_title_center{
+        justify-self: center;
+    }
+    .survey_title_right{
+        justify-self: right;
+    }
+
     .fillin_aque {
         width: 80%;
         display: grid;

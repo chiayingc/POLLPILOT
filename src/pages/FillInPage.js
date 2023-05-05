@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { render } from 'react-dom'
 import ColoredLine from '../components/ColoredLine'
+import Swal from 'sweetalert2'
 
 
 function FillInPage() {
@@ -75,6 +76,7 @@ function FillInPage() {
   let newAllAns = {};
   const [surveyQues, setSurveyQues] = useState([]);  //記錄所有題目內容
   const [surveySettings, setSurveySettings] = useState([]);
+  const [checkPassword, setCheckPassword] = useState(false);
 
 
   useEffect(() => {
@@ -91,13 +93,16 @@ function FillInPage() {
             setSurveyQues(data.data().questions);
             console.log(surveySetting[1]);
 
-            if(surveySetting[1].status==2){
+            if (surveySetting[1].status == 2) {
               console.log("問卷關閉中");
               navigate("/close");
             }
+            if (surveySetting[1].status == 0) {
+              setCheckPassword(true);
+            }
           });
       });
-    
+
   }, []);
 
 
@@ -131,27 +136,27 @@ function FillInPage() {
       <div className='anoption' >
         {/* <div> */}
 
-          {/* 這個寫法是多選題的~~~~ 要改成type D */}
-          <input id={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}
-            type='radio'
-            name={props.type == "C" ? 'quec' + props.id : 'qued' + props.id + '_' + props.index}
-            // className='cd_radio_radio'
-            value={props.index}
-            checked={
-              checkedList[serial] && checkedList[serial][index] !== undefined ? checkedList[serial][index] : false}  //判斷原本有沒有在裡面 沒有的話才checked
-            onChange={() => {
-              // console.log(selectedValue);
-            }}
-            onClick={(e) => {
-              props.type == "C" ? handleOptionChange(serial, index) : handleDOptionChange(serial, index);
+        {/* 這個寫法是多選題的~~~~ 要改成type D */}
+        <input id={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}
+          type='radio'
+          name={props.type == "C" ? 'quec' + props.id : 'qued' + props.id + '_' + props.index}
+          // className='cd_radio_radio'
+          value={props.index}
+          checked={
+            checkedList[serial] && checkedList[serial][index] !== undefined ? checkedList[serial][index] : false}  //判斷原本有沒有在裡面 沒有的話才checked
+          onChange={() => {
+            // console.log(selectedValue);
+          }}
+          onClick={(e) => {
+            props.type == "C" ? handleOptionChange(serial, index) : handleDOptionChange(serial, index);
 
-              // let v=  document.querySelector('[name="'+tmp+'"]').value;
-              // let v=  document.querySelector("#"+tmp).value;
-              // console.log(v);
-            }}
-          />
-          <label htmlFor={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}></label>
-          <p className='fillin_option'>{props.option}</p>
+            // let v=  document.querySelector('[name="'+tmp+'"]').value;
+            // let v=  document.querySelector("#"+tmp).value;
+            // console.log(v);
+          }}
+        />
+        <label htmlFor={props.type == "C" ? 'cradio' + props.id + "_" + props.index : 'dradio' + props.index}></label>
+        <p className='fillin_option'>{props.option}</p>
         {/* </div> */}
       </div>
     return <div>
@@ -222,7 +227,7 @@ function FillInPage() {
           <div className='fillin_que'>{queData.content}</div>
           {/* 這裡要加入range大小(資料來源)跟間隔顯示、range樣式 */}
           <span>{queData.options[0]}</span>
-          <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} />  
+          <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} />
           <span>{queData.options[1]}</span>
         </div>
       // return aque;
@@ -268,7 +273,7 @@ function FillInPage() {
     if (queData.type == "K") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <ColoredLine color={'#666'}/>
+          <ColoredLine color={'#666'} />
         </div>
       // return aque;
       formcontents.push(aque);
@@ -276,8 +281,8 @@ function FillInPage() {
 
 
 
-    
-    
+
+
 
 
     return formcontents
@@ -342,13 +347,48 @@ function FillInPage() {
       }).catch(() => { console.log("fail") });
   }
 
+  const passwordCheck=()=>{
+    console.log(document.querySelector("#input_password").value);
+    console.log(surveySettings[1].key);
+    if(document.querySelector("#input_password").value==surveySettings[1].key){
+      setCheckPassword(true);
+    }
+    else{
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: '密碼錯誤',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  }
+
+  let talign=['left','center','right']; 
+
   return (
     <div id='fillinpage'>
-      <Navbar type={4} />newnew
+      <Navbar type={4} />
+      {!checkPassword ?  
       <div className='fillin_questions'>
-        {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
+        <div >
+          test
+        </div>
+        <input type='text' id='input_password'/>
+        <button onClick={passwordCheck} id='btn_fillin'>密碼</button>
       </div>
-      <button onClick={fillin} id='btn_fillin'>送出問卷</button>
+      : 
+      <div className='fillin_questions'>
+        <h3 className={'survey_title_'+talign[surveySettings[1]?surveySettings[1].titleAlign:0]}>{surveySettings[1]?surveySettings[1].name:''}</h3>
+        <div>
+          {surveySettings[1]?surveySettings[1].welcomeText:''}
+        </div>
+        <div>
+          {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
+        </div>
+        <button onClick={fillin} id='btn_fillin'>送出問卷</button>
+      </div>}
+
 
       {/* <div>{surveySetting.welcomeText}</div>
       <div id='fillinpage_questions'>

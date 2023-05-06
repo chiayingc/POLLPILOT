@@ -270,7 +270,7 @@ function Question({ allQ, remove, done, doneC }) {
         <br />
         <div className='done'>
           <button id={"Gremove" + id} className="Gremove" onClick={remove}>刪除</button>
-          <button id={"Gdone" + id} className="Gdone" onClick={(e) => { doneC(e, options[id]) }}>完成</button>  /////////////////////////////////////////////////////
+          <button id={"Gdone" + id} className="Gdone" onClick={(e) => { doneC(e, options[id]) }}>完成</button>
         </div>
       </div>
       allQuestions.push(oneQue);

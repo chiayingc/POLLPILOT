@@ -45,6 +45,20 @@
     .survey_title_right{
         justify-self: right;
     }
+
+    .quenum{
+        margin-right: 5px;
+    }
+
+    .rangebar{
+        display: grid;
+        grid-template-columns: 1rem 3fr 1rem;
+        column-gap: 5px;
+    }
+
+    .fillin_ans_range{
+        cursor: pointer;
+    }
     
 
     .fillin_aque {

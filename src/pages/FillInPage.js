@@ -173,8 +173,8 @@ function FillInPage() {
     if (queData.type == "A") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{queData.content}</div>
-          <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} placeholder={queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       // return aque;
       formcontents.push(aque);
@@ -183,9 +183,9 @@ function FillInPage() {
     if (queData.type == "B") {
       let bque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
           {/* className要改 */}
-          <textarea type="text" className='qus_title_inputB' id={"ans" + queData.queSerial} placeholder={queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
+          <textarea type="text" className='qus_title_inputB' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       formcontents.push(bque);
     }
@@ -203,7 +203,7 @@ function FillInPage() {
 
       let cque =
         <div key={queData.id} className='fillin_aque'>
-          <div className='fillin_que'>{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
           {queData.options.map((item, index) => <Options key={index} option={item} id={queData.id} serial={queData.queSerial} index={index} type={queData.type} />)}
         </div>
       formcontents.push(cque);
@@ -213,7 +213,7 @@ function FillInPage() {
     if (queData.type == "F") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
           <input type="number" className='fillin_ans_num' id={"ans" + queData.queSerial} placeholder="請輸入數字" onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       // return aque;
@@ -224,11 +224,13 @@ function FillInPage() {
     if (queData.type == "G") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
           {/* 這裡要加入range大小(資料來源)跟間隔顯示、range樣式 */}
-          <span>{queData.options[0]}</span>
-          <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} />
-          <span>{queData.options[1]}</span>
+          <div className='rangebar'>
+            <span>{queData.options[0]}</span>
+            <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} />
+            <span>{queData.options[1]}</span>
+          </div>
         </div>
       // return aque;
       formcontents.push(aque);
@@ -261,7 +263,8 @@ function FillInPage() {
     if (queData.type == "J") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{queData.content}</div>
+
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
           {/* 這邊要補預設日期 */}
           <input type="date" className='fillin_ans_date' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue="" />
         </div>
@@ -347,13 +350,13 @@ function FillInPage() {
       }).catch(() => { console.log("fail") });
   }
 
-  const passwordCheck=()=>{
+  const passwordCheck = () => {
     console.log(document.querySelector("#input_password").value);
     console.log(surveySettings[1].key);
-    if(document.querySelector("#input_password").value==surveySettings[1].key){
+    if (document.querySelector("#input_password").value == surveySettings[1].key) {
       setCheckPassword(true);
     }
-    else{
+    else {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -364,30 +367,30 @@ function FillInPage() {
     }
   }
 
-  let talign=['left','center','right']; 
+  let talign = ['left', 'center', 'right'];
 
   return (
     <div id='fillinpage'>
       <Navbar type={4} />
-      {!checkPassword ?  
-      <div className='fillin_questions'>
-        <div className='fillin_askkey'>
-          此問卷需要密碼才能填寫, 請輸入問卷密碼
+      {!checkPassword ?
+        <div className='fillin_questions'>
+          <div className='fillin_askkey'>
+            此問卷需要密碼才能填寫, 請輸入問卷密碼
+          </div>
+          <input type='password' id='input_password' />
+          <button onClick={passwordCheck} id='btn_fillin'>確認</button>
         </div>
-        <input type='text' id='input_password'/>
-        <button onClick={passwordCheck} id='btn_fillin'>確認</button>
-      </div>
-      : 
-      <div className='fillin_questions'>  
-        <div>
-          {surveySettings[1]?surveySettings[1].welcomeText:''}
-        </div>
-        <h3 className={'survey_title_'+talign[surveySettings[1]?surveySettings[1].titleAlign:0]}>{surveySettings[1]?surveySettings[1].name:''}</h3>
-        {/* <div> */}
+        :
+        <div className='fillin_questions'>
+          <div>
+            {surveySettings[1] ? surveySettings[1].welcomeText : ''}
+          </div>
+          <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
+          {/* <div> */}
           {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
-        {/* </div> */}
-        <button onClick={fillin} id='btn_fillin'>送出問卷</button>
-      </div>}
+          {/* </div> */}
+          <button onClick={fillin} id='btn_fillin'>送出問卷</button>
+        </div>}
 
 
       {/* <div>{surveySetting.welcomeText}</div>

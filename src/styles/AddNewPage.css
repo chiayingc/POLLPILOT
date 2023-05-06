@@ -59,8 +59,19 @@
         row-gap: 10px;
     }
 
-    #addnewpage_addtitle>input {
+    #addnewpage_addtitle>input{
         font-size: .9em;
+        padding: .2rem .6rem;
+        background-color: inherit;
+        border: solid rgb(193, 193, 193);
+        border-width: 0px 0px 1px 0px;
+        width: 90%;
+    }
+
+    #setKey{
+        display: none;
+        margin-top: 10px;
+        font-size: .7em;
         padding: .2rem .6rem;
         background-color: inherit;
         border: solid rgb(193, 193, 193);

@@ -371,21 +371,21 @@ function FillInPage() {
       <Navbar type={4} />
       {!checkPassword ?  
       <div className='fillin_questions'>
-        <div >
-          test
+        <div className='fillin_askkey'>
+          此問卷需要密碼才能填寫, 請輸入問卷密碼
         </div>
         <input type='text' id='input_password'/>
-        <button onClick={passwordCheck} id='btn_fillin'>密碼</button>
+        <button onClick={passwordCheck} id='btn_fillin'>確認</button>
       </div>
       : 
-      <div className='fillin_questions'>
-        <h3 className={'survey_title_'+talign[surveySettings[1]?surveySettings[1].titleAlign:0]}>{surveySettings[1]?surveySettings[1].name:''}</h3>
+      <div className='fillin_questions'>  
         <div>
           {surveySettings[1]?surveySettings[1].welcomeText:''}
         </div>
-        <div>
+        <h3 className={'survey_title_'+talign[surveySettings[1]?surveySettings[1].titleAlign:0]}>{surveySettings[1]?surveySettings[1].name:''}</h3>
+        {/* <div> */}
           {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
-        </div>
+        {/* </div> */}
         <button onClick={fillin} id='btn_fillin'>送出問卷</button>
       </div>}
 

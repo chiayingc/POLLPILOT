@@ -13,7 +13,7 @@ function AddNewPage() {
     const { state } = useLocation();
     const userData = state;
     const { user, setUser } = useContext(UserContext);
-    let surveyTitle = "未命名問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creater;
+    let surveyTitle = "未命名問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creator;
     let surveyStatus = 0, surveyTitleAlign = 0;
     let surveyShowNum = true;
 
@@ -150,15 +150,18 @@ function AddNewPage() {
                         <h4>問卷狀態</h4>
                         <select onChange={(e) => {
                             let status = 0;
-                            if (e.target.value == "公開") { status = 0 };
-                            if (e.target.value == "密碼保護") { status = 1 };
-                            if (e.target.value == "關閉") { status = 2 };
+                            if (e.target.value == "公開") { status = 0; document.querySelector("#setKey").style.display="none"; surveyKey="";};
+                            if (e.target.value == "密碼保護") { status = 1; document.querySelector("#setKey").style.display="block"; };
+                            if (e.target.value == "關閉") { status = 2; document.querySelector("#setKey").style.display="none"; surveyKey=""; };
                             surveyStatus = status;
                         }}>
                             <option>公開</option>
                             <option>密碼保護</option>
                             <option>關閉</option>
                         </select>
+                        <div>
+                            <input type='text' id='setKey' placeholder='密碼' onChange={(e)=>{surveyKey=e.target.value;}}/>
+                        </div>
                     </div>
                     <div id='num_desplay'>
                         <h4>題號顯示</h4>

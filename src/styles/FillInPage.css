@@ -11,7 +11,7 @@
         row-gap: 30px;
     }
 
-    .fillin_questions {
+    .fillin_questions{
         width: 50%;
         display: grid;
         justify-items: center;
@@ -19,6 +19,21 @@
         row-gap: 40px;
         max-height: calc(80vh - 120px);
         overflow-y: auto;
+    }
+
+    #input_password{
+        margin-top: 10px;
+        font-size: .7em;
+        padding: .2rem .6rem;
+        background-color: inherit;
+        border: solid rgb(193, 193, 193);
+        border-width: 0px 0px 1px 0px;
+        width: 30%;
+    }
+
+    .fillin_askkey{
+        font-size: .8rem;
+        font-weight: 700;
     }
 
     .survey_title_left{
@@ -30,6 +45,7 @@
     .survey_title_right{
         justify-self: right;
     }
+    
 
     .fillin_aque {
         width: 80%;

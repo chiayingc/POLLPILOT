@@ -1,12 +1,12 @@
 body > div{
     width: 100%;
-    background-color: #EEE;
-    height: 100vh;
+    /* background-color: #EEE; */
 }
 
 #closepage{
     align-self: center;
-    background-color: #FAFAFA;
+    background-color: #fff;
+    margin-top: calc(50vh - 125px);
     margin-bottom: 2px;
     padding: 30px;
     height: 50px;

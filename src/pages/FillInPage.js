@@ -97,7 +97,7 @@ function FillInPage() {
               console.log("問卷關閉中");
               navigate("/close");
             }
-            if (surveySetting[1].status == 0) {
+            if (surveySetting[1].status == 1) {
               setCheckPassword(true);
             }
           });
@@ -372,7 +372,7 @@ function FillInPage() {
   return (
     <div id='fillinpage'>
       <Navbar type={4} />
-      {!checkPassword ?
+      {checkPassword ?
         <div className='fillin_questions'>
           <div className='fillin_askkey'>
             此問卷需要密碼才能填寫, 請輸入問卷密碼

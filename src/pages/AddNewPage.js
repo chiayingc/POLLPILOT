@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import '../styles/AddNewPage.css'
 import Navbar from '../components/Navbar.js'
 import ColoredLine from '../components/ColoredLine.js'
-import { UserContext } from '../helper/Context'
+import { UserContext } from '../helper/UserContext'
 import { auth, db } from '../../firebase-config.js'
 import { doc, collection, addDoc, setDoc, getDoc, QuerySnapshot } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -13,7 +13,7 @@ function AddNewPage() {
     const { state } = useLocation();
     const userData = state;
     const { user, setUser } = useContext(UserContext);
-    let surveyTitle = "未命名問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creator;
+    let surveyTitle = "無標題問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creator;
     let surveyStatus = 0, surveyTitleAlign = 0;
     let surveyShowNum = true;
 
@@ -73,7 +73,8 @@ function AddNewPage() {
                     <div id='addnewpage_addtitle'>
                         <h4>問卷名稱</h4>
                         <input type="text" placeholder="無標題問卷"
-                            onChange={(e) => { if (surveyTitle != "") { surveyTitle = e.target.value; } }} />
+                            onChange={(e) => { if (e.target.value != "") { surveyTitle = e.target.value; } }} />
+                            {/* onChange={(e) => { if (surveyTitle != "") { surveyTitle = e.target.value; } }} /> */}
                     </div>
                     <div id='title_style'>
                         <h4>問卷標題設定</h4>

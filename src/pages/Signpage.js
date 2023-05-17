@@ -12,10 +12,10 @@ import {
     signInWithPopup,
     onAuthStateChanged,
 } from 'firebase/auth'
-import { UserContext } from '../helper/Context'
+import { UserContext } from '../helper/UserContext'
 
 function Signpage(props) {
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     let userName, signinEmail, signupEmail, signinPassword, signupPassword;
     const [errorHint, setErrorHint] = useState("");
     const navigate = useNavigate();
@@ -100,6 +100,8 @@ function Signpage(props) {
     const signingoogle = ()=>{
         signInWithPopup(auth, provider).then((data)=>{
             localStorage.setItem("email",data.user.email);
+            const guser = data.user;
+            console.log(guser.uid);
         });
     }
 

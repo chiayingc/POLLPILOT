@@ -194,7 +194,7 @@
 
     .survey_name {
         /* width: calc(100% - 4px); */
-        width: calc(100% - 1px);
+        width: calc(100% - 10px);
         /* padding: 3px; */
         padding-left: 13px;
         /* word-wrap: break-word; */

@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
   signOut
 } from 'firebase/auth'
-import { UserContext } from '../helper/UserContext'
+import { UserContext } from '../helper/Context'
 
 
 function Navbar(props) {

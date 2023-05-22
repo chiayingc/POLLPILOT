@@ -11,7 +11,7 @@ import ReleasePage from "./pages/ReleasePage";
 import FillInPage from "./pages/FillInPage";
 import ThanksPage from "./pages/ThanksPage";
 import ResultPage from "./pages/ResultPage";
-// import { UserContext } from "./helper/Context";
+import { UserContext } from "./helper/Context";
 
 import Signpage from './pages/Signpage';
 import TestDB from "./pages/TestDB";
@@ -26,7 +26,7 @@ function App() {
     return (
         <div>
             {/* <Navbar/> */}
-            {/* <UserContext.Provider value={{ user, setUser }}> */}
+            <UserContext.Provider value={{ user, setUser }}>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/dashboard" element={<DashBoardPage />} />
@@ -44,7 +44,7 @@ function App() {
                     {/* <Route path="/testDB" element={<TestDB />} /> */}
                     <Route path="/test" element={<Quiz />} />
                 </Routes>
-            {/* </UserContext.Provider> */}
+            </UserContext.Provider>
         </div>
     );
 }

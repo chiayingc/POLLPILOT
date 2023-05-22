@@ -7,14 +7,13 @@ import {
   onAuthStateChanged
 } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserContext } from '../helper/UserContext'
+import { UserContext } from '../helper/Context'
 import share from '../assets/share.png'
 import edit from '../assets/edit.png'
 
 
 function DashBoardPage() {
-  // const { user, setUser } = useContext(UserContext);
-  const{user}=useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [surveyList, setSurveyList] = useState([]);
   const [userData, setuserData] = useState([]);
@@ -22,13 +21,10 @@ function DashBoardPage() {
   let userdata = [];
 
   useEffect(() => {
-    
-    console.log("testContext:", user);
-
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         useruid = currentUser.uid;
-
+                                  
         const getUser = doc(db, "users", useruid);
         await getDoc(getUser)
           .then((data) => {

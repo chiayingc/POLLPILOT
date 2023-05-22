@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../styles/ResultPage.css'
-import { UserContext } from '../helper/UserContext'
+import { UserContext } from '../helper/Context'
 import { auth, db } from '../../firebase-config.js'
 import { doc, collection, addDoc, setDoc, getDoc, arrayUnion, onSnapshot, query, where } from 'firebase/firestore'
 import { useLocation, useNavigate } from 'react-router-dom'

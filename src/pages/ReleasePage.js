@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../helper/UserContext'
+import { UserContext } from '../helper/Context'
 import Navbar from '../components/Navbar'
 import '../styles/ReleasePage.css'
 import { useLocation } from 'react-router-dom'

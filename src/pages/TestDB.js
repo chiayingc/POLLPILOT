@@ -9,10 +9,10 @@ import {
     createUserWithEmailAndPassword,
     onAuthStateChanged
 } from 'firebase/auth'
-import { UserContext } from '../helper/UserContext'
+import { UserContext } from '../helper/Context'
 
 function TestDB() {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(Context);
     const [userName, setUserName] = useState("");
 
     let uid;

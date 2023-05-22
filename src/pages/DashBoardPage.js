@@ -17,6 +17,7 @@ function DashBoardPage() {
   const navigate = useNavigate();
   const [surveyList, setSurveyList] = useState([]);
   const [userData, setuserData] = useState([]);
+  const [condition, setCondition] = useState([0,1,2]);
   let useruid = "";
   let userdata = [];
 
@@ -24,7 +25,7 @@ function DashBoardPage() {
     onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         useruid = currentUser.uid;
-                                  
+
         const getUser = doc(db, "users", useruid);
         await getDoc(getUser)
           .then((data) => {
@@ -37,8 +38,10 @@ function DashBoardPage() {
         setuserData(userdata);
 
         const surveys = collection(db, "surveys");
-        const userSurveys = query(surveys, where("creater", "==", userdata[3]));
-        const test = onSnapshot(
+        const userSurveys = query(surveys, 
+                                  where("creater", "==", userdata[3]),
+                                  where("Settings.status", "in", condition));
+        const getdata = onSnapshot(
           userSurveys, (snapshot) => {
             let surveyList = [];
             snapshot.forEach((doc) => {
@@ -46,19 +49,22 @@ function DashBoardPage() {
               //let version=doc.data().version; // 編輯問卷時要用版本
               // console.log(settings); //doc.data()  ->所有問卷內容 ;   doc.id ->所有問卷名稱
               surveyList.push({ ...settings, id: doc.id, name: settings.name, serial: settings.serial, showNum: settings.showNum, status: settings.status, thanksText: settings.thanksText, welcomeText: settings.welcomeText, key: settings.key });
+              surveyList.filter((survey)=>{condition.includes(survey.status);});
             });
+            // console.log(condition);
+            // console.log(surveyList);
             if (surveyList == '') {
               const userSurveys = document.querySelector("#user_surveys");
               userSurveys.className = "user_surveys_hide";
             }
             setSurveyList(surveyList);
           });
-        return test
+        return getdata
       } else {
         navigate("/signin");
       }
     });
-  }, []);
+  }, [condition]);
 
 
   function Survey(props) {
@@ -79,6 +85,25 @@ function DashBoardPage() {
       </div>
     return thesur;
 
+  }
+  
+  function handleSelectChanged(status){
+    // console.log("e:",e);
+    switch (status){
+      case "all":
+        setCondition([0,1,2]);
+        break;
+      case "open":
+        setCondition([0]);
+        break;
+      case "key":
+        setCondition([1]);
+        break;
+      case "close":
+        setCondition([2]);
+        break;
+    }
+    // console.log(condition);
   }
 
 
@@ -101,12 +126,14 @@ function DashBoardPage() {
         <div id='dashboardpage_main_right'>
           <p id='dashboard_title'>我的問卷</p>
           <div id='dashboard_arrangement'>
-            {/* <select>
-              <option>
-                全部狀態
-              </option>
+            <select defaultValue="all" onChange={(e)=>{handleSelectChanged(e.target.value)}}>
+              <option value="all" disabled>問卷狀態</option>
+              <option value="all">全部</option>
+              <option value="open">開放</option>
+              <option value="key">密碼</option>
+              <option value="close">關閉</option>
             </select>
-            <select>
+            {/* <select>
               <option>
                 最新建立日期
               </option>
@@ -137,7 +164,7 @@ function DashBoardPage() {
           </div>
 
           <div id='user_surveys' className='user_surveys'>
-            {surveyList.map((sur, index) => <Survey key={index} id={sur.id} name={sur.name} serial={sur.serial} />)}
+            {surveyList.map((sur, index) => <Survey key={index} id={sur.id} name={sur.name} serial={sur.serial} condition={condition} />)}
           </div>
 
 

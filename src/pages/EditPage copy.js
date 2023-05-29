@@ -15,7 +15,7 @@ import Swal from 'sweetalert2'
 import EditQuestion from '../components/EditQuestion'
 
 function EditPage() {
-    // console.log("Edit");
+    console.log("Edit");
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const state = useLocation();
@@ -30,13 +30,11 @@ function EditPage() {
     const [surveyQues, setSurveyQues] = useState([]);  //記錄所有題目內容?
 
     let oldVersion;
-    let currentVersion;
-    const [newVersion, setNewVersion]=useState();
     let surveySettings;
 
     useEffect(() => {
         // console.log("pathname:",state.pathname.replace("/edit/",""));
-        // console.log(serial);
+        console.log(serial);
 
         onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
@@ -46,26 +44,21 @@ function EditPage() {
                 const getVersion = doc(db, "surveys", serial);
                 await getDoc(getVersion)
                     .then((data) => {
-                        // console.log(data.data());
+                        console.log(data.data());
                         // console.log(Object.values(data.data().questionsType));
                         setAllQues(Object.values(data.data().questionsType));
                         oldVersion = data.data().version;
-                        // console.log(oldVersion);
-                        currentVersion = parseInt(oldVersion) + 1;
-                        setNewVersion(currentVersion);
                         // surveySettings=data.data().Settings;
-                        // console.log("version::", currentVersion);
+                        console.log("version::", oldVersion);
                         // console.log("settings::",surveySettings);
                     });
 
                 //取得目前的題目
                 const getQues = doc(db, "surveys", serial, "questions", "version" + oldVersion);
-                // console.log(oldVersion);
                 await getDoc(getQues)
                     .then((data) => {
-                        // console.log(data.data().questions);
+                        console.log(data.data().questions);
                         setAllQuestions(data.data().questions);
-                        setQueCount(data.data().questions.length);
                     });
 
 
@@ -74,10 +67,9 @@ function EditPage() {
             }
         });
     }, []);
-    ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
     /////////////////
-
 
 
     const done = async (e) => {
@@ -92,10 +84,10 @@ function EditPage() {
                 return;
             }
             let newAllQues = allQuestions;
-            // console.log("R:", newAllQues);
+            console.log("R:", newAllQues);
             // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
             newAllQues[id] = theQue;
-            // console.log("N:", newAllQues);
+            console.log("N:", newAllQues);
 
             setAllQuestions(newAllQues);
             e.target.className = "noshow";
@@ -111,10 +103,10 @@ function EditPage() {
                 return;
             }
             let newAllQues = allQuestions;
-            // console.log("R:", newAllQues);
+            console.log("R:", newAllQues);
             // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
             newAllQues[id] = theQue;
-            // console.log("N:", newAllQues);
+            console.log("N:", newAllQues);
 
             setAllQuestions(newAllQues);
             // document.querySelector("#" + type + "remove" + id).className="Aremove";
@@ -124,39 +116,38 @@ function EditPage() {
     };
 
     const doneC = async (e, options) => {
-        // console.log('doneC');
+        console.log('doneC');
         e.preventDefault();
         if (options) {  ///////////如果有選項才繼續.... 這邊要再修改
-            // console.log(options);
+
             let queSerial = Date.now().toString(36).slice(2, 8);
             let type = e.target.id.substr(0, 1);
             let id = e.target.id.replace(type + "done", "");
-            // console.log(id, type);
+            console.log(id, type);
             // //這邊要加入判斷type 改變content內容
             let content = document.querySelector("#" + type + "queContent" + id).value;
-            let option;
-            if (type != "G") { option = options.filter(ele => ele.trim() !== ''); }
+            let option = options.filter(ele => ele.trim() !== '');
             if (type == "G") { option = Object.values(options);; }
             // // console.log("#" + type + "queContent" + id);
             // if (content != '') {
             let theQue = { id: id, type: type, queSerial: queSerial, content: content, options: option };
 
             if (theQue.id == "" || theQue.type == "" || theQue.queSerial == "" || theQue.content == "" || theQue.options == "") {
-                // console.log("empty");
+                console.log("empty");
                 return;
             }
             let newAllQues = allQuestions;
-            // console.log("R:", newAllQues);
+            console.log("R:", newAllQues);
             //   // newAllQues[e.target.id.replace("Adone", "")] = theQue; ////////////////
             newAllQues[id] = theQue;
-            // console.log("N:", newAllQues);
+            console.log("N:", newAllQues);
 
             setAllQuestions(newAllQues);
             //   // document.querySelector("#" + type + "remove" + id).className="Aremove";
 
             // }
             e.target.className = "noshow";
-            // console.log(e.target.id);
+            console.log(e.target.id);
         }
     };
 
@@ -172,7 +163,7 @@ function EditPage() {
         // else {
 
 
-        // console.log(1, allQuestions);
+        console.log(1, allQuestions);
         let tmp = allQuestions;
         // if(type=="A" || type=="B"){tmp[eid] = '';}
         // if(type=="C"){tmp[eid]=}
@@ -198,7 +189,7 @@ function EditPage() {
 
                 document.querySelector("#qus" + eid).className = 'noshow';
                 setAllQuestions(tmp);
-                // console.log(3, allQuestions);
+                console.log(3, allQuestions);
                 // console.log(1,allQuestions);
                 // // let tmp=allQuestions;
                 // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
@@ -231,15 +222,13 @@ function EditPage() {
     }
 
     const saveQues = async () => {
-
-        console.log(newVersion);
         // console.log(serial);
 
         const newAllQ = allQuestions.filter(ele => ele).map((ele, index) => ({ ...ele, id: index + 1 }));;
 
-        // console.log(newAllQ);
+        console.log(newAllQ);
         let newQuesType = {}
-        // console.log(newAllQ);
+        console.log(newAllQ);
 
         for (let i = 0; i < newAllQ.length; i++) {
             newQuesType[newAllQ[i].queSerial] = newAllQ[i].type;
@@ -248,17 +237,16 @@ function EditPage() {
 
 
         // //如果是編輯問卷, 這邊Version版本要改!
-        const setQues = doc(db, "surveys", serial, "questions", "version"+newVersion);
+        const setQues = doc(db, "surveys", serial, "questions", "version1");
         await setDoc(setQues, {
-            questions: newAllQ,
-            questionsType: newQuesType
+            questions: newAllQ
         }, { merge: true })
             .then(async () => {
-                // console.log("success");
+                console.log("success");
                 const setVersion = doc(db, "surveys", serial);
                 await setDoc(setVersion, {
-                    // questionsType: newQuesType,
-                    version: newVersion    //如果是編輯問卷, 這邊Version版本要改!
+                    questionsType: newQuesType,
+                    version: 1    //如果是編輯問卷, 這邊Version版本要改!
                 }, { merge: true }).then(() => {
                     navigate("/release/" + serial);
                 }).catch(() => { console.log("fail") });

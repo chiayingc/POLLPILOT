@@ -12,7 +12,7 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
   const [options, setOptions] = useState([]);
   const [allOptions, setAllOptions]=useState([]);
   // let count;
-  // console.log(count);
+  console.log(count);
   // console.log("b");
   // console.log(options);
   // console.log(allQuestion);
@@ -110,19 +110,23 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     return <div>{tmp}</div>
   };
 
-  const QueC = ({ options, id, type }) => {
+  const QueC = ({ options, count, id, type }) => {
     
-    let countc=options.length;
+    // let countc=options.length;
+    let countc;
     // console.log("Coptions",options,countc,id);
     // let tmp=options;
+    let tmpopt;
+    tmpopt = '';
+    if (options!= undefined && options[id] != undefined) {  countc=options[id].length; }
     
     allQueCD = [];
     if (count != undefined) {
-      let tmpopt;
+      
       for (let i = 0; i < countc; i++) {
         // console.log("i:", i, "id:", id);
         // console.log(options);
-        tmpopt = '';
+        
         if (options!= undefined && options[id] != undefined) { tmpopt = options[id][i]; }
        
         let tmp = '';
@@ -168,7 +172,7 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
 
   for (let i = 0; i < allQuestion.length; i++) {
-    console.log("OPTIONS",options);
+    // console.log("OPTIONS",options);
     let id = i ;
     // let id = i+1 ;
     if (allQuestion[i]['type'] == "A") {
@@ -204,9 +208,15 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
       allQuestions.push(oneQue);
     }
     if (allQuestion[i]['type'] == "C") {
+      // console.log(options[id].length);
+      let tmpcount=count;
       let tmp=options;
 
         tmp[i]=allQuestion[i].options;
+        // console.log(tmp[i].length);
+        if (count[id] == undefined) { tmpcount[id] = { id: id, count: tmp[i].length }; setCount(tmpcount); }
+
+        // console.log(options[i].length);
       // let tmp=options;
       // if(tmp[id]==undefined){tmp[id]=[];}
       // if(tmp[id]['options']==undefined){tmp[id]['options']=allQuestion[id-1]['options'];}
@@ -216,15 +226,15 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
         defaultValue={allQuestion[i]['content']} onClick={() => { document.querySelector("#Cdone" + id).className = "Cdone" }} />
 
         <button className='btn_addradio' onClick={() => {
-          let tmp = count;
-          tmp[0] = { id: 0, count: 0 };
-          if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
+          let tmpcount = count;
+          tmpcount[0] = { id: 0, count: 0 };
+          // if (count[id] == undefined) { tmpcount[id] = { id: id, count: 0 }; setCount(tmpcount); }
           const c = count.find(q => q?.id === id);
           c.count++;
           setCount([...count]);
 
         }}>+</button>
-        <QueC options={options} id={id} type={"C"} />
+        <QueC options={options} count={count[id]} id={id} type={"C"} />
         {/* {allQueC} */}
 
         {/* {countC.map((item, index) => <A key={index} count={item} />)} */}
@@ -241,9 +251,11 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     }
 
     if (allQuestion[i]['type'] == "D") {
+      let tmpcount=count;
       let tmp=options;
 
       tmp[i]=allQuestion[i].options;
+      if (count[id] == undefined) { tmpcount[id] = { id: id, count: tmp[i].length }; setCount(tmpcount); }
 
       // console.log(options);
 
@@ -252,9 +264,9 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
           defaultValue={allQuestion[i]['content']}  onClick={() => { document.querySelector("#Ddone" + id).className = "Ddone" }} />
 
         <button className='btn_addradio' onClick={() => {
-          let tmp = count;
-          tmp[0] = { id: 0, count: 0 };
-          if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
+          let tmpcount = count;
+          tmpcount[0] = { id: 0, count: 0 };
+          // if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
           const c = count.find(q => q?.id === id);
           c.count++;
           setCount([...count]);

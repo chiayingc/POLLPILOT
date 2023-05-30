@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import '../styles/FillInPage.css'
 import { useLocation } from 'react-router-dom'
 import { db } from '../../firebase-config.js'
@@ -322,6 +322,7 @@ function FillInPage() {
 
   const fillin = async () => {
     console.log(selectedValue);
+    console.log(version);
     // let serials = [];
     // // let tmpAllAns=[];
     // let tmpAllAns = {};
@@ -354,7 +355,7 @@ function FillInPage() {
     console.log(document.querySelector("#input_password").value);
     console.log(surveySettings[1].key);
     if (document.querySelector("#input_password").value == surveySettings[1].key) {
-      setCheckPassword(true);
+      setCheckPassword(false);
     }
     else {
       Swal.fire({

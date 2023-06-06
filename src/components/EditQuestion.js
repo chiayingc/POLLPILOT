@@ -118,9 +118,9 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     // let tmp=options;
     let tmpopt;
     tmpopt = '';
+
     // if (options!= undefined && options[id] != undefined) {  countc=options[id].length; }
-    if (options!= undefined && options[id] != undefined) {  countc=count.count; }
-    
+    if (options!= undefined && options[id] != undefined) {  countc=count.count; }    
     allQueCD = [];
     if (count != undefined) {
       
@@ -168,7 +168,9 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     setOptions(thequec);
     console.log("t:", thequec);
     console.log("o:", options);
-    // console.log(e.target.value);
+    // console.log("t:", thequec);
+    // console.log("o:", options);
+
   }
 
 

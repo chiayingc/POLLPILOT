@@ -1,0 +1,330 @@
+@media (max-width:1980px) {
+
+    body >div{
+        width: 100%;
+        /* display: grid; */
+        /* justify-items: center; */
+    }
+    
+    input {
+        outline: none;
+    }
+
+    #addnewpage {
+        width: 100%;
+        display: grid;
+        justify-items: center;
+        color: #666;
+    }
+
+    #addnewpage_main {
+        margin-top: 30px;
+        width: 90%;
+        display: grid;
+        justify-items: center;
+        margin-bottom: 50px;
+    }
+
+    #survey_setting,
+    #general_setting {
+        width: 55%;
+        display: grid;
+        justify-items: center;
+        margin-bottom: 30px;
+        border: 1px solid rgb(236, 236, 236);
+        padding: 30px;
+    }
+
+    #next_btn {
+        width: calc(55% + 60px);
+        display: grid;
+        justify-items: center;
+        margin-bottom: 35px;
+    }
+
+    #survey_setting>h3,
+    #general_setting>h3 {
+        justify-self: left;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+    }
+
+    #addnewpage_addtitle {
+        width: 90%;
+        padding: 20px;
+        display: grid;
+        /* grid-template-rows: 30px 35px 37px; */
+        grid-template-rows: 30px 35px;
+        row-gap: 10px;
+    }
+
+    #addnewpage_addtitle>input{
+        font-size: .9em;
+        padding: .2rem .6rem;
+        background-color: inherit;
+        border: solid rgb(193, 193, 193);
+        border-width: 0px 0px 1px 0px;
+        width: 90%;
+    }
+
+    #setKey{
+        display: none;
+        margin-top: 10px;
+        font-size: .7em;
+        padding: .2rem .6rem;
+        background-color: inherit;
+        border: solid rgb(193, 193, 193);
+        border-width: 0px 0px 1px 0px;
+        width: 90%;
+    }
+
+    /* #addnewpage_addtitle >div{
+    display: grid;
+    justify-content: right;
+    padding-top: 5px;
+    padding-left: 65%;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+} */
+
+    /* #addnewpage_addtitle >div >button{
+     要改成取消沒有底色 
+    background-color: rgba(249, 240, 245, 0.731);
+    border: #f5f7e77f 1px solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #111827;
+    min-width: 60px;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: baseline;
+    cursor: pointer;
+    touch-action: manipulation;
+    cursor: pointer;
+} */
+
+    #title_style,
+    #welcome_text,
+    #thanks_text,
+    #survey_status,
+    #num_desplay {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #title_align {
+        display: flex;
+        height: fit-content;
+        padding: 10px;
+    }
+
+    .align_btn {
+        margin-right: 15px;
+        padding: 15px;
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        background-color: #f5f1ed56;
+        border: .5px solid rgb(248, 239, 218);
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: .8rem;
+        font-weight: 600;
+        color: #444;
+        /* text-align: center; */
+        /* vertical-align: baseline; */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .align_btn:hover {
+        background-color: #dedad539;
+    }
+
+    .align_btn_c {
+        margin-right: 15px;
+        padding: 15px;
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        background-color: #e2d4c656;
+        border: .5px solid rgb(251, 246, 234);
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: .8rem;
+        font-weight: 600;
+        color: #444;
+        /* text-align: center; */
+        /* vertical-align: baseline; */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .align_btn_c:hover {
+        background-color: #e2d4c656;
+        border: .5px solid rgb(251, 246, 234);
+    }
+
+    .align_btn>svg,
+    .align_btn_c>svg {
+        padding-bottom: 5px;
+        width:35px;
+        height:44px;
+    }
+
+    #num_button {
+        margin-top: 10px;
+    }
+
+    .num_btn, .num_btn_c {
+        margin-right: 10px;
+
+        width: 90px;
+        border-radius: 5px;
+        background-color: #f5f1ed56;
+        border: .5px solid rgb(248, 239, 218);
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: .8rem;
+        font-weight: 600;
+        padding: .4rem;
+        color: #444;
+        text-align: center;
+        vertical-align: baseline;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .num_btn_c{
+        background-color: #e2d4c656;
+    }
+
+    .num_btn_c:hover {
+        background-color: #e2d4c656;
+    }
+
+    .num_btn:hover {
+        background-color: #cabdb156;
+    }
+
+    #welcome_text>textarea,
+    #thanks_text>textarea {
+        width: 90%;
+        height: 70px;
+        resize: none;
+        background-color: inherit;
+        margin-top: 10px;
+        outline: none;
+        border-radius: 2px;
+        border-color: rgb(193, 193, 193);
+    }
+
+    #survey_status>select {
+        margin-top: 10px;
+        font-size: .5rem;
+        padding: .2rem .3rem;
+        text-align: center;
+        vertical-align: bottom;
+        cursor: pointer;
+        margin-right: 10px;
+        outline: none;
+        color: #666;
+        border-color: rgb(193, 193, 193);
+        border-radius: 2px;
+        background-color: inherit;
+    }
+
+    #next_btn>button {
+        justify-self: end;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgb(248, 239, 218);
+        border: .5px solid #f5f1ed56;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: .8rem;
+        font-weight: 600;
+        /* color: #444; */
+        text-align: center;
+        vertical-align: baseline;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        touch-action: manipulation;
+
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        border-radius: 4px;
+        background: rgba(248, 218, 228, 0.6);
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        background: rgb(219, 219, 219);
+        -webkit-box-shadow: inset 0 0 4px rgba(147, 147, 147, 0.3);
+    }
+}
+
+@media (max-width:980px) {
+    #survey_setting,
+    #general_setting {
+        width: 70%;
+    }
+
+    #next_btn {
+        width: calc(70% + 60px);
+    }
+}
+
+@media (max-width:720px) {
+
+    body >div{
+        display: grid;
+        /* justify-items: center; */
+    }
+
+    #addnewpage {
+        width: 100%;
+    }
+    #addnewpage_main {
+        width: 100%;
+        justify-content: center;
+    }
+    #survey_setting,
+    #general_setting {
+        width: 80%;
+        /* justify-content: center; */
+    }
+
+    #next_btn {
+        width: calc(80% + 60px);
+    }
+
+    #title_align>button {
+        /* margin-right: 10px; */
+        padding: 5px;
+        width: 65px;
+        height: 75px;
+        font-size: .6rem;
+        font-weight: 500;
+    }
+
+    #title_align>button>svg {
+        padding-bottom: 2px;
+        width:30px;
+        height:40px;
+    }
+    
+}

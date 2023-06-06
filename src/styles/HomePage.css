@@ -1,0 +1,284 @@
+body {
+    background-color: #FAFAFA;
+}
+
+
+button {
+    background-color: rgba(249, 240, 245, 0.667);
+    border: #c7c8ba6d 1px solid;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #111827;
+    min-width: 60px;
+    font-size: 1rem;
+    text-align: center;
+    vertical-align: baseline;
+    cursor: pointer;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c7c8ba6d;
+    border: rgba(249, 240, 245, 0.667) 1px solid;
+}
+
+@media (max-width:1980px) {
+
+    iframe {
+        border: 0;
+    }
+
+    .home_bk1 {
+        width: 40vw;
+        height: 100vh;
+        position: absolute;
+        right: 0;
+    }
+
+    .home_bk2 {
+        width: 40vw;
+        height: 48vh;
+        position: absolute;
+        top: 8px;
+        left: 1%;
+    }
+
+    .home_bk3 {
+        width: 40vw;
+        height: 70vh;
+        position: absolute;
+        bottom: 0px;
+        left: 4%;
+    }
+
+    /* 大衣 */
+    .home_bk4 {
+        width: 40vw;
+        height: 55vh;
+        position: absolute;
+        top: -4px;
+        right: 15%;
+    }
+
+    #homepage {
+        width: 100%;
+        display: grid;
+        justify-items: center;
+    }
+
+    #homepage_main {
+        max-width: 70%;
+        width: 30%;
+        height: 80vh;
+        display: grid;
+        padding: 20px;
+        justify-items: center;
+    }
+
+    #homepage_main_left {
+        /* margin-right: 35%; */
+        width: 100%;
+        padding: 20px;
+        padding-right: 35%;
+        display: grid;
+        row-gap: 15px;
+        font-size: 1.3rem;
+        justify-items: center;
+        align-content: center;
+        margin-top: 15%;
+        z-index: 0;
+    }
+
+    .logo {
+        width: 20vw;
+        filter: drop-shadow(3px 3px 2px rgba(2, 2, 2, 0.3));
+    }
+
+    #homepage_main_left>p {
+        font-weight: 600;
+        text-align: center;
+    }
+
+    #homepage_btn_start {
+        margin-top: 20px;
+        background-color: #f6dbdf;
+        border: 0;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #222;
+        min-width: 60px;
+        font-size: .9rem;
+        font-weight: 600;
+        padding: .65rem .7rem;
+        text-align: center;
+        vertical-align: baseline;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    #homepage_btn_start:hover {
+        background-color: #eaeaea;
+    }
+
+    #homepage_btn_start :focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+    }
+
+    #homepage_btn_start :focus-visible {
+        box-shadow: none;
+    }
+
+    #homepage_btn_start>a {
+        text-decoration: none;
+        color: #111827;
+    }
+}
+
+@media (max-width:1280px) {
+
+    .home_bk1 {
+        width: 38vw;
+        height: 70vh;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    .home_bk2 {
+        width: 40vw;
+        height: 48vh;
+        position: absolute;
+        top: 8px;
+        left: 1%;
+    }
+
+    .home_bk3 {
+        width: 35vw;
+        height: 60vh;
+        position: absolute;
+        bottom: 0px;
+        left: 4%;
+    }
+
+    /* 大衣 */
+    .home_bk4 {
+        width: 32vw;
+        height: 45vh;
+        position: absolute;
+        top: -4px;
+        right: 8%;
+    }
+
+    .logo {
+        width: 28vw;
+    }
+
+    #homepage_main_left {
+        margin-top: 30%;
+        padding-right: 10%;
+    }
+}
+
+@media (max-width:770px) {
+
+     .home_bk1 {
+        width: 60vw;
+        height: 60vh;
+        position: absolute;
+        right: -5%;
+        bottom: 0;
+    }
+
+    .home_bk2 {
+        width: 40vw;
+        height: 38vh;
+        position: absolute;
+        top: 1%;
+        left: 8%;
+    }
+
+    .home_bk3 {
+        width: 58vw;
+        height: 53vh;
+        position: absolute;
+        bottom: 0px;
+        left: -8%;
+    }
+
+    /* 大衣 */
+    .home_bk4 {
+        width: 40vw;
+        height: 38vh;
+        position: absolute;
+        top: -8px;
+        right: 2%;
+    }
+
+    .logo {
+        width: 32vw;
+    }
+
+    #homepage_main_left {
+        margin-top: 20%;
+        padding-right: 15%;
+    }
+
+
+}
+
+@media (min-width:360px) and (max-width:600px) {
+
+
+    .home_bk1 {
+        width: 65vw;
+        height: 50vh;
+        position: absolute;
+        right: -20px;
+        bottom: 0;
+    }
+
+    .home_bk2 {
+        width: 40vw;
+        height: 35vh;
+        position: absolute;
+        top: 0px;
+        left: 6%;
+    }
+
+    .home_bk3 {
+        width: 55vw;
+        height: 35vh;
+        position: absolute;
+        bottom: 0px;
+        left: -20px;
+    }
+
+    /* 大衣 */
+    .home_bk4 {
+        width: 42vw;
+        height: 46vh;
+        position: absolute;
+        top: -40px;
+        right: -5px;
+    }
+
+    .logo {
+        width: 42vw;
+    }
+
+    #homepage_btn_start {
+        margin-top: 10px;
+        font-size: .8rem;
+        font-weight: 600;
+        padding: .6rem .7rem;
+    }
+
+    #homepage_main_left {
+        margin-top: 35%;
+        padding-right: 45%;
+    }
+
+}

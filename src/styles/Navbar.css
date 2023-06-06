@@ -1,0 +1,106 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: boder-box;
+    font-family: 'Noto Sans TC';
+}
+
+
+body>div{
+    display: grid;
+    width: 100%;
+    justify-items: center;
+}
+
+#navbar{
+    width: calc(100% - 40px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0 2px 0px -1px rgba(6,6,6,0.1);
+    height: 30px;
+    z-index: 1;
+    background-color: #fff;
+    /* margin-bottom: 20px; */
+}
+
+#navbar2{
+    width: calc(100% - 40px);
+    display: grid;
+    
+    align-items: center;
+    justify-self: left;
+    padding: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 20px;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+}
+
+#nav_btns{
+    justify-self: right;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr; */
+    /* column-gap: 1rem; */
+}
+
+#nav_btn_signin,
+#nav_btn_signup,
+#nav_btn_signout{
+    background-color: #FFFFFF;
+    border: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #111827;
+    font-size: .9rem;
+    font-weight: 600;
+    padding: .3rem 0 .3rem 0;
+    text-align: center;
+    vertical-align: baseline;
+    box-shadow: 0 1px 3px 0 rgba(242, 167, 202, 0.26), 0 1px 2px 0 rgba(217, 200, 209, 0.9);
+    cursor: pointer;
+    touch-action: manipulation;
+    margin-left: 10px;
+}
+
+#nav_btn_signin >a,
+#nav_btn_signup >a{
+    text-decoration: none;
+    color: #111827;
+    /* font-size: 12px; */
+    font-weight: 500;
+}
+#nav_btn_signin:hover, 
+#nav_btn_signup:hover,
+#nav_btn_signout:hover {
+    background-color: #F7D6DB;
+}
+
+#nav_btn_signin:focus,
+#nav_btn_signup:focus,
+#nav_btn_signout:focus{
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+#nav_btn_signin:focus-visible,
+#nav_btn_signup:focus-visible,
+#nav_btn_signout:focus-visible{
+    box-shadow: none;
+}
+
+#nav_logo{
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pplogo{
+    height: 30px;
+    /* width: 100px; */
+}

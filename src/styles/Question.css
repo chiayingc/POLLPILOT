@@ -1,0 +1,289 @@
+@media (max-width:1920px) {
+    .qus,
+    .categoryI {
+        width: calc(100% - 60px);
+        /* margin-top: 5px; */
+        min-height: 90px;
+        height: fit-content;
+        margin-bottom: 3px;
+        display: grid;
+        border: 1px solid #e8e8e8;
+        border-radius: 2px;
+        padding: 30px;
+        background-color: #fbfbfb;
+    }
+
+    .introH{
+        width: calc(100% - 60px);
+        /* margin-top: 5px; */
+        min-height: 90px;
+        height: fit-content;
+        margin-bottom: 3px;
+        display: grid;
+        border: 1.5px dashed #e8e8e8;
+        border-radius: 3px;
+        padding: 30px;
+        background-color: #fbfbfb;
+    }
+
+    .qus_title_inputA {
+        width: calc(100% - 1.2rem - 2px);
+        /* height: calc(25px - .4rem); */
+        /* font-size: .8rem; */
+        padding: .2rem .6rem;
+        border: 1px solid #888;
+        border-radius: 2px;
+        margin-bottom: 5px;
+        background-color: inherit;
+    }
+
+    .qus_title_inputB {
+        width: calc(100% - 1.2rem - 2px);
+        padding: .2rem .6rem;
+        border: 1px solid #888;
+        border-radius: 2px;
+        outline: none;
+        resize: none;
+        height: 3rem;
+        background-color: inherit;
+        overflow-y: auto;
+    }
+
+    .qus_title_inputJ{
+        /* width: calc(100% - 1.2rem - 2px); */
+        width: fit-content;
+        padding: .1rem;
+        border: 1px solid #888;
+        border-radius: 2px;
+        margin-bottom: 3px;
+        background-color: inherit;
+        cursor: pointer;
+    }
+
+    .qus_titleA,
+    .qus_titleB,
+    .qus_titleC,
+    .qus_titleD,
+    .qus_titleF,
+    .qus_titleG,
+    .qus_titleH,
+    .qus_titleI,
+    .qus_titleJ {
+        width: calc(100% - 1.2rem);
+        font-size: .9rem;
+        padding: .2rem .6rem .2rem .6rem;
+        border: solid #888;
+        border-width: 0px 0px 1px 0px;
+        margin-bottom: 5px;
+        background-color: inherit;
+    }
+
+    .cd_radio {
+        max-width: 100%;
+        background-color: inherit;
+        display: grid;
+        grid-template-columns: 25px 1fr;
+        column-gap: 5px;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    .cd_radio_text {
+        background-color: inherit;
+        outline: none;
+        font-size: .8rem;
+        padding: .2rem .6rem .2rem .6rem;
+        border: solid #888;
+        border-width: 0px 0px 1px 0px;
+        color: #666;
+        width: 80%;
+    }
+
+    .cd_radio_label {
+        position: relative;
+        display: block;
+        width: 13px;
+        height: 13px;
+        cursor: pointer;
+        border: 2px solid #e2c0d0;
+        border-radius: 25px;
+        -moz-transition: background-color 0.2s ease-in;
+        -webkit-transition: background-color 0.2s ease-in;
+        -o-transition: background-color 0.2s ease-in;
+        transition: background-color 0.2s ease-in;
+    }
+
+    .cd_radio_label::before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 5px;
+        height: 5px;
+        background-color: #FAFAFA;
+        border-radius: 15px;
+        opacity: 0;
+        -moz-transition: opacity 0.2s ease-in;
+        -webkit-transition: opacity 0.2s ease-in;
+        -o-transition: opacity 0.2s ease-in;
+        transition: opacity 0.2s ease-in;
+    }
+
+    input:checked+.cd_radio_label {
+        background-color: rgb(239, 196, 216);
+    }
+
+    .cd_radio_radio:checked+.cd_radio_label::before {
+        opacity: 1;
+    }
+
+    .cd_radio_radio {
+        display: none;
+    }
+
+    .selected,
+    .unselect {
+        width: 30px;
+        background-color: #888;
+    }
+
+
+    .btn_addradio {
+        background-color: #f6e4e7;
+        width: fit-content;
+        min-width: 10px;
+        padding: .1rem .5rem .1rem .5rem;
+        font-size: 1.1rem;
+        font-weight: 900;
+        border-color: #cecece;
+        justify-self: right;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .btn_addradio:hover {
+        border-color: #cecece;
+        background-color: #fff;
+    }
+
+    .done {
+        display: flex;
+        justify-content: right;
+    }
+
+    .Adone,
+    .Bdone,
+    .Cdone,
+    .Ddone,
+    .Fdone,
+    .Gdone,
+    .Hdone,
+    .Idone,
+    .Jdone,
+    .Kdone {
+        cursor: pointer;
+        background-color: #f7f0e9;
+        color: #666;
+        font-size: .5rem;
+        font-weight: 600;
+        padding: .1rem 0 .1rem 0;
+        border: 1px solid #bebebe;
+        margin-left: 8px;
+        max-height: 1.4rem;
+    }
+
+    .Adone:hover,
+    .Bdone:hover,
+    .Cdone:hover,
+    .Ddone:hover,
+    .Fdone:hover,
+    .Gdone:hover,
+    .Hdone:hover,
+    .Idone:hover,
+    .Jdone:hover,
+    .Kdone:hover {
+        background-color: #e9e5e1;
+    }
+
+    /* .Adone:focus,
+    .Bdone:focus,
+    .Cdone:focus,
+    .Ddone:focus {
+        display: none;
+    } */
+
+    .Aremove,
+    .Bremove,
+    .Cremove,
+    .Dremove,
+    .Fremove,
+    .Gremove,
+    .Hremove,
+    .Iremove,
+    .Jremove,
+    .Kremove {
+        cursor: pointer;
+        background-color: #e9e5e1;
+        color: #666;
+        font-size: .5rem;
+        padding: .1rem 0 .1rem 0;
+        border: 1px solid #bebebe;
+        max-height: 1.4rem;
+    }
+
+    .Aremove:hover,
+    .Bremove:hover,
+    .Cremove:hover,
+    .Dremove:hover,
+    .Fremove:hover,
+    .Gremove:hover,
+    .Hremove:hover,
+    .Iremove:hover,
+    .Jremove:hover,
+    .Kremove:hover {
+        background-color: #f7f0e9;
+    }
+
+    .rangeG {
+        padding: .2rem .6rem .2rem .6rem;
+        font-size: .8rem;
+        margin-top: .1rem;
+        margin-bottom: .2rem;
+        border: 1px #e2c0d0 dashed;
+        border-radius: 3px;
+        width: fit-content;
+        cursor: pointer;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 1rem 1fr;
+        column-gap: .5rem;
+    }
+
+    .rangeG:hover {
+        background-color: #fff5fa;
+        border-color: #cecece;
+    }
+
+    .infoicon {
+        width: 1rem;
+
+    }
+
+
+    /*F數字題隱藏箭頭*/
+    /* Chrome, Safari, Edge, Opera */
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+
+    .noshow {
+        display: none;
+    }
+}

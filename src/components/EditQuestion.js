@@ -118,9 +118,12 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     // let tmp=options;
     let tmpopt;
     tmpopt = '';
+    console.log("test::",options);
 
     // if (options!= undefined && options[id] != undefined) {  countc=options[id].length; }
-    if (options!= undefined && options[id] != undefined) {  countc=count.count; }    
+    // if (options!= undefined && options[id] != undefined) {  countc=count.count; }
+    if (count!= undefined) {  countc=count.count; }    
+    console.log("here::",count);
     allQueCD = [];
     if (count != undefined) {
       
@@ -455,6 +458,7 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
           let tmp = count;
           tmp[0] = { id: 0, count: 0 };
           if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
+
           const c = count.find(q => q?.id === id);
           c.count++;
           setCount([...count]);

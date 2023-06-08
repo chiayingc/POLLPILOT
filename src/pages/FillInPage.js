@@ -14,6 +14,7 @@ function FillInPage() {
 
   const [selectedValue, setSelectedValue] = useState({});
   const [checkedList, setCheckedList] = useState({});
+  const [version, setVersion]=useState(1);
 
   const handleOptionChange = (serial, index) => {
     // let tmp=selectedValue;
@@ -85,6 +86,7 @@ function FillInPage() {
     getDoc(getSetting)
       .then(async (data) => {
         let version = data.data().version;
+        setVersion(version);
         let surveySetting = [version, data.data().Settings];
         const getQues = doc(db, "surveys", serial, "questions", "version" + version);
         await getDoc(getQues)
@@ -341,7 +343,7 @@ function FillInPage() {
     const setAnswer = doc(db, "answers", answerSerial);
     await setDoc(setAnswer,
       {
-        surveySerial: serial,
+        surveySerial: serial+version,
         answer: selectedValue
       }
       , { merge: true })

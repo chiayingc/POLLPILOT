@@ -13,12 +13,8 @@
   "description": "",
   "dependencies": {
     "chart.js": "^4.2.1",
-<<<<<<< HEAD
     "firebase-tools": "^12.3.0",
     "firebaseui": "^6.0.2",
-=======
-    "firebase": "^9.16.0",
->>>>>>> d01762466b52cd0bffd1585b726e1328fb88602a
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",

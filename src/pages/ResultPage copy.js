@@ -27,6 +27,7 @@ function ResultPage() {
 
   let queSerials = [];  //紀錄所有題目編號
   let allAns = []; //紀錄整理各題所有答案
+  let version;
   let allQuestions = [];
   let data;
   // let answer = {};
@@ -34,27 +35,21 @@ function ResultPage() {
   let queTypes = {}; //紀錄所有題目題型
   // let settings=
 
-  // const [version, setVersion]=useState(1);
 
   let tmpAry = location.pathname.split("/");
   let serial = tmpAry[tmpAry.length - 1];
 
   useEffect(() => {
 
-    const getVersion = doc(db, "surveys", serial);
-        getDoc(getVersion)
-          .then((datadata) => {
-            // setVersion(datadata.data().version); 
-         
-
     const answers = collection(db, "answers");
-    const select = query(answers, where("surveySerial", "==", serial+datadata.data().version));
-// console.log(serial+datadata.data().version);
+    const select = query(answers, where("surveySerial", "==", serial));
+
     onSnapshot(select, (querySnapshot) => {
       allAnswers = [];
       querySnapshot.forEach((doc) => {
         let data = doc.data();
         allAnswers.push(data.answer);
+
       });
       if (allAnswers[0] != undefined && allAnswers[0] != null) {
         // let tmp=allAnswers.filter(ele => ele !== {});
@@ -75,11 +70,11 @@ function ResultPage() {
         const getVersion = doc(db, "surveys", serial);
         getDoc(getVersion)
           .then((data) => {
-console.log(data);
-            // version = data.data().version;
+
+            version = data.data().version;
             queTypes = data.data().questionsType;
-console.log(datadata.data().version);
-            const getQuestions = doc(db, "surveys", serial, "questions", "version" + datadata.data().version);
+
+            const getQuestions = doc(db, "surveys", serial, "questions", "version" + version);
             getDoc(getQuestions)
               .then((data) => {
                 allQuestions = data.data().questions;
@@ -237,7 +232,6 @@ console.log(datadata.data().version);
       }
 
     });
-  });
 
   }, []);
 

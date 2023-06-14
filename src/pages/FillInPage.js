@@ -169,13 +169,14 @@ function FillInPage() {
   function AQue(props) {
     let queData = props.quedata;
     let formcontents = [];
+    let queNum = props.queNum;
 
 
 
     if (queData.type == "A") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queNum}.</span> : ""}{queData.content}</div>
           <input type="text" className='fillin_ans' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       // return aque;
@@ -185,7 +186,7 @@ function FillInPage() {
     if (queData.type == "B") {
       let bque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queNum}.</span> : ""}{queData.content}</div>
           {/* className要改 */}
           <textarea type="text" className='qus_title_inputB' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
@@ -205,7 +206,7 @@ function FillInPage() {
 
       let cque =
         <div key={queData.id} className='fillin_aque'>
-          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queNum}.</span> : ""}{queData.content}</div>
           {queData.options.map((item, index) => <Options key={index} option={item} id={queData.id} serial={queData.queSerial} index={index} type={queData.type} />)}
         </div>
       formcontents.push(cque);
@@ -215,7 +216,7 @@ function FillInPage() {
     if (queData.type == "F") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queNum}.</span> : ""}{queData.content}</div>
           <input type="number" className='fillin_ans_num' id={"ans" + queData.queSerial} placeholder="請輸入數字" onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
         </div>
       // return aque;
@@ -226,7 +227,7 @@ function FillInPage() {
     if (queData.type == "G") {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
-          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queNum}.</span> : ""}{queData.content}</div>
           {/* 這裡要加入range大小(資料來源)跟間隔顯示、range樣式 */}
           <div className='rangebar'>
             <span>{queData.options[0]}</span>
@@ -266,7 +267,7 @@ function FillInPage() {
       let aque =
         <div key={queData.queSerial} className='fillin_aque'>
 
-          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queData.id}.</span> : ""}{queData.content}</div>
+          <div className='fillin_que'>{surveySettings[1].showNum ? <span className='quenum'>{queNum}.</span> : ""}{queData.content}</div>
           {/* 這邊要補預設日期 */}
           <input type="date" className='fillin_ans_date' id={"ans" + queData.queSerial} onChange={recordAns} defaultValue="" />
         </div>
@@ -372,6 +373,23 @@ function FillInPage() {
 
   let talign = ['left', 'center', 'right'];
 
+  function CountNum() {
+    let questionCount = 0;
+    return (
+      <div>
+        {surveyQues.map((que, index) => {
+          if (que.type === 'A' || que.type === 'B' || que.type === 'C' || que.type === 'D'
+          || que.type === 'F' || que.type === 'G' || que.type === 'J') {
+            questionCount += 1;
+            return <AQue key={index} quedata={que} queNum={questionCount} />;
+          } else {
+            return <AQue key={index} quedata={que} queNum={null} />;
+          }
+        })}
+      </div>
+    );
+  }
+
   return (
     <div id='fillinpage'>
       <Navbar type={4} />
@@ -385,12 +403,13 @@ function FillInPage() {
         </div>
         :
         <div className='fillin_questions'>
-          <div>
+          <div className='welcomeText'>
             {surveySettings[1] ? surveySettings[1].welcomeText : ''}
           </div>
           <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
           {/* <div> */}
-          {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)}
+          {/* {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)} */}
+          {<CountNum/>}
           {/* </div> */}
           <button onClick={fillin} id='btn_fillin'>送出問卷</button>
         </div>}
@@ -406,4 +425,6 @@ function FillInPage() {
 }
 
 export default FillInPage
+
+
 

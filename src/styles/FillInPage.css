@@ -1,3 +1,4 @@
+
 @media (max-width:1980px) {
     #fillinpage {
         width: 100%;
@@ -8,17 +9,40 @@
         /* margin-bottom: 10vh; */
         /* padding: 30px; */
         /* grid-template-rows: auto 10%; */
-        row-gap: 30px;
+        /* row-gap: 30px; */
     }
 
     .fillin_questions{
+        width: 100%;
+        display: grid;
+        justify-items: center;
+        /* display: grid; */
+        /* justify-items: center; */
+        /* padding: 30px; */
+        /* row-gap: 40px; */
+        /* max-height: calc(80vh - 120px); */
+        row-gap: 20px;
+        /* overflow-y: auto; */
+    }
+
+    .fillin_questions>div:not(.welcomeText){
+        width: 50%;
+        display: grid;
+        justify-items: center;
+        padding: 30px;
+        row-gap: 35px;
+        max-height: calc(60vh - 120px);
+        overflow-y: auto;
+    }
+
+    .welcomeText{
         width: 50%;
         display: grid;
         justify-items: center;
         padding: 30px;
         row-gap: 40px;
-        max-height: calc(80vh - 120px);
-        overflow-y: auto;
+        /* max-height: calc(80vh - 120px); */
+        /* overflow-y: auto; */
     }
 
     #input_password{
@@ -116,7 +140,7 @@
     }
 
     .fillin_intro{
-        width: 100%;
+        width: 95%;
         color: #2f2f2f;
         font-size: 1rem;
         font-weight: 600;
@@ -248,13 +272,14 @@
 }
 
 @media (max-width:800px) {
-    .fillin_questions {
+    .fillin_questions>div:not(.welcomeText){
         width: 70%;
+        max-height: calc(50vh - 160px);
     }
 }
 
 @media (max-width:600px) {
-    .fillin_questions {
+    .fillin_questions>div:not(.welcomeText){
         padding-right: 0px;
         padding-left: 4px;
     }

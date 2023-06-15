@@ -13,7 +13,7 @@ function AddNewPage() {
     const { state } = useLocation();
     const userData = state;
     const { user, setUser } = useContext(UserContext);
-    let surveyTitle = "未命名問卷", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creator;
+    let surveyTitle = "", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creator;
     let surveyStatus = 0, surveyTitleAlign = 0;
     let surveyShowNum = true;
 
@@ -52,6 +52,7 @@ function AddNewPage() {
             version: 1
         }, { merge: true })
             .then(() => {
+                console.log("testsettings::",Settings);
                 console.log("set success");
                 navigate("/addques", {
                     state: Settings
@@ -73,7 +74,8 @@ function AddNewPage() {
                     <div id='addnewpage_addtitle'>
                         <h4>問卷名稱</h4>
                         <input type="text" placeholder="無標題問卷"
-                            onChange={(e) => { if (surveyTitle != "") { surveyTitle = e.target.value; } }} />
+                            // onChange={(e) => { if (surveyTitle != "") { surveyTitle = e.target.value; } }} />
+                            onChange={(e) => { if (e.target.value == ""){surveyTitle="未命名問卷"}else { surveyTitle = e.target.value; } }} />
                     </div>
                     <div id='title_style'>
                         <h4>問卷標題設定</h4>

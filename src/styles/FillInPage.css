@@ -21,18 +21,34 @@
         /* padding: 30px; */
         /* row-gap: 40px; */
         /* max-height: calc(80vh - 120px); */
-        row-gap: 20px;
+        row-gap: 40px;
         /* overflow-y: auto; */
     }
 
-    .fillin_questions>div:not(.welcomeText){
+    /* .fillin_questions>div:not(.welcomeText){ */
+        .quecontent{
         width: 50%;
+        display: grid;
+        justify-items: center;
+        /* padding: 30px;
+        row-gap: 35px; */
+        max-height: calc(80vh - 200px);
+        overflow-y: auto;
+    }
+    .title{
+            width: 50%;
+            display: grid;
+            justify-items: center;
+    }
+
+    .quecontent>div{
+        /* width: 100%; */
+        width: calc(100% - 60px);
         display: grid;
         justify-items: center;
         padding: 30px;
         row-gap: 35px;
-        max-height: calc(60vh - 120px);
-        overflow-y: auto;
+
     }
 
     .welcomeText{
@@ -272,14 +288,19 @@
 }
 
 @media (max-width:800px) {
-    .fillin_questions>div:not(.welcomeText){
+    /* .fillin_questions>div:not(.welcomeText){ */
+        /* .quecontent{ */
+        /* width: 70%; */
+        /* max-height: calc(50vh - 160px); */
+    /* } */
+    .quecontent,.title{
         width: 70%;
-        max-height: calc(50vh - 160px);
     }
 }
 
 @media (max-width:600px) {
-    .fillin_questions>div:not(.welcomeText){
+    /* .fillin_questions>div:not(.welcomeText){ */
+        .quecontent{
         padding-right: 0px;
         padding-left: 4px;
     }

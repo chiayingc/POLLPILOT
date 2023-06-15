@@ -406,10 +406,14 @@ function FillInPage() {
           <div className='welcomeText'>
             {surveySettings[1] ? surveySettings[1].welcomeText : ''}
           </div>
+          <div className='title'>
           <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
+          </div>
           {/* <div> */}
           {/* {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)} */}
+          <div className='quecontent'>
           {<CountNum/>}
+          </div>
           {/* </div> */}
           <button onClick={fillin} id='btn_fillin'>送出問卷</button>
         </div>}

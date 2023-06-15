@@ -29,6 +29,7 @@ function DashBoardPage() {
         const getUser = doc(db, "users", useruid);
         await getDoc(getUser)
           .then((data) => {
+            console.log(data.data());
             userdata = []
             userdata.push(data.data().uid,
               data.data().name,

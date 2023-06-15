@@ -11,6 +11,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     onAuthStateChanged,
+    getAuth
 } from 'firebase/auth'
 import { UserContext } from '../helper/Context'
 
@@ -61,12 +62,16 @@ function Signpage(props) {
                     signupPassword)
                     .then(() => {
                         // 把使用者註冊資料放進資料庫
-                        onAuthStateChanged(auth, async (currentUser) => {
+                        // onAuthStateChanged(auth, async (currentUser) => {
+                            const auth = getAuth();
+                            const currentUser = auth.currentUser;
+                            console.log(currentUser);
                             if (currentUser) {
                                 let random = Date.now().toString(36);
                                 let shortuid = currentUser.uid.substring(0, 4);
                                 const createUser = doc(db, "users", currentUser.uid);
-                                await setDoc(createUser, {
+                                // await 
+                                setDoc(createUser, {
                                     name: userName,
                                     email: signupEmail,
                                     uid: currentUser.uid,
@@ -80,7 +85,7 @@ function Signpage(props) {
                                     })
                                     .catch(() => { console.log("create fail") });
                             }
-                        });
+                        // });
                     })
                     .catch((error) => {
                         console.log(error.message);

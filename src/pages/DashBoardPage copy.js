@@ -29,7 +29,7 @@ function DashBoardPage() {
         const getUser = doc(db, "users", useruid);
         await getDoc(getUser)
           .then((data) => {
-            // console.log(data.data());
+            console.log(data.data());
             userdata = []
             userdata.push(data.data().uid,
               data.data().name,
@@ -54,15 +54,11 @@ function DashBoardPage() {
             });
             // console.log(condition);
             // console.log(surveyList);
-            const userSurveys = document.querySelector("#user_surveys");
             if (surveyList == '') {
+              const userSurveys = document.querySelector("#user_surveys");
               userSurveys.className = "user_surveys_hide";
             }
-            else{
-              userSurveys.className = "user_surveys";
-            }
             setSurveyList(surveyList);
-            console.log(surveyList);
           });
         return getdata
       } else {

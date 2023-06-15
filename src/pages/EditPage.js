@@ -235,7 +235,8 @@ function EditPage() {
         console.log(newVersion);
         // console.log(serial);
 
-        const newAllQ = allQuestions.filter(ele => ele).map((ele, index) => ({ ...ele, id: index + 1 }));;
+        const newAllQ = allQuestions.filter(ele => ele).map((ele, index) => ({ ...ele, id: index + 1 }));
+        console.log(newAllQ);
 
         // console.log(newAllQ);
         let newQuesType = {}

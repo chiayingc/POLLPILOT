@@ -73,17 +73,14 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
           let rangeGap = result.value.rangeGap;
 
           let thequec = options;
-          // console.log(thequec);
-          // if (thequec[id] == undefined) { thequec[id] = []; }
-          // if (thequec[id]['rangeMin'] == undefined) { thequec[id]['rangeMin'] = 1; thequec[id]['rangeMax'] = 100; thequec[id]['rangeGap'] = 1; }
+          console.log(thequec);
+          if (thequec[id] == undefined) { thequec[id] = []; }
+          if (thequec[id][0] == undefined) { thequec[id][0] = 1; thequec[id][1] = 100; thequec[id][2] = 1; }
 
           rangeMin != '' ? thequec[id][0] = parseInt(rangeMin) : thequec[id][0]=thequec[id][0];
           rangeMax != '' ? thequec[id][1] = parseInt(rangeMax) : thequec[id][1]=thequec[id][1];
           rangeGap != '' ? thequec[id][2] = parseInt(rangeGap) : thequec[id][2]=thequec[id][2];
-          // console.log(thequec[id]);
-
-
-          // thequec[ctitleid][coptionid] = e.target.value;
+          thequec[id] = thequec[id].slice(0, 3);
           setOptions(thequec);
 
           document.querySelector("#rangebar"+id).min=thequec[id][0];
@@ -99,12 +96,12 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
       }}>
         <img src={infoicon} className='infoicon' />
-        <div>介於區間 <span id={'range_min'+id}>{options[id][0]}</span> - <span id={'range_max'+id}>{options[id][1]}</span></div>
+        <div>介於區間 <span id={'range_min'+id}>{options[id][0]?options[id][0]:1}</span> - <span id={'range_max'+id}>{options[id][1]?options[id][1]:100}</span></div>
       </div>
       
-      <span id={'rangebar_min'+id}>{options[id][0]}</span>
-      <input id={'rangebar'+id} type='range' min={options[id][0]} max={options[id][1]} step={options[id][2]} />
-      <span id={'rangebar_max'+id}>{options[id][1]}</span>
+      <span id={'rangebar_min'+id}>{options[id][0]?options[id][0]:1}</span>
+      <input id={'rangebar'+id} type='range' min={options[id][0]} max={options[id][1]} step={options[id][2]?options[id][2]:1} />
+      <span id={'rangebar_max'+id}>{options[id][1]?options[id][1]:100}</span>
     </>);
 
     return <div>{tmp}</div>
@@ -533,7 +530,7 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
       let thequec = options;
       // console.log(thequec);
       if (thequec[id] == undefined) { thequec[id] = []; }
-      // if (thequec[id]['rangeMin'] == undefined) { thequec[id]['rangeMin'] = 1; thequec[id]['rangeMax'] = 100; thequec[id]['rangeGap'] = 1; }
+      if (thequec[id]['rangeMin'] == undefined) { thequec[id]['rangeMin'] = 1; thequec[id]['rangeMax'] = 100; thequec[id]['rangeGap'] = 1; }
 
       // <QueG options={options} id={id} type={"G"} />
       let oneQue = <div key={id} id={"qus" + id} className="qus">

@@ -175,6 +175,11 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
 
   for (let i = 0; i < allQuestion.length; i++) {
+    console.log(allQuestion);
+    let queSerial = Date.now().toString(36).slice(2, 8);
+    console.log(queSerial);
+    allQuestion[i]['queSerial']=queSerial;
+    console.log(allQuestion);
     // console.log("OPTIONS",options);
     let id = i ;
     // let id = i+1 ;

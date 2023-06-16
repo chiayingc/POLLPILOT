@@ -75,15 +75,13 @@ function ResultPage() {
         const getVersion = doc(db, "surveys", serial);
         getDoc(getVersion)
           .then((data) => {
-console.log(data);
             // version = data.data().version;
             queTypes = data.data().questionsType;
-console.log(datadata.data().version);
             const getQuestions = doc(db, "surveys", serial, "questions", "version" + datadata.data().version);
             getDoc(getQuestions)
               .then((data) => {
                 allQuestions = data.data().questions;
-                // console.log(allQuestions);
+                console.log(allQuestions);
 
                 let allContents = [];
                 let oneResult = [];
@@ -96,9 +94,12 @@ console.log(datadata.data().version);
                   if (allQuestions[i].type == "A" || allQuestions[i].type == "B" || allQuestions[i].type == "F" || allQuestions[i].type == "J" || allQuestions[i].type == "G") {
                     oneResult = [];
                     // allContents.push(<div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}------------</div>);
-                    for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
-                      let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allAns[allQuestions[i].queSerial][j]}</p>;    //因為是簡答題,取字串
-                      oneResult.push(oneAns);
+                    if(allAns[allQuestions[i].queSerial]!=undefined){
+                      console.log("hi");
+                      for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { //第i題的所有回答
+                        let oneAns = <p id={"q" + i + "a" + j} key={"q" + i + "a" + j} className="result_oneans_A">{allAns[allQuestions[i].queSerial][j]}</p>;    //因為是簡答題,取字串
+                        oneResult.push(oneAns);
+                      }
                     }
 
                     aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">

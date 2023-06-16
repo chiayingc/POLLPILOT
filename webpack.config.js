@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  mode: "development",  //production
+  mode: "production",  //development
   entry: "./src/index.js",
   output: {
     filename: "main.js",
@@ -66,5 +66,8 @@ module.exports = {
   externals: {
     fs: 'commonjs fs'
   },
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  optimization:{
+    minimize:false,
+  }
 };

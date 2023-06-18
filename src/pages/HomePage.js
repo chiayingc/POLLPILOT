@@ -39,7 +39,9 @@ function HomePage() {
       <div id='homepage_main'>
         <div id='homepage_main_left'>
           <img src={pplogo} className='logo'/>
-          <p>雲端問卷服務</p><p>Quisque vitae diam sesagaugue. </p>
+          <p className='homepage_title'>雲端問卷服務</p>
+          <p className='homepage_secondtitle'>讓您快速建立、分享問卷<br/>
+            即時收集回應，統計數據</p>
           <button id='homepage_btn_start'>
             <Link to={url}>免費建立問卷</Link>
           </button>

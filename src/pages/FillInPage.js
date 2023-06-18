@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar'
 import { render } from 'react-dom'
 import ColoredLine from '../components/ColoredLine'
 import Swal from 'sweetalert2'
+import ClosePage from './ClosePage'
 
 
 function FillInPage() {
@@ -76,7 +77,9 @@ function FillInPage() {
   let serial = tmpAry[tmpAry.length - 1];
   let newAllAns = {};
   const [surveyQues, setSurveyQues] = useState([]);  //記錄所有題目內容
-  const [surveySettings, setSurveySettings] = useState([]);
+  let tmpSetting=[];
+  tmpSetting[1]={status:2};
+  const [surveySettings, setSurveySettings] = useState(tmpSetting);
   const [checkPassword, setCheckPassword] = useState(false);
 
 
@@ -92,12 +95,15 @@ function FillInPage() {
         await getDoc(getQues)
           .then((data) => {
             setSurveySettings(surveySetting);
-            setSurveyQues(data.data().questions);
+            // setSurveyQues(data.data().questions);
             console.log(surveySetting[1]);
 
-            if (surveySetting[1].status == 2) {
-              console.log("問卷關閉中");
-              navigate("/close");
+            if (surveySetting[1].status != 2) {
+              // console.log("問卷關閉中");
+              // navigate("/close");
+            // }
+            // else{
+              setSurveyQues(data.data().questions);
             }
             if (surveySetting[1].status == 1) {
               setCheckPassword(true);
@@ -393,30 +399,34 @@ function FillInPage() {
   return (
     <div id='fillinpage'>
       <Navbar type={4} />
-      {checkPassword ?
-        <div className='fillin_questions'>
-          <div className='fillin_askkey'>
-            此問卷需要密碼才能填寫, 請輸入問卷密碼
+      {
+      surveySettings[1].status==2?
+      (<ClosePage/>)
+      :
+        checkPassword ?
+          <div className='fillin_questions'>
+            <div className='fillin_askkey'>
+              此問卷需要密碼才能填寫, 請輸入問卷密碼
+            </div>
+            <input type='password' id='input_password' />
+            <button onClick={passwordCheck} id='btn_fillin'>確認</button>
           </div>
-          <input type='password' id='input_password' />
-          <button onClick={passwordCheck} id='btn_fillin'>確認</button>
-        </div>
-        :
-        <div className='fillin_questions'>
-          <div className='welcomeText'>
-            {surveySettings[1] ? surveySettings[1].welcomeText : ''}
-          </div>
-          <div className='title'>
-          <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
-          </div>
-          {/* <div> */}
-          {/* {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)} */}
-          <div className='quecontent'>
-          {<CountNum/>}
-          </div>
-          {/* </div> */}
-          <button onClick={fillin} id='btn_fillin'>送出問卷</button>
-        </div>}
+          :
+          <div className='fillin_questions'>
+            <div className='welcomeText'>
+              {surveySettings[1] ? surveySettings[1].welcomeText : ''}
+            </div>
+            <div className='title'>
+            <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
+            </div>
+            {/* <div> */}
+            {/* {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)} */}
+            <div className='quecontent'>
+            {<CountNum/>}
+            </div>
+            {/* </div> */}
+            <button onClick={fillin} id='btn_fillin'>送出問卷</button>
+          </div>}
 
 
       {/* <div>{surveySetting.welcomeText}</div>

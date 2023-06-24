@@ -274,7 +274,7 @@ function AddQuesPage() {
           <div id='questype_menu' className='questype_menu'
             onClick={() => {
               document.querySelector("#questype_menu").className = "noshow";
-              document.querySelector("#addquespage_main_right").addEventListener('click', handelMenu);
+              document.querySelector("#addquespage_main_left").addEventListener('click', handelMenu);
               document.querySelector("#addquespage_main_right").className = 'addquespage_main_right';
 
             }}>

@@ -78,7 +78,7 @@ function FillInPage() {
   let newAllAns = {};
   const [surveyQues, setSurveyQues] = useState([]);  //記錄所有題目內容
   let tmpSetting=[];
-  tmpSetting[1]={status:2};
+  tmpSetting[1]={status:3};
   const [surveySettings, setSurveySettings] = useState(tmpSetting);
   const [checkPassword, setCheckPassword] = useState(false);
 
@@ -400,6 +400,9 @@ function FillInPage() {
     <div id='fillinpage'>
       <Navbar type={4} />
       {
+      surveySettings[1].status==3?
+        <div></div>
+      :
       surveySettings[1].status==2?
       (<ClosePage/>)
       :
@@ -413,11 +416,11 @@ function FillInPage() {
           </div>
           :
           <div className='fillin_questions'>
+            <div className='title'>
+              <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
+            </div>
             <div className='welcomeText'>
               {surveySettings[1] ? surveySettings[1].welcomeText : ''}
-            </div>
-            <div className='title'>
-            <h3 className={'survey_title_' + talign[surveySettings[1] ? surveySettings[1].titleAlign : 0]}>{surveySettings[1] ? surveySettings[1].name : ''}</h3>
             </div>
             {/* <div> */}
             {/* {surveyQues.map((que, index) => <AQue key={index} quedata={que} />)} */}

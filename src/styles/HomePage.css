@@ -23,7 +23,7 @@ button:hover {
     border: rgba(249, 240, 245, 0.667) 1px solid;
 }
 
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
 
     iframe {
         border: 0;
@@ -143,7 +143,7 @@ button:hover {
         text-decoration: none;
         color: #111827;
     }
-}
+/* } */
 
 @media (max-width:1280px) {
 

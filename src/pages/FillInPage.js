@@ -20,6 +20,7 @@ function FillInPage() {
   const handleOptionChange = (serial, index) => {
     // let tmp=selectedValue;
     // Object.assign(tmp,newAllAns);
+    console.log(serial,index);
 
     const newArr = [...selectedValue[serial]]; // 先複製一份陣列
     const newCheck = [...checkedList[serial]];
@@ -43,6 +44,7 @@ function FillInPage() {
     // let tmpp=selectedValue;
     // Object.assign(tmpp,newAllAns);
     // setSelectedValue(tmpp);
+    console.log(serial,index);
 
     const newArr = [...selectedValue[serial]]; // 先複製一份陣列
     const newCheck = [...checkedList[serial]];
@@ -237,7 +239,8 @@ function FillInPage() {
           {/* 這裡要加入range大小(資料來源)跟間隔顯示、range樣式 */}
           <div className='rangebar'>
             <span>{queData.options[0]}</span>
-            <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} />
+            {/* <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={queData.options[0]} /> */}
+            <input className='fillin_ans_range' type='range' min={queData.options[0]} max={queData.options[1]} step={queData.options[2]} id={"ans" + queData.queSerial} onChange={recordAns} defaultValue={selectedValue[queData.queSerial]} />
             <span>{queData.options[1]}</span>
           </div>
         </div>

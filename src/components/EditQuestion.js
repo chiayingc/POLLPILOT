@@ -175,6 +175,7 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
 
   for (let i = 0; i < allQuestion.length; i++) {
+    if(allQuestion[i]!=''){
     console.log(allQuestion);
     let queSerial = Date.now().toString(36).slice(2, 8);
     console.log(queSerial);
@@ -235,7 +236,9 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
         <button className='btn_addradio' onClick={() => {
           let tmpcount = count;
+          if(tmpcount[0]==undefined){
           tmpcount[0] = { id: 0, count: 0 };
+          }
           // if (count[id] == undefined) { tmpcount[id] = { id: id, count: 0 }; setCount(tmpcount); }
           const c = count.find(q => q?.id === id);
           c.count++;
@@ -273,7 +276,9 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
         <button className='btn_addradio' onClick={() => {
           let tmpcount = count;
+          if(tmpcount[0]==undefined){
           tmpcount[0] = { id: 0, count: 0 };
+          }
           // if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
           const c = count.find(q => q?.id === id);
           c.count++;
@@ -410,6 +415,7 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     
     //矩陣題 星級題
 
+    }
   }
 
 

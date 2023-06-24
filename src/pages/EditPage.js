@@ -63,7 +63,7 @@ function EditPage() {
                 // console.log(oldVersion);
                 await getDoc(getQues)
                     .then((data) => {
-                        // console.log(data.data().questions);
+                        console.log(data.data().questions);
                         setAllQuestions(data.data().questions);
                         setQueCount(data.data().questions.length);
                     });
@@ -83,6 +83,7 @@ function EditPage() {
     const done = async (e) => {
         e.preventDefault();
         let queSerial = Date.now().toString(36).slice(2, 8);
+        console.log(queSerial);
         let type = e.target.id.substr(0, 1);
         let id = e.target.id.replace(type + "done", "");
 
@@ -129,6 +130,7 @@ function EditPage() {
         if (options) {  ///////////如果有選項才繼續.... 這邊要再修改
             // console.log(options);
             let queSerial = Date.now().toString(36).slice(2, 8);
+            console.log(queSerial);
             let type = e.target.id.substr(0, 1);
             let id = e.target.id.replace(type + "done", "");
             // console.log(id, type);
@@ -172,7 +174,7 @@ function EditPage() {
         // else {
 
 
-        // console.log(1, allQuestions);
+        console.log(1, allQuestions);
         let tmp = allQuestions;
         // if(type=="A" || type=="B"){tmp[eid] = '';}
         // if(type=="C"){tmp[eid]=}
@@ -180,6 +182,7 @@ function EditPage() {
         tmp[eid] = '';
         // let newAllQues = allQuestions.filter((ele) => ele.id != eid);
         // console.log(2,newAllQues);
+        console.log(tmp);
         // 這邊要加入把整個題目匡拔掉
 
 
@@ -243,6 +246,8 @@ function EditPage() {
         // console.log(newAllQ);
 
         for (let i = 0; i < newAllQ.length; i++) {
+            let queSerial = Date.now().toString(36).slice(2, 8);
+            newAllQ[i].queSerial=queSerial+i;
             newQuesType[newAllQ[i].queSerial] = newAllQ[i].type;
             // console.log(newQuesType);
         }

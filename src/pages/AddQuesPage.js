@@ -298,11 +298,16 @@ function AddQuesPage() {
             <button onClick={addQue} value={"J"}>日期</button>
             <button onClick={addQue} value={"K"}>分隔線</button>
           </div>
-          <div id='step_btn'>
+          {/* <div id='step_btn'> */}
+            {/* <button>＜問卷設定</button> */}
+            {/* <button onClick={saveQues}>外觀設定＞</button> */}
+            {/* <button onClick={saveQues}>發布問卷</button> */}
+          {/* </div> */}
+        </div>
+        <div id='step_btn'>
             {/* <button>＜問卷設定</button> */}
             {/* <button onClick={saveQues}>外觀設定＞</button> */}
             <button onClick={saveQues}>發布問卷</button>
-          </div>
         </div>
       </div>
 

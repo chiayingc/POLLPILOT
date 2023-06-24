@@ -6,7 +6,7 @@ body {
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
 }
 
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
     .swal2-popup{
         width: 30em !important;
         font-size: .4rem !important;
@@ -111,8 +111,13 @@ body {
     }
 
     #step_btn {
-        position: relative;
-        top: calc(100% - 400px);
+        /* position: relative; */
+        position: absolute;
+        right: 20px;
+        bottom: 8vh;
+        width: 13rem;
+        max-width: 265px;
+        /* top: calc(100% - 400px); */
         display: grid;
         row-gap: 10px;
         padding: 12px;
@@ -135,7 +140,7 @@ body {
         cursor: pointer;
         touch-action: manipulation;
     }
-}
+/* } */
 
 @media (max-width:1280px) {
     #questions {
@@ -167,6 +172,10 @@ body {
         position: absolute;
         top: 30;
         right: 0;
+    }
+
+    #step_btn {
+        max-width: 135px;
     }
 
     /* #questions{

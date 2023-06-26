@@ -2,7 +2,7 @@ body>div {
     width: 100%;
 }
 
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
     #releasepage {
         width: 100%;
         display: grid;
@@ -85,7 +85,7 @@ body>div {
         background-color: #c7c8ba6d;
         border: rgba(249, 240, 245, 0.667) 1px solid;
     }
-}
+/* } */
 
 @media (max-width:768px) {
     #releasepage_content {

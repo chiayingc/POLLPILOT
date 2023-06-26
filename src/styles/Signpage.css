@@ -1,4 +1,4 @@
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
 
     input {
         outline: none;
@@ -143,7 +143,7 @@
         grid-template-columns: 90px auto;
     }
 
-}
+/* } */
 
 @media (max-width:1280px) {
 

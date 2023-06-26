@@ -1,4 +1,4 @@
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
 
     body >div{
         width: 100%;
@@ -275,7 +275,7 @@
         background: rgb(219, 219, 219);
         -webkit-box-shadow: inset 0 0 4px rgba(147, 147, 147, 0.3);
     }
-}
+/* } */
 
 @media (max-width:980px) {
     #survey_setting,

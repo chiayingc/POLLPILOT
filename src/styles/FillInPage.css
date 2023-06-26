@@ -1,5 +1,5 @@
 
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
     #fillinpage {
         width: 100%;
         display: grid;
@@ -287,7 +287,7 @@
 
 
     
-}
+/* } */
 
 @media (max-width:800px) {
     /* .fillin_questions>div:not(.welcomeText){ */

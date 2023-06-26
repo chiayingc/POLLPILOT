@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext, version } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/AddQuesPage.css'
-import Question from '../components/Question.js'
+import '../styles/EditPage.css'
+// import Question from '../components/Question.js'
 import '../styles/Question.css'
 import { UserContext } from '../helper/Context'
 import { auth, db } from '../../firebase-config.js'
-import { doc, collection, addDoc, setDoc, getDoc, arrayUnion } from 'firebase/firestore'
+import { doc, collection, addDoc, setDoc, getDoc, arrayUnion, query, where, onSnapshot } from 'firebase/firestore'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
     onAuthStateChanged
@@ -13,6 +14,7 @@ import {
 import menu from '../assets/add-to-queue.png'
 import Swal from 'sweetalert2'
 import EditQuestion from '../components/EditQuestion'
+import EditSettings from '../components/EditSettings'
 
 function EditPage() {
     // console.log("Edit");
@@ -28,11 +30,23 @@ function EditPage() {
     const [allQuestions, setAllQuestions] = useState([]);  //記錄所有題目內容
 
     const [surveyQues, setSurveyQues] = useState([]);  //記錄所有題目內容?
+    // console.log("state:",state);
+    const [step, setStep] = useState(0);
+
+    if (state.state) {
+        console.log(state.state);
+        if (step != state.state) {
+            setStep(state.state);
+        }
+        // console.log("step::",state.state.step);
+        // setStep(state.state.step);
+    }
 
     let oldVersion;
     let currentVersion;
-    const [newVersion, setNewVersion]=useState();
-    let surveySettings;
+    const [newVersion, setNewVersion] = useState();
+    const [surveySettings, setSurveySettings] = useState({});
+
 
     useEffect(() => {
         // console.log("pathname:",state.pathname.replace("/edit/",""));
@@ -40,34 +54,70 @@ function EditPage() {
 
         onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
+                console.log(currentUser.uid);
                 if (window.innerWidth < 600) { setMobile(true); }
-
+                // console.log(currentUser);
                 //取得問卷資訊、問題版本    (如果是新增,用0開始; 如果是編輯問卷題目, 從資料庫取)
                 const getVersion = doc(db, "surveys", serial);
                 await getDoc(getVersion)
-                    .then((data) => {
-                        // console.log(data.data());
-                        // console.log(Object.values(data.data().questionsType));
-                        setAllQues(Object.values(data.data().questionsType));
-                        oldVersion = data.data().version;
-                        // console.log(oldVersion);
-                        currentVersion = parseInt(oldVersion) + 1;
-                        setNewVersion(currentVersion);
-                        // surveySettings=data.data().Settings;
-                        // console.log("version::", currentVersion);
-                        // console.log("settings::",surveySettings);
-                    });
+                    .then(async (data) => {
+                        console.log(data.data());
 
-                //取得目前的題目
-                const getQues = doc(db, "surveys", serial, "questions", "version" + oldVersion);
-                // console.log(oldVersion);
-                await getDoc(getQues)
-                    .then((data) => {
-                        console.log(data.data().questions);
-                        setAllQuestions(data.data().questions);
-                        setQueCount(data.data().questions.length);
-                    });
+                        /*驗證是否為此問卷的作者 */
+                        const users = collection(db, "users");
+                        const getUsermark = query(users,
+                            where("usermark", "==", data.data().creator));
+                        // getDoc(getUsermark)
+                        //     .then((user)=>{console.log(user.data().usermark);})
+                        //     .catch();
+                        const queryUsermark = onSnapshot(
+                            getUsermark, (snapshot) => {
+                                snapshot.forEach(async(user) => {
+                                    console.log(user.data().uid);
+                                    console.log(currentUser.uid);
+                                    if (user.data().uid != currentUser.uid) {
+                                        //alert
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: '您似乎不是此問卷的作者',
+                                            timer: 2000,
+                                            timerProgressBar: true,
+                                        }).then(() => {
+                                            navigate("/dashboard");
+                                        });
+                                        // navigate("/dashboard");
+                                    }
+                                    else {
 
+
+                                        /*驗證是否為此問卷的作者*/
+
+                                        setSurveySettings(data.data().Settings);
+                                        // console.log(Object.values(data.data().questionsType));
+                                        setAllQues(Object.values(data.data().questionsType));
+                                        oldVersion = data.data().version;
+                                        // console.log(oldVersion);
+                                        currentVersion = parseInt(oldVersion) + 1;
+                                        setNewVersion(currentVersion);
+                                        // surveySettings=data.data().Settings;
+                                        // console.log("version::", currentVersion);
+                                        // console.log("settings::",surveySettings);
+
+
+                                        //取得目前的題目
+                                        const getQues = doc(db, "surveys", serial, "questions", "version" + oldVersion);
+                                        // console.log(oldVersion);
+                                        await getDoc(getQues)
+                                            .then((data) => {
+                                                console.log(data.data().questions);
+                                                setAllQuestions(data.data().questions);
+                                                setQueCount(data.data().questions.length);
+                                            });
+                                    }
+                                })
+                            });
+                    });
 
             } else {
                 navigate("/signin");
@@ -234,7 +284,7 @@ function EditPage() {
     }
 
     const saveQues = async () => {
-
+        // console.log(Settings);
         console.log(newVersion);
         // console.log(serial);
 
@@ -247,14 +297,14 @@ function EditPage() {
 
         for (let i = 0; i < newAllQ.length; i++) {
             let queSerial = Date.now().toString(36).slice(2, 8);
-            newAllQ[i].queSerial=queSerial+i;
+            newAllQ[i].queSerial = queSerial + i;
             newQuesType[newAllQ[i].queSerial] = newAllQ[i].type;
             // console.log(newQuesType);
         }
 
 
         // //如果是編輯問卷, 這邊Version版本要改!
-        const setQues = doc(db, "surveys", serial, "questions", "version"+newVersion);
+        const setQues = doc(db, "surveys", serial, "questions", "version" + newVersion);
         await setDoc(setQues, {
             questions: newAllQ,
             questionsType: newQuesType
@@ -291,55 +341,58 @@ function EditPage() {
     return (
         <div id='addquespage'>
             <Navbar type={1} />
-            <div id='addquespage_main'>
-                <div id='addquespage_main_left'>
-                    {/* <Question allQ={allQues} recordQue={recordQue} done={done} /> */}
-                    {/* //這邊要再加入要不要顯示題號的設定 回傳不同的html結果 */}
-                    <EditQuestion allQ={allQues} done={done} doneC={doneC} remove={remove} allQuestion={allQuestions} />
-                    {/* <Question allQ={allQues} /> */}
-                    {/* {allQues.map((allq, index) => <Question key={index} allQ={allq} />)} */}
-                </div>
-                {mobile ?
-                    <div id='questype_menu' className='questype_menu'
-                        onClick={() => {
-                            document.querySelector("#questype_menu").className = "noshow";
-                            document.querySelector("#addquespage_main_left").addEventListener('click', handelMenu);
-                            document.querySelector("#addquespage_main_right").className = 'addquespage_main_right';
-
-                        }}>
-                        <img src={menu} />
-                        <p className='addhint'>新增題目</p>
+            {step == 0 ?
+                <EditSettings oldSettings={surveySettings} />
+                :
+                <div id='addquespage_main'>
+                    <div id='addquespage_main_left'>
+                        {/* <Question allQ={allQues} recordQue={recordQue} done={done} /> */}
+                        {/* //這邊要再加入要不要顯示題號的設定 回傳不同的html結果 */}
+                        <EditQuestion allQ={allQues} done={done} doneC={doneC} remove={remove} allQuestion={allQuestions} />
+                        {/* <Question allQ={allQues} /> */}
+                        {/* {allQues.map((allq, index) => <Question key={index} allQ={allq} />)} */}
                     </div>
-                    : ''}
+                    {mobile ?
+                        <div id='questype_menu' className='questype_menu'
+                            onClick={() => {
+                                document.querySelector("#questype_menu").className = "noshow";
+                                document.querySelector("#addquespage_main_left").addEventListener('click', handelMenu);
+                                document.querySelector("#addquespage_main_right").className = 'addquespage_main_right';
 
-                <div id='addquespage_main_right' className={mobile ? 'noshow' : 'addquespage_main_right'}>
-                    <h5>選擇題型</h5>
-                    <div id='ques_type'>
-                        <button onClick={addQue} value={"A"}>單行文字</button>
-                        <button onClick={addQue} value={"B"}>多行文字</button>
-                        <button onClick={addQue} value={"C"}>單選題</button>
-                        <button onClick={addQue} value={"D"}>多選題</button>
-                        {/* <button onClick={addQue} value={"E"}>矩陣題</button> */}
-                        <button onClick={addQue} value={"F"}>數字題</button>
-                        <button onClick={addQue} value={"G"}>數字滑桿</button>
-                        <button onClick={addQue} value={"H"}>引言</button>
-                        <button onClick={addQue} value={"I"}>分類標題</button>
-                        <button onClick={addQue} value={"J"}>日期</button>
-                        <button onClick={addQue} value={"K"}>分隔線</button>
-                    </div>
-                    {/* <div id='step_btn'> */}
+                            }}>
+                            <img src={menu} />
+                            <p className='addhint'>新增題目</p>
+                        </div>
+                        : ''}
+
+                    <div id='addquespage_main_right' className={mobile ? 'noshow' : 'addquespage_main_right'}>
+                        <h5>選擇題型</h5>
+                        <div id='ques_type'>
+                            <button onClick={addQue} value={"A"}>單行文字</button>
+                            <button onClick={addQue} value={"B"}>多行文字</button>
+                            <button onClick={addQue} value={"C"}>單選題</button>
+                            <button onClick={addQue} value={"D"}>多選題</button>
+                            {/* <button onClick={addQue} value={"E"}>矩陣題</button> */}
+                            <button onClick={addQue} value={"F"}>數字題</button>
+                            <button onClick={addQue} value={"G"}>數字滑桿</button>
+                            <button onClick={addQue} value={"H"}>引言</button>
+                            <button onClick={addQue} value={"I"}>分類標題</button>
+                            <button onClick={addQue} value={"J"}>日期</button>
+                            <button onClick={addQue} value={"K"}>分隔線</button>
+                        </div>
+                        {/* <div id='step_btn'> */}
                         {/* <button>＜問卷設定</button> */}
                         {/* <button onClick={saveQues}>外觀設定＞</button> */}
                         {/* <button onClick={saveQues}>發布問卷</button> */}
-                    {/* </div> */}
-                </div>
-                <div id='step_btn'>
+                        {/* </div> */}
+                    </div>
+                    <div id='step_btn'>
                         {/* <button>＜問卷設定</button> */}
                         {/* <button onClick={saveQues}>外觀設定＞</button> */}
                         <button onClick={saveQues}>發布問卷</button>
+                    </div>
                 </div>
-            </div>
-
+            }
         </div>
     )
 }

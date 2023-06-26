@@ -47,7 +47,7 @@ function AddNewPage() {
         }
 
         await setDoc(addSurvey, {
-            creater: userData[3],
+            creator: userData[3],
             Settings: Settings,
             version: 1
         }, { merge: true })

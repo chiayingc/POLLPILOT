@@ -1,4 +1,4 @@
-@media (max-width:1980px) {
+/* @media (max-width:1980px) { */
 
     #dashboardpage {
         width: 100%;
@@ -249,7 +249,7 @@
         margin-left: 10px;
     }
 
-}
+/* } */
 
 @media (max-width:1180px) {
 

@@ -17,7 +17,7 @@ function DashBoardPage() {
   const navigate = useNavigate();
   const [surveyList, setSurveyList] = useState([]);
   const [userData, setuserData] = useState([]);
-  const [condition, setCondition] = useState([0,1,2]);
+  const [condition, setCondition] = useState([0, 1, 2]);
   let useruid = "";
   let userdata = [];
 
@@ -37,11 +37,12 @@ function DashBoardPage() {
               data.data().usermark);
           });
         setuserData(userdata);
+        console.log(userdata);
 
         const surveys = collection(db, "surveys");
-        const userSurveys = query(surveys, 
-                                  where("creater", "==", userdata[3]),
-                                  where("Settings.status", "in", condition));
+        const userSurveys = query(surveys,
+          where("creator", "==", userdata[3]),
+          where("Settings.status", "in", condition));
         const getdata = onSnapshot(
           userSurveys, (snapshot) => {
             let surveyList = [];
@@ -50,16 +51,18 @@ function DashBoardPage() {
               //let version=doc.data().version; // 編輯問卷時要用版本
               // console.log(settings); //doc.data()  ->所有問卷內容 ;   doc.id ->所有問卷名稱
               surveyList.push({ ...settings, id: doc.id, name: settings.name, serial: settings.serial, showNum: settings.showNum, status: settings.status, thanksText: settings.thanksText, welcomeText: settings.welcomeText, key: settings.key });
-              surveyList.filter((survey)=>{condition.includes(survey.status);});
+              surveyList.filter((survey) => { condition.includes(survey.status); });
             });
             // console.log(condition);
             // console.log(surveyList);
             const userSurveys = document.querySelector("#user_surveys");
-            if (surveyList == '') {
-              userSurveys.className = "user_surveys_hide";
-            }
-            else{
-              userSurveys.className = "user_surveys";
+            if (userSurveys) {
+              if (surveyList == '') {
+                userSurveys.className = "user_surveys_hide";
+              }
+              else {
+                userSurveys.className = "user_surveys";
+              }
             }
             setSurveyList(surveyList);
             console.log(surveyList);
@@ -91,12 +94,12 @@ function DashBoardPage() {
     return thesur;
 
   }
-  
-  function handleSelectChanged(status){
+
+  function handleSelectChanged(status) {
     // console.log("e:",e);
-    switch (status){
+    switch (status) {
       case "all":
-        setCondition([0,1,2]);
+        setCondition([0, 1, 2]);
         break;
       case "open":
         setCondition([0]);
@@ -131,7 +134,7 @@ function DashBoardPage() {
         <div id='dashboardpage_main_right'>
           <p id='dashboard_title'>我的問卷</p>
           <div id='dashboard_arrangement'>
-            <select defaultValue="all" onChange={(e)=>{handleSelectChanged(e.target.value)}}>
+            <select defaultValue="all" onChange={(e) => { handleSelectChanged(e.target.value) }}>
               <option value="all" disabled>問卷狀態</option>
               <option value="all">全部</option>
               <option value="open">開放</option>

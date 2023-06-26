@@ -40,7 +40,7 @@ function DashBoardPage() {
 
         const surveys = collection(db, "surveys");
         const userSurveys = query(surveys, 
-                                  where("creater", "==", userdata[3]),
+                                  where("creator", "==", userdata[3]),
                                   where("Settings.status", "in", condition));
         const getdata = onSnapshot(
           userSurveys, (snapshot) => {

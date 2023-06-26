@@ -38,16 +38,16 @@ function EditSettings({oldSettings}) {
     // const { user, setUser } = useContext(UserContext);
     
 
-    useEffect(() => {
-        onAuthStateChanged(auth, async (currentUser) => {
-            if (currentUser) {
-                // setUser(currentUser);
-                // console.log(currentUser);
-            } else {
-                navigate("/signin");
-            }
-        });
-    }, []);
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, async (currentUser) => {
+    //         if (currentUser) {
+    //             // setUser(currentUser);
+    //             // console.log(currentUser);
+    //         } else {
+    //             navigate("/signin");
+    //         }
+    //     });
+    // }, []);
 
     function changeTitleAlign(align){
         console.log("align",align);
@@ -90,7 +90,7 @@ function EditSettings({oldSettings}) {
             showNum: surveyShowNum,
             welcomeText: surveyWelcomeText,
             thanksText: surveyThanksText,
-            status: surveyStatus,
+            status: parseInt(surveyStatus),
             key: surveyKey
         }
 

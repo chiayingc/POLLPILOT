@@ -72,7 +72,7 @@ function EditPage() {
                         //     .catch();
                         const queryUsermark = onSnapshot(
                             getUsermark, (snapshot) => {
-                                snapshot.forEach(async(user) => {
+                                snapshot.forEach(async (user) => {
                                     console.log(user.data().uid);
                                     console.log(currentUser.uid);
                                     if (user.data().uid != currentUser.uid) {
@@ -81,7 +81,7 @@ function EditPage() {
                                             icon: 'error',
                                             title: 'Oops...',
                                             text: '您似乎不是此問卷的作者',
-                                            timer: 2000,
+                                            timer: 1200,
                                             timerProgressBar: true,
                                         }).then(() => {
                                             navigate("/dashboard");
@@ -95,7 +95,10 @@ function EditPage() {
 
                                         setSurveySettings(data.data().Settings);
                                         // console.log(Object.values(data.data().questionsType));
-                                        setAllQues(Object.values(data.data().questionsType));
+                                        let questionsType = data.data().questionsType;
+                                        if (questionsType) {
+                                            setAllQues(Object.values(questionsType));
+                                        }
                                         oldVersion = data.data().version;
                                         // console.log(oldVersion);
                                         currentVersion = parseInt(oldVersion) + 1;
@@ -110,9 +113,13 @@ function EditPage() {
                                         // console.log(oldVersion);
                                         await getDoc(getQues)
                                             .then((data) => {
-                                                console.log(data.data().questions);
-                                                setAllQuestions(data.data().questions);
-                                                setQueCount(data.data().questions.length);
+                                                if (data.data()) {
+                                                    // console.log(data.data());
+                                                    if (data.data().questions) {
+                                                        setAllQuestions(data.data().questions);
+                                                        setQueCount(data.data().questions.length);
+                                                    }
+                                                }
                                             });
                                     }
                                 })

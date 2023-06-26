@@ -80,7 +80,13 @@ function Signpage(props) {
                                 }, { merge: true })
                                     .then(() => {
                                         console.log("create successed!");
-                                        alert("註冊成功");
+                                        // alert("註冊成功");
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: '註冊成功！',
+                                            timer: 1500,
+                                            timerProgressBar: true,
+                                        });
                                         navigate("/dashboard");
                                     })
                                     .catch(() => { console.log("create fail") });
@@ -91,7 +97,14 @@ function Signpage(props) {
                         console.log(error.message);
                         // setErrorHint(error.message.substring(8, [error.message.length]));
                         setErrorHint(error.message);
-                        alert("註冊失敗");
+                        // alert("註冊失敗");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: '註冊失敗！',
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
                     });
             } catch (error) {
                 //註冊失敗

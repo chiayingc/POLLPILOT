@@ -179,6 +179,8 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
     console.log(allQuestion);
     let queSerial = Date.now().toString(36).slice(2, 8);
     console.log(queSerial);
+    ////
+    if(allQuestion[i]==undefined){allQuestions[i]=[];allQuestion[i]['queSerial']='';};
     allQuestion[i]['queSerial']=queSerial;
     console.log(allQuestion);
     // console.log("OPTIONS",options);

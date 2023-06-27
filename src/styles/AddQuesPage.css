@@ -173,9 +173,21 @@ body {
         top: 30;
         right: 0;
     }
-
+/* 
     #step_btn {
         max-width: 135px;
+    } */
+
+    #step_btn {
+        /* position: relative; */
+        position: absolute;
+        right: 30px;
+        width: 5rem;
+        max-width: 35px;
+        /* top: calc(100% - 400px); */
+        display: grid;
+        row-gap: 10px;
+        padding: 12px;
     }
 
     /* #questions{

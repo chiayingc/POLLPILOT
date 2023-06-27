@@ -138,7 +138,7 @@ function Signpage(props) {
                             <input className='sign_input' type="password" placeholder='請輸入您的密碼'
                                 onChange={(e) => { signinPassword = e.target.value; }} />
                             <img />
-                            <p className='second_title'>忘記密碼了嗎</p>
+                            {/* <p className='second_title'>忘記密碼了嗎</p> */}
                         </div>
                         <p className='hint' id='signin_hint'>{errorHint}</p>
                     </div>
@@ -180,7 +180,7 @@ function Signpage(props) {
                     <button onClick={signup}>註冊</button>
                 </form>
                 <div>
-                    <p className='sign_btn'>其他註冊</p>
+                    {/* <p className='sign_btn'>其他註冊</p> */}
                     {/* <button>使用 Facebook 註冊</button> */}
                     <div><p className='sign_btn'>已經有帳號嗎？</p> <p className='sign_btn'><Link to={"/signin"}>前往登入</Link></p></div>
                 </div>

@@ -32,7 +32,7 @@ function HomePage() {
 
   return (
     <div id='homepage'>
-      <Navbar type={3} />
+      <Navbar type={2} />
       <iframe className='home_bk1' src={homepage_bk1}></iframe>
       <iframe className='home_bk2' src={homepage_bk2}></iframe>
       <iframe className='home_bk3' src={homepage_bk3}></iframe>

@@ -11,7 +11,7 @@ import {
 import { UserContext } from '../helper/Context'
 
 
-function Navbar(props) {
+function Navbar({type}) {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   // console.log(user);
@@ -29,7 +29,7 @@ function Navbar(props) {
   
   let result;
 
-  if (props.type == 1) {
+  if (type == 1) {
 
     result = <div id='navbar'>
       <div id='nav_logo'>
@@ -50,7 +50,7 @@ function Navbar(props) {
 
   }
 
-  if (props.type == 2) {
+  if (type == 2) {
 
     result = <div id='navbar2'>
       {user ? (
@@ -68,7 +68,7 @@ function Navbar(props) {
 
   }
 
-  if (props.type == 3 || props.type==4) {
+  if (type == 3 || type==4) {
 
     result = <div id='navbar'>
       <div id='nav_logo'>

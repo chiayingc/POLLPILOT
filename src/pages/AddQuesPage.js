@@ -234,7 +234,7 @@ function AddQuesPage() {
         console.log("success");
         const setVersion = doc(db, "surveys", serial);
         await setDoc(setVersion, {
-          questionsType: newQuesType,
+          // questionsType: newQuesType,
           version: 1    //如果是編輯問卷, 這邊Version版本要改!
         }, { merge: true }).then(() => {
           navigate("/release/" + serial);

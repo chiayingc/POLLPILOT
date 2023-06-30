@@ -34,7 +34,7 @@ function EditPage() {
     const [step, setStep] = useState(0);
 
     if (state.state) {
-        console.log(state.state);
+        // console.log(state.state);
         if (step != state.state) {
             setStep(state.state);
         }
@@ -54,7 +54,7 @@ function EditPage() {
 
         onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
-                console.log(currentUser.uid);
+                // console.log(currentUser.uid);
                 if (window.innerWidth < 600) { setMobile(true); }
                 // console.log(currentUser);
                 //取得問卷資訊、問題版本    (如果是新增,用0開始; 如果是編輯問卷題目, 從資料庫取)
@@ -73,8 +73,8 @@ function EditPage() {
                         const queryUsermark = onSnapshot(
                             getUsermark, (snapshot) => {
                                 snapshot.forEach(async (user) => {
-                                    console.log(user.data().uid);
-                                    console.log(currentUser.uid);
+                                    // console.log(user.data().uid);
+                                    // console.log(currentUser.uid);
                                     if (user.data().uid != currentUser.uid) {
                                         //alert
                                         Swal.fire({
@@ -95,10 +95,10 @@ function EditPage() {
 
                                         setSurveySettings(data.data().Settings);
                                         // console.log(Object.values(data.data().questionsType));
-                                        let questionsType = data.data().questionsType;
-                                        if (questionsType) {
-                                            setAllQues(Object.values(questionsType));
-                                        }
+                                        // let questionsType = data.data().questionsType;
+                                        // if (questionsType) {
+                                        //     setAllQues(Object.values(questionsType));
+                                        // }
                                         oldVersion = data.data().version;
                                         // console.log(oldVersion);
                                         currentVersion = parseInt(oldVersion) + 1;
@@ -118,6 +118,10 @@ function EditPage() {
                                                     if (data.data().questions) {
                                                         setAllQuestions(data.data().questions);
                                                         setQueCount(data.data().questions.length);
+                                                    }
+                                                    if (data.data().questionsType) {
+                                                        let questionsType = data.data().questionsType;
+                                                        setAllQues(Object.values(questionsType));
                                                     }
                                                 }
                                             });
@@ -292,7 +296,7 @@ function EditPage() {
 
     const saveQues = async () => {
         // console.log(Settings);
-        console.log(newVersion);
+        console.log(allQuestions);
         // console.log(serial);
 
         const newAllQ = allQuestions.filter(ele => ele).map((ele, index) => ({ ...ele, id: index + 1 }));

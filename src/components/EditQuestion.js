@@ -10,9 +10,10 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
   // function Question({ allQ }) {
   const [count, setCount] = useState([]);
   const [options, setOptions] = useState([]);
-  const [allOptions, setAllOptions]=useState([]);
+  // const [allOptions, setAllOptions]=useState([]);
   // let count;
-  console.log(count);
+  console.log("old",allQuestion);
+  console.log(allQ);
   // console.log("b");
   // console.log(options);
   // console.log(allQuestion);

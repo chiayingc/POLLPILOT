@@ -117,7 +117,8 @@ function DashBoardPage() {
 
   return (
     <div id='dashboardpage'>
-      <Navbar type={2} />
+      {/* <Navbar type={2} /> */}
+      <Navbar type={1} />
       <div id='dashboardpage_main'>
         <div id='dashboardpage_main_left'>
           {/* <input type="text" placeholder="搜尋問卷標題" /> */}

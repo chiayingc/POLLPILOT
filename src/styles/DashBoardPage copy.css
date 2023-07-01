@@ -1,7 +1,4 @@
 /* @media (max-width:1980px) { */
-    *{
-        box-sizing: border-box;
-    }
 
     #dashboardpage {
         width: 100%;
@@ -72,7 +69,6 @@
         display: grid;
         grid-template-rows: 28px 20px 135px auto;
         row-gap: 10px;
-        width: 100%;
     }
 
     #dashboard_title {
@@ -135,16 +131,16 @@
 
     .user_surveys {
         display: grid;
-        /* grid-template-columns: repeat(auto-fill, 190px); */
-        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        grid-template-columns: repeat(4, 200px);
         column-gap: 15px;
         row-gap: 15px;
         padding-right: 20px;
         height: fit-content;
         max-height: 395px;
         overflow-y: auto;
+
         width: fit-content;
-        max-width: 100%;
+
         box-shadow: 2px 2px 4px rgba(207, 207, 207, 0.2);
         padding-bottom: 10px;
         border-radius: 5px;
@@ -173,8 +169,7 @@
         padding-top: 16px;
         padding-bottom: 16px;
         padding-right: 16px;
-        /* width: 190px; */
-        width: 100%;
+        width: 190px;
         height: 120px;
 
         background-color: #f5edef56;
@@ -310,7 +305,6 @@
 
     .user_surveys {
         column-gap: 8px;
-        max-width: max-content;
         /* padding-right: 8px; */
         grid-template-columns: repeat(2, 160px);
         justify-self: center;

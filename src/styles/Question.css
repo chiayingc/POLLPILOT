@@ -1,4 +1,4 @@
-@media (max-width:1920px) {
+/* @media (max-width:1920px) { */
     .qus,
     .categoryI {
         width: calc(100% - 60px);
@@ -286,4 +286,4 @@
     .noshow {
         display: none;
     }
-}
+/* } */

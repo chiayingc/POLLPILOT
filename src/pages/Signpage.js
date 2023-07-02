@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../styles/Signpage.css'
-import { doc, collection, setDoc, getDoc, getDocs, query, where, onSnapshot, get } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { Link, useNavigate } from 'react-router-dom'
-// import signbk1 from '../assets/signbk1.svg'
 import signbk1 from '../assets/illustration_home_01.svg'
 import Navbar from '../components/Navbar'
 import { auth, db, provider } from '../../firebase-config.js'
@@ -42,7 +41,6 @@ function Signpage(props) {
                 navigate("/dashboard");
             }
         } catch (error) {
-            // console.log(error.message);
             setErrorHint("登入失敗:" + error.message.substring(8, [error.message.length]));
         }
 
@@ -61,8 +59,6 @@ function Signpage(props) {
                     signupEmail,
                     signupPassword)
                     .then(() => {
-                        // 把使用者註冊資料放進資料庫
-                        // onAuthStateChanged(auth, async (currentUser) => {
                             const auth = getAuth();
                             const currentUser = auth.currentUser;
                             console.log(currentUser);
@@ -70,7 +66,6 @@ function Signpage(props) {
                                 let random = Date.now().toString(36);
                                 let shortuid = currentUser.uid.substring(0, 4);
                                 const createUser = doc(db, "users", currentUser.uid);
-                                // await 
                                 setDoc(createUser, {
                                     name: userName,
                                     email: signupEmail,
@@ -79,8 +74,6 @@ function Signpage(props) {
                                     registTime: Date.now()
                                 }, { merge: true })
                                     .then(() => {
-                                        console.log("create successed!");
-                                        // alert("註冊成功");
                                         Swal.fire({
                                             icon: 'success',
                                             title: '註冊成功！',
@@ -89,15 +82,14 @@ function Signpage(props) {
                                         });
                                         navigate("/dashboard");
                                     })
-                                    .catch(() => { console.log("create fail") });
+                                    .catch(() => { 
+                                        //
+                                    });
                             }
                         // });
                     })
                     .catch((error) => {
-                        console.log(error.message);
-                        // setErrorHint(error.message.substring(8, [error.message.length]));
                         setErrorHint(error.message);
-                        // alert("註冊失敗");
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
@@ -107,10 +99,14 @@ function Signpage(props) {
                         });
                     });
             } catch (error) {
-                //註冊失敗
-                // console.log(3);
                 setErrorHint(error.message.substring(8, [error.message.length]));
-                alert("註冊失敗");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '註冊失敗！',
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
             }
         }
     };
@@ -138,7 +134,6 @@ function Signpage(props) {
                             <input className='sign_input' type="password" placeholder='請輸入您的密碼'
                                 onChange={(e) => { signinPassword = e.target.value; }} />
                             <img />
-                            {/* <p className='second_title'>忘記密碼了嗎</p> */}
                         </div>
                         <p className='hint' id='signin_hint'>{errorHint}</p>
                     </div>
@@ -147,12 +142,9 @@ function Signpage(props) {
                     </button>
                 </form>
                 <div>
-                    {/* <p>其他登入</p> */}
-                    {/* <button onClick={signingoogle}>使用 Google 登入</button> */}
                     <div><p className='sign_btn'>還沒有註冊嗎？</p> <p className='sign_btn'><Link to={"/signup"}>前往註冊</Link></p></div>
                 </div>
             </div>
-
         }
         if (props.sign == "signup") {
             form = <div className='sign_form'>
@@ -180,15 +172,11 @@ function Signpage(props) {
                     <button onClick={signup}>註冊</button>
                 </form>
                 <div>
-                    {/* <p className='sign_btn'>其他註冊</p> */}
-                    {/* <button>使用 Facebook 註冊</button> */}
                     <div><p className='sign_btn'>已經有帳號嗎？</p> <p className='sign_btn'><Link to={"/signin"}>前往登入</Link></p></div>
                 </div>
             </div>
         }
-
         return form
-
     }
 
     let deploy;
@@ -203,7 +191,6 @@ function Signpage(props) {
             </div>
         </div>
     </div>
-
     return deploy
 }
 

@@ -1,23 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { UserContext } from '../helper/Context'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/ReleasePage.css'
 import { useLocation } from 'react-router-dom'
-import { auth, db } from '../../firebase-config.js'
+import { auth } from '../../firebase-config.js'
 import {
-  signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import link from '../assets/link.png'
+import Swal from 'sweetalert2'
 
 function ReleasePage() {
-  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  // const [shortUid, setShortUid]=useState("");
-
   const location = useLocation();
   let tmpAry = location.pathname.split("/");
   let serial = tmpAry[tmpAry.length - 1];
@@ -25,8 +19,7 @@ function ReleasePage() {
   useEffect(()=>{
     onAuthStateChanged(auth, async(currentUser) => {
       if (currentUser) {
-        // setUser(currentUser);
-        // setShortUid(currentUser.uid.substring(0,4));
+        //
       }else {
         navigate("/signin");
       }
@@ -42,10 +35,15 @@ function ReleasePage() {
     let successful =document.execCommand('copy');
 
     if(successful){
-      alert("複製成功！");
+      Swal.fire({
+        icon: 'success',
+        title: '複製成功！',
+        timer: 1500,
+        timerProgressBar: true,
+      });
     }
     else{
-      alert("fail");
+      //
     }
     window.getSelection().removeAllRanges();    
   }
@@ -69,7 +67,6 @@ function ReleasePage() {
             <button className='copylink' onClick={copyUrl}>複製</button>
           </div>
           <br/>
-          {/* <div>QR code</div> */}
         </div>
       </div>
     </div>

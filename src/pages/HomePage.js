@@ -10,21 +10,15 @@ import { auth } from '../../firebase-config.js'
 import {
   onAuthStateChanged
 } from 'firebase/auth'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function HomePage() {
-  // const [user, setUser] = useState({});
   const [url, setUrl] = useState("/signin");
-  const navigate=useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      // setUser(currentUser);
       if (currentUser) {
-        // console.log(user);
         setUrl("/dashboard");
-        // navigate("/dashboard");
       } else {
-        // console.log(user);
         setUrl("/signin");
       }
     });
@@ -47,9 +41,6 @@ function HomePage() {
             <Link to={url}>免費建立問卷</Link>
           </button>
         </div>
-        {/* <div id='homepage_main_right'> */}
-          
-        {/* </div> */}
       </div>
     </div>
   )

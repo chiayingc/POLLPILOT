@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import pplogo from '../assets/pp-logo.png'
 import '../styles/Navbar.css'
-
 import { auth } from '../../firebase-config.js'
 import {
   onAuthStateChanged,
@@ -14,7 +13,6 @@ import { UserContext } from '../helper/Context'
 function Navbar({type}) {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  // console.log(user);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -28,9 +26,7 @@ function Navbar({type}) {
   }
   
   let result;
-
   if (type == 1) {
-
     result = <div id='navbar'>
       <div id='nav_logo'>
         <img src={pplogo} className="pplogo" onClick={() => { navigate("/dashboard") }} />
@@ -47,11 +43,8 @@ function Navbar({type}) {
           </div>
         )}
     </div>
-
   }
-
   if (type == 2) {
-
     result = <div id='navbar2'>
       {user ? (
         <div id='nav_btns'>
@@ -65,20 +58,14 @@ function Navbar({type}) {
           </div>
         )}
     </div>
-
   }
-
   if (type == 3 || type==4) {
-
     result = <div id='navbar'>
       <div id='nav_logo'>
         <img src={pplogo} className="pplogo"  onClick={() => { type==3? navigate("/dashboard"):navigate("/") }} />
       </div>
     </div>
   }
-
-  
-
   return result
 }
 export default Navbar

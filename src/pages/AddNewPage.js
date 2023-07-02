@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import '../styles/AddNewPage.css'
 import Navbar from '../components/Navbar.js'
 import ColoredLine from '../components/ColoredLine.js'
-import { UserContext } from '../helper/Context'
 import { auth, db } from '../../firebase-config.js'
-import { doc, collection, addDoc, setDoc, getDoc, QuerySnapshot } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -12,7 +11,6 @@ function AddNewPage() {
     const navigate = useNavigate();
     const { state } = useLocation();
     const userData = state;
-    const { user, setUser } = useContext(UserContext);
     let surveyTitle = "", surveyWelcomeText = "", surveyThanksText = "", surveyKey = "", surveySerial = "", creator;
     let surveyStatus = 0, surveyTitleAlign = 0;
     let surveyShowNum = true;
@@ -27,13 +25,9 @@ function AddNewPage() {
         });
     }, []);
 
-
     const saveSurveySettings = async () => {
-
         surveySerial = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); //問卷編號
         const addSurvey = doc(db, "surveys", surveySerial);
-
-        //要再篩選資料內容(比如serial不能為空等等)
 
         let Settings = {
             name: surveyTitle, //問卷名稱
@@ -58,10 +52,9 @@ function AddNewPage() {
                     state: Settings
                 });
             })
-            .catch(() => {  //加alert讓使用者知道沒有新增成功
-                console.log("set failed");
+            .catch(() => {  
+                //
             });
-
     }
 
     return (
@@ -74,7 +67,6 @@ function AddNewPage() {
                     <div id='addnewpage_addtitle'>
                         <h4>問卷名稱</h4>
                         <input type="text" placeholder="無標題問卷"
-                            // onChange={(e) => { if (surveyTitle != "") { surveyTitle = e.target.value; } }} />
                             onChange={(e) => { if (e.target.value == ""){surveyTitle="未命名問卷"}else { surveyTitle = e.target.value; } }} />
                     </div>
                     <div id='title_style'>
@@ -118,33 +110,6 @@ function AddNewPage() {
                         <textarea onChange={(e) => { surveyThanksText = e.target.value; }}></textarea>
                     </div>
                 </div>
-
-
-                {/* <div>
-                <h3><label for="bg-color">選擇背景顏色</label></h3>
-                <input type="color" id="bg-color" name="bg-color"
-                    value="#F7E2E5">    ///要改React 顏色選擇套件
-            </div> */}
-
-                {/* <div id='title_style'>
-                <h3>設定歡迎Banner</h3>
-                <textarea></textarea>
-            </div>
-
-            <div id='title_style'>
-                <h3>設定感謝Banner</h3>
-                <textarea></textarea>
-            </div> */}
-
-
-                {/* <div id='add_questions'>
-                <h3>建立題目</h3>
-                <button> + </button>
-                <div id='all_questions'>
-                    <Question/>
-                </div>
-            </div> */}
-
                 <div id='general_setting'>
                     <h3>一般設定</h3>
                     <ColoredLine color="#FCE6C0" />
@@ -182,20 +147,13 @@ function AddNewPage() {
                             </button>
                         </div>
                     </div>
-                    {/* <div id='survey_rate'>
-                    <h4>問卷頁面進度條</h4>
-                    <div>OFF</div>
-                    </div> */}
                 </div>
                 <div id='next_btn' onClick={saveSurveySettings}>
                     <button>下一步：建立題目</button>
                 </div>
-
             </div>
-
         </div>
     )
 }
-
 
 export default AddNewPage

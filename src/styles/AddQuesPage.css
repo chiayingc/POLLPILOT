@@ -1,146 +1,132 @@
+body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 body>div {
     width: 100%;
 }
 
-body {
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+.swal2-popup {
+    width: 30em !important;
+    font-size: .4rem !important;
 }
 
-/* @media (max-width:1980px) { */
-    .swal2-popup{
-        width: 30em !important;
-        font-size: .4rem !important;
-    }
+#addquespage {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    color: #666;
+}
 
-    #addquespage {
-        width: 100%;
-        display: grid;
-        justify-items: center;
-        color: #666;
-    }
+#addquespage_main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 280px;
+    column-gap: 20px;
+}
 
-    #addquespage_main {
-        width: 100%;
-        display: grid;
-        grid-template-columns: auto 280px;
-        column-gap: 20px;
-    }
+#questype_menu {
+    cursor: pointer;
+}
 
-    #questype_menu {
-        cursor: pointer;
-    }
+#questype_menu>img {
+    position: absolute;
+    right: 30px;
+    top: 50px;
+    width: 30px;
+    height: 30px;
+}
 
-    #questype_menu>img {
-        /* display: none; */
-        position: absolute;
-        right: 30px;
-        top: 50px;
-        width: 30px;
-        height: 30px;
-    }
+.addhint {
+    font-size: .4rem;
+    font-weight: 600;
+    position: absolute;
+    right: calc(30px - .5rem);
+    top: 85px;
+    color: #D1D2D2;
+}
 
-    .addhint {
-        font-size: .4rem;
-        font-weight: 600;
-        position: absolute;
-        /* right: calc(50px - 1rem); */
-        right: calc(30px - .5rem);
-        top: 85px;
-        color: #D1D2D2;
-    }
+.addquespage_main_right {
+    height: calc(100vh - 88px);
+    margin-top: 2px;
+    background-color: #FAFAFA;
+    padding: 20px;
+    padding-top: 30px;
+    box-shadow: -1px 1px 1px 1px rgba(6, 6, 6, 0.05);
+    justify-content: center;
+    padding: 20px;
+    padding-top: 30px;
+}
 
-    .addquespage_main_right {
-        height: calc(100vh - 88px);
-        margin-top: 2px;
-        background-color: #FAFAFA;
-        padding: 20px;
-        padding-top: 30px;
-        box-shadow: -1px 1px 1px 1px rgba(6, 6, 6, 0.05);
-        justify-content: center;
-        padding: 20px;
-        padding-top: 30px;
-    }
+#addquespage_main_left {
+    display: flex;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+    margin-top: 30px;
+}
 
-    #addquespage_main_left {
-        /* display: grid; */
-        display: flex;
-        justify-content: center;
-        /* width: 100%; */
-        padding-left: 50px;
-        padding-right: 50px;
-        overflow-y: auto;
-        height: calc(100vh - 100px);
-        margin-top: 30px;
-        /* padding-left: 150px; */
-        /* padding-left: 300px; */
-    }
+#questions {
+    width: 50%;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: fit-content;
+}
 
-    #questions {
-        width: 50%;
-        padding-left: 50px;
-        padding-right: 50px;
-        height: fit-content;
-    }
+#ques_type {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 10px;
+    margin-bottom: 25px;
+}
 
-    #ques_type {
-        padding: 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 15px;
-        row-gap: 10px;
-        margin-bottom: 25px;
-    }
+#ques_type>button {
+    border: .5px dashed #86531d65;
+    border-radius: 3px;
+    background-color: rgba(238, 226, 217, 0.7);
+    font-size: .8rem;
+    font-weight: 600;
+    padding: .2rem .5rem .2rem .5rem;
+    cursor: pointer;
+    color: #444;
+}
 
-    #ques_type>button {
-        /* width: 125px; */
-        /* height: 30px; */
+#ques_type>button:hover {
+    background-color: rgb(246, 234, 224);
+    color: #000;
+}
 
-        border: .5px dashed #86531d65;
-        border-radius: 3px;
-        background-color: rgba(238, 226, 217, 0.7);
-        font-size: .8rem;
-        font-weight: 600;
-        padding: .2rem .5rem .2rem .5rem;
-        cursor: pointer;
-        color: #444;
-    }
+#step_btn {
+    position: absolute;
+    right: 20px;
+    bottom: 8vh;
+    width: 13rem;
+    max-width: 265px;
+    display: grid;
+    row-gap: 10px;
+    padding: 12px;
+}
 
-    #ques_type>button:hover {
-        background-color: rgb(246, 234, 224);
-        color: #000;
-    }
-
-    #step_btn {
-        /* position: relative; */
-        position: absolute;
-        right: 20px;
-        bottom: 8vh;
-        width: 13rem;
-        max-width: 265px;
-        /* top: calc(100% - 400px); */
-        display: grid;
-        row-gap: 10px;
-        padding: 12px;
-    }
-
-    #step_btn>button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 3px;
-        background-color: #f5f1edba;
-        border: .5px solid #f5f1ed56;
-        border-radius: 5px;
-        box-sizing: border-box;
-        font-size: .8rem;
-        font-weight: 600;
-        /* color: #444; */
-        text-align: center;
-        vertical-align: baseline;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        cursor: pointer;
-        touch-action: manipulation;
-    }
-/* } */
+#step_btn>button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #f5f1edba;
+    border: .5px solid #f5f1ed56;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: .8rem;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: baseline;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    touch-action: manipulation;
+}
 
 @media (max-width:1280px) {
     #questions {
@@ -153,14 +139,11 @@ body {
         padding-left: 0;
     }
 
-    /* 這邊要調整右邊跟左邊的寬度比 */
-    /* # */
-    #questions{
+    #questions {
         padding-left: 8px;
         padding-right: 8px;
         margin-right: 20px;
     }
-
 }
 
 @media (max-width:600px) {
@@ -173,32 +156,12 @@ body {
         top: 30;
         right: 0;
     }
-/* 
-    #step_btn {
-        max-width: 135px;
-    } */
 
     #step_btn {
-        /* position: relative; */
         position: absolute;
-        /* right: 30px; */
         right: 0px;
-        /* width: calc(1.6rem + 40px); */
-        /* width: calc(1.6rem + 20px); */
         width: fit-content;
-        /* max-width: 35px; */
-        /* top: calc(100% - 400px); */
         display: grid;
         row-gap: 10px;
-        /* padding: 12px; */
     }
-
-    /* #step_btn > button{
-        width: .4rem;
-    } */
-
-    /* #questions{
-        padding-left: 35px;
-        padding-right: 35px;
-    } */
 }

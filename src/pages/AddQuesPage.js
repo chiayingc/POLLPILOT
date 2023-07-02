@@ -304,12 +304,13 @@ function AddQuesPage() {
             {/* <button onClick={saveQues}>發布問卷</button> */}
           {/* </div> */}
         </div>
-        <div id='step_btn'>
+        
+      </div>
+      <div id='step_btn'>
             {/* <button>＜問卷設定</button> */}
             {/* <button onClick={saveQues}>外觀設定＞</button> */}
             <button onClick={saveQues}>發布問卷</button>
         </div>
-      </div>
 
     </div>
   )

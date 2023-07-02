@@ -181,14 +181,21 @@ body {
     #step_btn {
         /* position: relative; */
         position: absolute;
-        right: 30px;
-        width: 5rem;
-        max-width: 35px;
+        /* right: 30px; */
+        right: 0px;
+        /* width: calc(1.6rem + 40px); */
+        /* width: calc(1.6rem + 20px); */
+        width: fit-content;
+        /* max-width: 35px; */
         /* top: calc(100% - 400px); */
         display: grid;
         row-gap: 10px;
-        padding: 12px;
+        /* padding: 12px; */
     }
+
+    /* #step_btn > button{
+        width: .4rem;
+    } */
 
     /* #questions{
         padding-left: 35px;

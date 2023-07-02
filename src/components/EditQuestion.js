@@ -467,7 +467,8 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
         <button className='btn_addradio' onClick={() => {
           let tmp = count;
-          tmp[0] = { id: 0, count: 0 };
+          // console.log(id);
+          // tmp[0] = { id: 0, count: 0 };
           if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
 
           const c = count.find(q => q?.id === id);
@@ -498,7 +499,8 @@ function EditQuestion({ allQ, remove, done, doneC, allQuestion }) {
 
         <button className='btn_addradio' onClick={() => {
           let tmp = count;
-          tmp[0] = { id: 0, count: 0 };
+          // console.log(id);
+          // tmp[0] = { id: 0, count: 0 };
           if (count[id] == undefined) { tmp[id] = { id: id, count: 0 }; setCount(tmp); }
           const c = count.find(q => q?.id === id);
           c.count++;

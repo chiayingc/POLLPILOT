@@ -1,8 +1,4 @@
 /* @media (max-width:1980px) { */
-    *{
-        box-sizing: border-box;
-    }
-
     #dashboardpage {
         width: 100%;
         display: grid;
@@ -26,7 +22,7 @@
         padding: 20px;
         padding-top: 40px;
         box-shadow: 2px 1px 1px 1px rgba(6, 6, 6, 0.05);
-        min-height: calc(100vh - 60px);
+        min-height: calc(100vh - 94px);
         display: grid;
         grid-template-rows: 25px 18px 25px;
         row-gap: 10px;
@@ -72,7 +68,7 @@
         display: grid;
         grid-template-rows: 28px 20px 135px auto;
         row-gap: 10px;
-        width: 100%;
+        width: calc(100% - 40px);
     }
 
     #dashboard_title {
@@ -141,7 +137,8 @@
         row-gap: 15px;
         padding-right: 20px;
         height: fit-content;
-        max-height: 395px;
+        /* max-height: 395px; */
+        max-height: calc(100vh - 300px - 1.5rem);
         overflow-y: auto;
         width: fit-content;
         max-width: 100%;
@@ -173,8 +170,8 @@
         padding-top: 16px;
         padding-bottom: 16px;
         padding-right: 16px;
-        /* width: 190px; */
-        width: 100%;
+        width: 190px;
+        /* width: 100%; */
         height: 120px;
 
         background-color: #f5edef56;

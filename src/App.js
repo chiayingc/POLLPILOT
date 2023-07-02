@@ -34,7 +34,6 @@ function App() {
                     <Route path="/signin" element={<Signpage sign={"signin"} />} />
                     <Route path="/close" element={<ClosePage />} />
                     <Route path="/edit/:edit" element={<EditPage />} />
-                    <Route path="/test" element={<Quiz />} />
                 </Routes>
             </UserContext.Provider>
         </div>

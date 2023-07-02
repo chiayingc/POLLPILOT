@@ -72,7 +72,7 @@ function Navbar({type}) {
 
     result = <div id='navbar'>
       <div id='nav_logo'>
-        <img src={pplogo} className="pplogo"  onClick={() => { props.type==3? navigate("/dashboard"):navigate("/") }} />
+        <img src={pplogo} className="pplogo"  onClick={() => { type==3? navigate("/dashboard"):navigate("/") }} />
       </div>
     </div>
   }

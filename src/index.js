@@ -1,4 +1,4 @@
-console.log("hello webpack3");
+// console.log("hello webpack3");
 
 import React from "react";
 import App from "./App.js";

@@ -16,7 +16,7 @@ import { UserContext } from '../helper/Context'
 
 function Signpage(props) {
     const { user, setUser } = useContext(UserContext);
-    let userName, signinEmail, signupEmail, signinPassword, signupPassword;
+    let userName, signinEmail='testtest@mail.com', signupEmail, signinPassword='testtest123', signupPassword;
     const [errorHint, setErrorHint] = useState("");
     const navigate = useNavigate();
 
@@ -126,12 +126,14 @@ function Signpage(props) {
                     <div>
                         <p className='form_column'>您的電子郵件地址</p>
                         <input className='sign_input' type="text" placeholder='請輸入您的電子郵件地址'
+                            defaultValue={'testtest@mail.com'}
                             onChange={(e) => { signinEmail = e.target.value; }} />
                     </div>
                     <div>
                         <p className='form_column'>您的密碼</p>
                         <div>
                             <input className='sign_input' type="password" placeholder='請輸入您的密碼'
+                                defaultValue={'testtest123'}
                                 onChange={(e) => { signinPassword = e.target.value; }} />
                             <img />
                         </div>

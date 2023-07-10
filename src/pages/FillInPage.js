@@ -76,7 +76,19 @@ function FillInPage() {
           .then((data) => {
             setSurveySettings(surveySetting);
             if (surveySetting[1].status != 2) {
-              setSurveyQues(data.data().questions);
+              if(data.data() && data.data().questions){
+                setSurveyQues(data.data().questions);
+              }else{
+                Swal.fire({
+                  icon: 'warning',
+                  title: '此問卷目前沒有題目！',
+                  timer: 2000,
+                  timerProgressBar: true,
+              }).then(
+                ()=>{navigate("/");}
+              );
+              
+              }
             }
             if (surveySetting[1].status == 1) {
               setCheckPassword(true);

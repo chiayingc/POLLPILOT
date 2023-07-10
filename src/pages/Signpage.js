@@ -13,6 +13,7 @@ import {
     getAuth
 } from 'firebase/auth'
 import { UserContext } from '../helper/Context'
+import Swal from 'sweetalert2'
 
 function Signpage(props) {
     const { user, setUser } = useContext(UserContext);

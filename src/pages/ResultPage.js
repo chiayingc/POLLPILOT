@@ -31,10 +31,12 @@ function ResultPage() {
             allAnswers.push(data.answer);
           });
           if (allAnswers[0] != undefined && allAnswers[0] != null) {
+            console.log(allAnswers);
             let tmp = allAnswers.filter(object => Object.keys(object).length != 0);
             allAnswers = tmp;
-            queSerials = Object.keys(allAnswers[0]);
-
+            // if (Object.keys(allAnswers).length != 0) {
+              queSerials = Object.keys(allAnswers[0]);
+            // }
             allAns = [];
             allAnswers.forEach((obj) => {
               for (let j = 0; j < queSerials.length; j++) {
@@ -42,14 +44,16 @@ function ResultPage() {
                 allAns[queSerials[j]].push(obj[queSerials[j]]);
               }
             });
+            console.log(allAns);
 
             const getVersion = doc(db, "surveys", serial);
             getDoc(getVersion)
               .then((data) => {
-                queTypes = data.data().questionsType;
                 const getQuestions = doc(db, "surveys", serial, "questions", "version" + datadata.data().version);
                 getDoc(getQuestions)
                   .then((data) => {
+                    // console.log(data.data());
+                    // queTypes = data.data().questionsType;
                     allQuestions = data.data().questions;
                     let allContents = [];
                     let oneResult = [];
@@ -91,7 +95,7 @@ function ResultPage() {
                             }
                             if (allQuestions[i].type == "D") {
                               count = new Array(allQuestions[i].options.length).fill(0);
-                              for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) { 
+                              for (let j = 0; j < allAns[allQuestions[i].queSerial].length; j++) {
                                 for (let l = 0; l < allAns[allQuestions[i].queSerial][j].length; l++) {
                                   if (allAns[allQuestions[i].queSerial][j][l] >= 0 && allAns[allQuestions[i].queSerial][j][l] < count.length) {
                                     count[allAns[allQuestions[i].queSerial][j][l]]++;

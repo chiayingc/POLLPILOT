@@ -5,6 +5,7 @@
     .signpage {
         width: 100%;
         height: 100vh;
+        overflow-y: hidden;
         background: linear-gradient(to right, #fff 0%, #fff 42%, rgb(250, 250, 250) 42%, rgb(250, 250, 250) 100%);
         display: grid;
         justify-items: center;

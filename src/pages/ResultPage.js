@@ -70,7 +70,7 @@ function ResultPage() {
                           }
                         }
                         aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
-                          <h4>{i + 1}</h4>
+                          {/* <h4>{i + 1}</h4> */}
                           <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
                           {oneResult}
                         </div>
@@ -79,8 +79,8 @@ function ResultPage() {
                       }
                       ////
                       if (allQuestions[i].type == "H" || allQuestions[i].type == "I") {
-                        aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
-                          <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
+                        aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_B">
+                          <div id={"que" + i} key={"que" + i} className="result_que_B">{allQuestions[i].content}</div>
                         </div>
                         allContents.push(aResult);
                         key += 1;
@@ -135,7 +135,7 @@ function ResultPage() {
                           oneResult.push(oneAns);
                         }
                         aResult = <div id={"q" + i} key={"q" + i} className="result_oneque_A">
-                          <h4>{i + 1}</h4>
+                          {/* <h4>{i + 1}</h4> */}
                           <div id={"que" + i} key={"que" + i} className="result_que_A">{allQuestions[i].content}</div>
                           <div className='pie'>
                             <Pie data={data} />

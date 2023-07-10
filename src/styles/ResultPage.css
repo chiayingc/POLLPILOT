@@ -13,6 +13,7 @@ body > div{
 
 #resultpage_content{
     width: 75%;
+    margin-top: 30px;
     max-height: calc(100vh - 34px);
     overflow-y: auto;
 }
@@ -25,6 +26,14 @@ body > div{
     grid-template-rows: 1rem fit-content auto;
 }
 
+.result_oneque_B{
+    background-color: #FAFAFA;
+    margin-bottom: 2px;
+    padding-left: 30px;
+    display: grid;
+    grid-template-rows: 1rem fit-content auto;
+}
+
 
 .result_que_A{
     color: rebeccapurple;
@@ -32,6 +41,15 @@ body > div{
     font-weight: 700;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    vertical-align: baseline;
+    display: grid;
+}
+.result_que_B{
+    color: rgb(60, 22, 98);
+    font-size: 1rem;
+    font-weight: 700;
+    padding-top: .5rem;
+    padding-bottom: .3rem;
     vertical-align: baseline;
     display: grid;
 }
